@@ -6,8 +6,6 @@ import {signOut} from "../firebase/auth";
 import Col from "react-bootstrap/Col";
 
 export const Layout = ({user, children, title}) => {
-  const Authorized = ({user}) => <></>
-  const Unauthorized = () => <Link href="/login">Logowanie</Link>
 
   if (!user) {
     return (
@@ -32,20 +30,10 @@ export const Layout = ({user, children, title}) => {
           </h5>
         </Col>
         <Col className="text-right">
-          {user.email} | <a href="#" className="text-white" onClick={signOut}>Logout</a>
+          {user.email} | <a href="#" className="text-white" onClick={signOut}>Wyloguj</a>
         </Col>
       </Row>
-
-      <Container>
-        <Row>
-          {
-            user
-              ? <Authorized user={user}/>
-              : <Unauthorized/>
-          }
-        </Row>
-      </Container>
-
+      
       {children}
     </>
   )
