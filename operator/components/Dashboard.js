@@ -3,7 +3,7 @@ import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 
-const Dashboard = () => {
+export const Dashboard = () => {
   return (
     <Container fluid>
       <Row className="mt-3">
@@ -17,4 +17,3 @@ const Dashboard = () => {
     </Container>
   )
 }
-export default Dashboard

@@ -2,7 +2,7 @@ import React from "react";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 
-const Layout = ({children}) => {
+export const Layout = ({children}) => {
   return (
     <>
       <Container>
@@ -15,4 +15,3 @@ const Layout = ({children}) => {
     </>
   )
 }
-export default Layout
