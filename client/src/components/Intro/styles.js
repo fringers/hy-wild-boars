@@ -3,6 +3,7 @@ import { makeStyles } from '@material-ui/core';
 export default makeStyles((theme) => ({
   container: {
     alignItems: 'center',
+    backgroundColor: '#dcd1bc',
     display: 'flex',
     flexDirection: 'column',
     height: '80vh',
@@ -12,12 +13,7 @@ export default makeStyles((theme) => ({
     textAlign: 'center',
   },
   icon: {
-    color: theme.palette.primary.main,
-    height: 256,
-    fontSize: 156,
-  },
-  redIcon: {
-    color: theme.palette.error.main,
+    color: '#9f8960', //theme.palette.primary.main,
     height: 256,
     fontSize: 156,
   },

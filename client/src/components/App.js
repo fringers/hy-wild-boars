@@ -1,6 +1,6 @@
 import React from 'react';
-import { BrowserRouter, Route } from 'react-router-dom';
-import { AnimatedSwitch } from 'react-router-transition';
+import { BrowserRouter } from 'react-router-dom';
+import { AnimatedSwitch, AnimatedRoute } from 'react-router-transition';
 import { makeStyles } from '@material-ui/core';
 
 import Intro from './Intro';
@@ -9,14 +9,14 @@ import ThankYou from './ThankYou';
 
 const useStyles = makeStyles(() => ({
   container: {
-    backgroundColor: 'grey',
+    backgroundColor: '#f6f3ee',
     height: '100vh',
     width: '100%',
     margin: 0,
   },
   switchWrapper: {
     position: 'relative',
-    '> div': {
+    '& > div': {
       position: 'absolute',
     },
   },
@@ -34,9 +34,39 @@ const App = () => {
           atActive={{ opacity: 1 }}
           className={classes.switchWrapper}
         >
-          <Route exact path="/" component={Intro} />
-          <Route exact path="/submit" component={SubmitForm} />
-          <Route exact path="/thankyou" component={ThankYou} />
+          <AnimatedRoute
+            atEnter={{ offset: -100 }}
+            atLeave={{ offset: -100 }}
+            atActive={{ offset: 0 }}
+            mapStyles={(styles) => ({
+              transform: `translateX(${styles.offset}%)`,
+            })}
+            exact
+            path="/"
+            component={Intro}
+          />
+          <AnimatedRoute
+            atEnter={{ offset: -100 }}
+            atLeave={{ offset: -100 }}
+            atActive={{ offset: 0 }}
+            mapStyles={(styles) => ({
+              transform: `translateX(${styles.offset}%)`,
+            })}
+            exact
+            path="/submit"
+            component={SubmitForm}
+          />
+          <AnimatedRoute
+            atEnter={{ offset: -100 }}
+            atLeave={{ offset: -100 }}
+            atActive={{ offset: 0 }}
+            mapStyles={(styles) => ({
+              transform: `translateX(${styles.offset}%)`,
+            })}
+            exact
+            path="/thankyou"
+            component={ThankYou}
+          />
         </AnimatedSwitch>
       </BrowserRouter>
     </div>
