@@ -1,39 +1,12 @@
 import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import Carousel from 'react-material-ui-carousel';
-import { Paper, makeStyles } from '@material-ui/core';
+import { Paper } from '@material-ui/core';
 
 import FirstIntro from './pages/first';
 import SecondIntro from './pages/second';
 import ThirdIntro from './pages/third';
-
-const useStyles = makeStyles((theme) => ({
-  container: {
-    alignItems: 'center',
-    display: 'flex',
-    flexDirection: 'column',
-    height: '80vh',
-    justifyContent: 'space-between',
-    margin: theme.spacing(4),
-    padding: theme.spacing(4),
-    textAlign: 'center',
-  },
-  icon: {
-    color: theme.palette.primary.main,
-    height: 256,
-    fontSize: 156,
-  },
-  redIcon: {
-    color: theme.palette.error.main,
-    height: 256,
-    fontSize: 156,
-  },
-  buttonContainer: {
-    display: 'flex',
-    width: '100%',
-    justifyContent: 'space-around',
-  },
-}));
+import useStyles from './styles';
 
 const Intro = () => {
   const classes = useStyles();
@@ -45,16 +18,13 @@ const Intro = () => {
       index={page}
       autoPlay={false}
       indicators={true}
-      onChange={(index, active) => {
-        console.log({ index, active });
-        setPage(index);
-      }}
+      onChange={(index) => setPage(index)}
       navButtonsAlwaysInvisible
     >
       <Paper classes={{ root: classes.container }}>
         <FirstIntro
           classes={classes}
-          onSkip={() => history.push('/form')}
+          onSkip={() => history.push('/submit')}
           onNext={() => setPage(page + 1)}
         />
       </Paper>
@@ -69,7 +39,7 @@ const Intro = () => {
         <ThirdIntro
           classes={classes}
           onPrev={() => setPage(page - 1)}
-          onNext={() => history.push('./form')}
+          onNext={() => history.push('./submit')}
         />
       </Paper>
     </Carousel>
