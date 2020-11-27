@@ -4,14 +4,29 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import dynamic from "next/dynamic";
 import {RequestsPreview} from "./RequestsPreview";
+import {StatusSelector} from "./StatusSelector";
 
 const MapWithNoSSR = dynamic(() => import('./Map'), {
   ssr: false
 });
 
-export const Dashboard = ({latestRequest}) => {
+export const Dashboard = ({latestRequest, statuses, onStatusesChange}) => {
   return (
     <Container fluid>
+      <Row>
+        <StatusSelector status="NEW" selectedStatuses={statuses} onStatusesChange={onStatusesChange}>
+          Nowe
+        </StatusSelector>
+        <StatusSelector status="ACCEPTED" selectedStatuses={statuses} onStatusesChange={onStatusesChange}>
+          Zaakceptowane
+        </StatusSelector>
+        <StatusSelector status="RESOLVED" selectedStatuses={statuses} onStatusesChange={onStatusesChange}>
+          Rozwiązane
+        </StatusSelector>
+        <StatusSelector status="REJECTED" selectedStatuses={statuses} onStatusesChange={onStatusesChange}>
+          Odrzucone
+        </StatusSelector>
+      </Row>
       <Row className="mt-3">
         <Col sm={12} xl={6}>
           <RequestsPreview requests={latestRequest}/>

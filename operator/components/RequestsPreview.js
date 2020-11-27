@@ -1,13 +1,14 @@
 import React from "react";
 import Table from "react-bootstrap/Table";
 import Link from "next/link"
+import {StatusIcon} from "./StatusIcon";
 
 export const RequestsPreview = ({requests}) => {
   return (
     <Table striped hover responsive>
       <thead>
         <tr>
-          <th>#</th>
+          <th>Status</th>
           <th>Data</th>
           <th>Zdjęcie</th>
           <th>Lokalizacja</th>
@@ -17,10 +18,12 @@ export const RequestsPreview = ({requests}) => {
       </thead>
       <tbody>
       {
-        requests.map((row, index) => {
+        requests.map(row => {
           return (
             <tr key={row.id}>
-              <td>{index+1}</td>
+              <td>
+                <StatusIcon status={row.status}/>
+              </td>
               <td>{row.timestamp.toLocaleString("pl")}</td>
               <td>
                 {/*{*/}

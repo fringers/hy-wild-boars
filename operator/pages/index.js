@@ -4,9 +4,14 @@ import {Dashboard} from "../components/Dashboard";
 import {watchLatestRequests} from "../firebase/db";
 
 export default function Home({user}) {
+  const [key, setKet] = useState((new Date()).getTime())
+
   const [latestRequest, setLatestRequests] = useState([])
+  const [statuses, setStatuses] = useState(['NEW', 'ACCEPTED'])
+
 
   useEffect(() => {
+    console.log('fsdfsd')
     if (!user)
       return;
 
@@ -14,14 +19,23 @@ export default function Home({user}) {
       setLatestRequests(data)
     }
 
-    return watchLatestRequests(5, onNewRequests);
-  }, [user?.uid])
+    return watchLatestRequests(5, statuses, onNewRequests);
+  }, [user?.uid, key])
+
+  const statusesChangeHandler = (statuses) => {
+    setKet((new Date()).getTime())
+    setStatuses(statuses)
+  }
 
   return (
     <Layout user={user}>
       {
         user
-          ? <Dashboard latestRequest={latestRequest}/>
+          ? <Dashboard
+              latestRequest={latestRequest}
+              statuses={statuses}
+              onStatusesChange={statusesChangeHandler}
+            />
           : ""
       }
     </Layout>

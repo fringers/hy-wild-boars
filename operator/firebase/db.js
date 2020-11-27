@@ -1,16 +1,21 @@
 import {db} from "./firebase";
 
-export const watchLatestRequests = (limit, callback) => {
-  return db.collection("requests")
-    .orderBy("timestamp", "desc")
-    .limit(limit)
-    .onSnapshot((snapshot) => {
-      const requests = [];
-      snapshot.forEach((doc) => {
-        requests.push(docToRequest(doc));
-      });
+const getLatestRequestsRef = (limit, statuses) => {
+  let request = db.collection("requests")
 
-      callback(requests)
+  if (statuses && statuses.length > 0)
+    request = request.where("status", "in", statuses)
+
+  request.orderBy("timestamp", "desc")
+    .limit(limit)
+
+  return request
+}
+
+export const watchLatestRequests = (limit, statuses, callback) => {
+  return getLatestRequestsRef(limit, statuses)
+    .onSnapshot((snapshot) => {
+      callback(snapshot.docs.map(docToRequest))
     })
 }
 
@@ -29,5 +34,6 @@ const docToRequest = (doc) => {
     location: data.location,
     // isDead: data.isDead,
     // details: data.details,
+    status: data.status,
   }
 }
