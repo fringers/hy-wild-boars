@@ -9,15 +9,15 @@ const MapWithNoSSR = dynamic(() => import('./Map'), {
   ssr: false
 });
 
-export const Dashboard = () => {
+export const Dashboard = ({latestRequest}) => {
   return (
     <Container fluid>
       <Row className="mt-3">
         <Col sm={12} xl={6}>
-          <RequestsPreview/>
+          <RequestsPreview requests={latestRequest}/>
         </Col>
         <Col sm={12} xl={6}>
-          <MapWithNoSSR/>
+          <MapWithNoSSR requests={latestRequest}/>
         </Col>
       </Row>
     </Container>
