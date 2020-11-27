@@ -1,8 +1,7 @@
 import React, {useEffect, useState} from "react";
 import Head from "next/head";
-import 'bootstrap/dist/css/bootstrap.min.css';
 import 'leaflet/dist/leaflet.css'
-import '../styles/globals.css'
+import '../styles/globals.scss'
 import {onAuthStateChanged} from "../firebase/auth";
 
 function MyApp({ Component, pageProps }) {

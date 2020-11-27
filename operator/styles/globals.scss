@@ -1,0 +1,10 @@
+$theme-colors: (
+  "primary": #728d57,
+);
+
+@import "~bootstrap/scss/bootstrap";
+
+.map {
+  width: 100%;
+  height: 600px;
+}
