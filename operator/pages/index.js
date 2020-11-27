@@ -11,7 +11,6 @@ export default function Home({user}) {
       return;
 
     const onNewRequests = (data) => {
-      console.log(data)
       setLatestRequests(data)
     }
 
