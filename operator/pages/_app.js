@@ -8,7 +8,7 @@ function MyApp({ Component, pageProps }) {
   return (
     <>
       <Head>
-        <title>Operator App</title>
+        <title>Zarządzanie zgłoszeniami dzików</title>
       </Head>
       <Component {...pageProps} />
     </>
