@@ -2,7 +2,7 @@ import {db} from "./firebase";
 
 export const watchLatestRequests = (limit, callback) => {
   return db.collection("requests")
-    // .orderBy("timestamp", "desc")
+    .orderBy("timestamp", "desc")
     .limit(limit)
     .onSnapshot((snapshot) => {
       const requests = [];
@@ -23,7 +23,7 @@ const docToRequest = (doc) => {
   const data = doc.data()
   return {
     id: doc.id,
-    // timestamp: data.timestamp.toDate(),
+    timestamp: data.timestamp.toDate(),
     // userId: data.userId,
     // photoUrl: data.photoUrl,
     location: data.location,
