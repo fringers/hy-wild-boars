@@ -1,5 +1,6 @@
 import React from "react";
 import Table from "react-bootstrap/Table";
+import Link from "next/link"
 
 export const RequestsPreview = ({requests}) => {
   return (
@@ -33,9 +34,9 @@ export const RequestsPreview = ({requests}) => {
                 {/*}*/}
               </td>
               <td>
-                {/*<Link href={`/requests/${row.id}`}>*/}
-                {/*  <a>Zobacz na mapie</a>*/}
-                {/*</Link>*/}
+                <Link href={`/requests/${row.id}`}>
+                  <a>Zobacz na mapie</a>
+                </Link>
                 {/*row.location*/}
               </td>
               <td>
