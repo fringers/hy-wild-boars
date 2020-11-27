@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
+import { useHistory } from 'react-router-dom';
 import Carousel from 'react-material-ui-carousel';
 import { Button, Paper } from '@material-ui/core';
 
 const Intro = () => {
+  const history = useHistory();
   const [page, setPage] = useState(0);
 
   return (
@@ -33,7 +35,7 @@ const Intro = () => {
         <h2>Test3</h2>
         <p>Description3</p>
         <Button onClick={() => setPage(page - 1)}>Wstecz</Button>
-        <Button onClick={() => console.log('navigate')}>Dalej</Button>
+        <Button onClick={() => history.push('/submit')}>Dalej</Button>
       </Paper>
     </Carousel>
   );

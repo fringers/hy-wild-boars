@@ -2,3 +2,5 @@
 *.iml
 
 /firebase-debug.log
+client/.eslintcache
+./client/.eslintcache
