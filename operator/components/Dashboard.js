@@ -2,6 +2,11 @@ import React from "react";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
+import dynamic from "next/dynamic";
+
+const MapWithNoSSR = dynamic(() => import('./Map'), {
+  ssr: false
+});
 
 export const Dashboard = () => {
   return (
@@ -11,7 +16,7 @@ export const Dashboard = () => {
           Requests preview
         </Col>
         <Col sm={12} xl={6}>
-          Map
+          <MapWithNoSSR/>
         </Col>
       </Row>
     </Container>
