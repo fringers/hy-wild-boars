@@ -5,13 +5,13 @@ import { faSatelliteDish, faTree, faBan, faCheck } from '@fortawesome/free-solid
 export const StatusIcon = ({status}) => {
   switch (status) {
     case 'NEW':
-      return <FontAwesomeIcon icon={faSatelliteDish}/>
+      return <FontAwesomeIcon icon={faSatelliteDish} title="Nowe zgłoszenie"/>
     case 'ACCEPTED':
-      return <FontAwesomeIcon icon={faTree}/>
+      return <FontAwesomeIcon icon={faTree} title="Zaakceptowano - przetwarzanie"/>
     case 'REJECTED':
-      return <FontAwesomeIcon icon={faBan}/>
+      return <FontAwesomeIcon icon={faBan} title="Odrzucone"/>
     case 'RESOLVED':
-      return <FontAwesomeIcon icon={faCheck}/>
+      return <FontAwesomeIcon icon={faCheck} title="Zgłoszenie rozwiązane"/>
     default:
       return null
   }

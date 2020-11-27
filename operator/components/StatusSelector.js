@@ -1,7 +1,7 @@
 import Button from "react-bootstrap/Button";
 import React from "react";
 
-export const StatusSelector = ({status, children, selectedStatuses, onStatusesChange}) => {
+export const StatusSelector = ({status, children, selectedStatuses, onStatusesChange, className = ''}) => {
   const selected = selectedStatuses.includes(status)
   const onClick = () => {
     const newStatuses = selectedStatuses
@@ -17,7 +17,7 @@ export const StatusSelector = ({status, children, selectedStatuses, onStatusesCh
   }
 
   return (
-    <Button variant={selected ? 'primary' : 'link'} onClick={onClick}>
+    <Button variant={selected ? 'primary' : 'link'} onClick={onClick} className={className}>
       {children}
     </Button>
   )

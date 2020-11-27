@@ -21,7 +21,7 @@ export const RequestsPreview = ({requests}) => {
         requests.map(row => {
           return (
             <tr key={row.id}>
-              <td>
+              <td className="text-center">
                 <StatusIcon status={row.status}/>
               </td>
               <td>{row.timestamp.toLocaleString("pl")}</td>

@@ -12,18 +12,18 @@ const MapWithNoSSR = dynamic(() => import('./Map'), {
 
 export const Dashboard = ({latestRequest, statuses, onStatusesChange}) => {
   return (
-    <Container fluid>
+    <Container fluid className="mt-3">
       <Row>
-        <StatusSelector status="NEW" selectedStatuses={statuses} onStatusesChange={onStatusesChange}>
+        <StatusSelector status="NEW" selectedStatuses={statuses} onStatusesChange={onStatusesChange} className="m-1">
           Nowe
         </StatusSelector>
-        <StatusSelector status="ACCEPTED" selectedStatuses={statuses} onStatusesChange={onStatusesChange}>
+        <StatusSelector status="ACCEPTED" selectedStatuses={statuses} onStatusesChange={onStatusesChange} className="m-1">
           Zaakceptowane
         </StatusSelector>
-        <StatusSelector status="RESOLVED" selectedStatuses={statuses} onStatusesChange={onStatusesChange}>
+        <StatusSelector status="RESOLVED" selectedStatuses={statuses} onStatusesChange={onStatusesChange} className="m-1">
           Rozwiązane
         </StatusSelector>
-        <StatusSelector status="REJECTED" selectedStatuses={statuses} onStatusesChange={onStatusesChange}>
+        <StatusSelector status="REJECTED" selectedStatuses={statuses} onStatusesChange={onStatusesChange} className="m-1">
           Odrzucone
         </StatusSelector>
       </Row>

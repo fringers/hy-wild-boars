@@ -11,7 +11,6 @@ export default function Home({user}) {
 
 
   useEffect(() => {
-    console.log('fsdfsd')
     if (!user)
       return;
 
