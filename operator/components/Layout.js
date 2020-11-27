@@ -5,7 +5,7 @@ import Link from "next/link";
 import {signOut} from "../firebase/auth";
 import Col from "react-bootstrap/Col";
 
-export const Layout = ({user, children}) => {
+export const Layout = ({user, children, title}) => {
   const Authorized = ({user}) => <></>
   const Unauthorized = () => <Link href="/login">Logowanie</Link>
 
@@ -20,7 +20,6 @@ export const Layout = ({user, children}) => {
           </Link>
         </Row>
       </Container>
-
     )
   }
 
@@ -29,7 +28,7 @@ export const Layout = ({user, children}) => {
       <Row className="bg-primary text-white p-4">
         <Col>
           <h5 className="m-0">
-            Aktualne zgłoszenia
+            {title}
           </h5>
         </Col>
         <Col className="text-right">

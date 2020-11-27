@@ -27,7 +27,7 @@ export default function Home({user}) {
   }
 
   return (
-    <Layout user={user}>
+    <Layout user={user} title="Ostatnie zgłoszenia">
       {
         user
           ? <Dashboard

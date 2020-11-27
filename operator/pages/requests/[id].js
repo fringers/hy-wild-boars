@@ -12,6 +12,7 @@ export default function Request({user}) {
   const router = useRouter()
 
   const [request, setRequest] = useState(null)
+  const [title, setTitle] = useState('')
 
   useEffect(() => {
     if (!user || !router.query.id)
@@ -20,13 +21,14 @@ export default function Request({user}) {
     const fetchRequest = async (id) => {
       const data = await getRequest(id)
       setRequest(data)
+      setTitle(`Zgłoszenie z ${data.timestamp.toLocaleString("pl")}`)
     }
 
     fetchRequest(router.query.id)
   }, [user?.uid, router.query.id])
 
   return (
-    <Layout user={user}>
+    <Layout user={user} title={title}>
       {
         (user && request)
           ? <MapWithNoSSR
