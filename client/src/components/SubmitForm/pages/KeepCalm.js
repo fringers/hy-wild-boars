@@ -8,7 +8,7 @@ const KeepCalm = ({ onNext, classes }) => (
   <Paper classes={{ root: classes.paper }}>
     <FontAwesomeIcon className={classes.icon} icon={faTree} />
     <div className={classes.infoContainer}>
-      <Typography variant="h2">Zachowaj spokój</Typography>
+      <Typography variant="h4">Zachowaj spokój</Typography>
       <Typography variant="subtitle1">
         Zachowaj bezpieczną odległość i nie prowokuj zwierzęcia. Staraj się
         udawać drzewo, powoli się wycofując.

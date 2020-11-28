@@ -8,7 +8,7 @@ const DontTouch = ({ onNext, classes }) => (
   <Paper classes={{ root: classes.paper }}>
     <FontAwesomeIcon className={classes.icon} icon={faViruses} />
     <div className={classes.infoContainer}>
-      <Typography variant="h2">Zachowaj dystans</Typography>
+      <Typography variant="h4">Zachowaj dystans</Typography>
       <Typography variant="subtitle1">
         Nie dotykaj zwłok i nie zbliżaj się do nich. Pamiętaj, że zwierzę mogło
         być chore.

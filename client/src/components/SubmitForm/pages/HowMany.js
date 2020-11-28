@@ -16,7 +16,7 @@ const HowMany = ({ onNext, classes }) => {
     <Paper classes={{ root: classes.paper }}>
       <FontAwesomeIcon className={classes.icon} icon={faChartLine} />
       <div className={classes.infoContainer}>
-        <Typography variant="h2">Ile dzików widzisz?</Typography>
+        <Typography variant="h4">Ile dzików widzisz?</Typography>
       </div>
       <FormControl className={classes.formControl}>
         <InputLabel id="how-many">Liczba dzików</InputLabel>
