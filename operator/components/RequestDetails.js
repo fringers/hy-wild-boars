@@ -63,7 +63,24 @@ export const RequestDetails = ({request, messages, geoInfo, onSendMessage, onSta
           <div className="mb-5">
             <ListGroup variant="flush">
               <ListGroup.Item>
-                <RequestActions request={request} onStatusUpdate={onStatusUpdate}/>
+                <div className="d-flex">
+                  <div className="flex-grow-1">
+                    <RequestActions request={request} onStatusUpdate={onStatusUpdate}/>
+                  </div>
+                  <div>
+                    <Button variant="secondary" onClick={ () => {
+                      html2canvas(document.body, {allowTaint: true, useCORS: true}).then(function(canvas) {
+                        const doc = jsPDF("l", "mm", [canvas.width, canvas.height]);
+
+                        const imgData = canvas.toDataURL('image/png');
+                        doc.addImage(imgData, 'PNG', 0, 0,canvas.width, canvas.height);
+                        doc.save('Zgłoszenie-'+request.timestamp.toLocaleString("pl")+'.pdf');
+
+                        // document.body.appendChild(canvas);
+                      });
+                    }} className="m-1">Wygeneruj PDF</Button>
+                  </div>
+                </div>
               </ListGroup.Item>
               <ListGroup.Item>
                 Miejsce zgłoszenia: {geoInfo ? geoInfo.display_name : ''}
@@ -102,17 +119,6 @@ export const RequestDetails = ({request, messages, geoInfo, onSendMessage, onSta
 
           <div className="mb-2">Rozmowa z użytkownikiem:</div>
           <RequestMessages messages={messages} onSendMessage={onSendMessage}/>
-          <Button variant="danger" onClick={ () => {
-              html2canvas(document.body, {allowTaint: true, useCORS: true}).then(function(canvas) {
-                const doc = jsPDF("l", "mm", [canvas.width, canvas.height]);
-
-                const imgData = canvas.toDataURL('image/png');
-                doc.addImage(imgData, 'PNG', 0, 0,canvas.width, canvas.height);
-                doc.save('Zgłoszenie-'+request.timestamp.toLocaleString("pl")+'.pdf');
-
-                // document.body.appendChild(canvas);
-              });
-          }} className="m-1">Wygeneruj PDF</Button>
 
         </Col>
         <Col sm={12} xl={6}>
