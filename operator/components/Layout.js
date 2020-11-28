@@ -8,7 +8,7 @@ import ListGroup from "react-bootstrap/ListGroup";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faListAlt } from '@fortawesome/free-solid-svg-icons'
 
-export const Layout = ({user, children, title}) => {
+export const Layout = ({user, children, title, subTitle}) => {
 
   if (!user) {
     return (
@@ -47,11 +47,12 @@ export const Layout = ({user, children, title}) => {
         </Row>
       </div>
       <div className="flex-grow-1">
-        <Row className="bg-primary text-white p-4">
+        <Row className={`bg-primary text-white ${subTitle ? 'py-3 px-4' : 'p-4'}`}>
           <Col>
             <h5 className="m-0">
               {title}
             </h5>
+            <span>{subTitle}</span>
           </Col>
           <Col className="text-right">
             {user.email} | <a href="#" className="text-white" onClick={signOut}>Wyloguj</a>

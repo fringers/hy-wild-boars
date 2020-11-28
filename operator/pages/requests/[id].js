@@ -3,7 +3,6 @@ import React, {useEffect, useState} from "react";
 import {useRouter} from "next/router";
 import {addRequestMessage, getGeoInfo, getRequest, getRequestMessages, updateRequestStatus} from "../../firebase/db";
 import {RequestDetails} from "../../components/RequestDetails";
-import {reverseSearch} from "../../nominatim/nominatim";
 
 export default function Request({user}) {
   const router = useRouter()
@@ -12,6 +11,7 @@ export default function Request({user}) {
   const [requestMessages, setRequestMessages] = useState([])
   const [geoInfo, setGeoInfo] = useState(null)
   const [title, setTitle] = useState('')
+  const [subTitle, setSubTitle] = useState('')
 
   useEffect(() => {
     if (!user || !router.query.id)
@@ -21,6 +21,7 @@ export default function Request({user}) {
       const data = await getRequest(id)
       setRequest(data)
       setTitle(`Zgłoszenie z ${data.timestamp.toLocaleString("pl")}`)
+      setSubTitle(`ID: ${data.id}`)
     }
 
     fetchRequest(router.query.id)
@@ -65,7 +66,7 @@ export default function Request({user}) {
   }
 
   return (
-    <Layout user={user} title={title}>
+    <Layout user={user} title={title} subTitle={subTitle}>
       {
         (user && request)
           ? (
