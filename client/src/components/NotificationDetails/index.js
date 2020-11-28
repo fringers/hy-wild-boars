@@ -1,7 +1,7 @@
-import React, {useState, useEffect, useContext} from 'react';
-import {useParams} from 'react-router-dom';
+import React, { useState, useEffect, useContext } from 'react';
+import { useParams } from 'react-router-dom';
 
-import {getRequestById,} from '../../firebase/db';
+import { getRequestById } from '../../firebase/db';
 import AppBar from '../AppBar';
 import ListItemText from '@material-ui/core/ListItemText';
 import ListItem from '@material-ui/core/ListItem';
@@ -10,11 +10,11 @@ import Avatar from '@material-ui/core/Avatar';
 import ListItemAvatar from '@material-ui/core/ListItemAvatar';
 import StatusIcon from '../NotificationsScreen/StatusIcon';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
-import {makeStyles} from '@material-ui/core';
-import {Chat} from "./components/Chat";
-import {boarsNumberEnumToText} from "../../libs/requestHelper";
-import {UserContext} from "../App";
-import {RequestMenu} from "./components/RequestMenu";
+import { makeStyles } from '@material-ui/core';
+import { Chat } from './components/Chat';
+import { boarsNumberEnumToText } from '../../libs/requestHelper';
+import { UserContext } from '../App';
+import { RequestMenu } from './components/RequestMenu';
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -45,8 +45,8 @@ const statusToText = (status) => {
 
 const NotificationDetails = () => {
   const classes = useStyles();
-  const {id} = useParams();
-  const user = useContext(UserContext)
+  const { id } = useParams();
+  const user = useContext(UserContext);
   const [request, setRequest] = useState({});
 
   const fetchRequest = async (id) => {
@@ -55,29 +55,28 @@ const NotificationDetails = () => {
   };
 
   useEffect(() => {
-    if (!user)
-      return
+    if (!user) return;
     fetchRequest(id);
   }, [user?.uid]);
 
   return (
     <div className={classes.container}>
-      <AppBar/>
+      <AppBar title="Szczegóły zgłoszenia" />
       <List>
         <ListItem>
           <ListItemIcon>
-            <StatusIcon status={request.status}/>
+            <StatusIcon status={request.status} />
           </ListItemIcon>
           <ListItemText
             primary={`${statusToText(request.status)}`}
             secondary={`${getDate(request.timestamp)}`}
           />
-          <RequestMenu request={request} onCancelled={fetchRequest}/>
+          <RequestMenu request={request} onCancelled={fetchRequest} />
         </ListItem>
       </List>
 
       <div>
-        <img src={request.photoUrl} style={{width: '100%'}}/>
+        <img src={request.photoUrl} style={{ width: '100%' }} />
       </div>
 
       <List>
@@ -88,16 +87,14 @@ const NotificationDetails = () => {
           />
         </ListItem>
         <ListItem>
-          <ListItemText
-            primary={request.details}
-          />
+          <ListItemText primary={request.details} />
         </ListItem>
         <ListItem>
-          <ListItemText primary={request.details}/>
+          <ListItemText primary={request.details} />
         </ListItem>
       </List>
 
-      <Chat id={id}/>
+      <Chat id={id} />
     </div>
   );
 };

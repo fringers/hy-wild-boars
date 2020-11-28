@@ -1,4 +1,4 @@
-import React, {useState, useEffect, useContext} from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { useHistory } from 'react-router-dom';
 
 import List from '@material-ui/core/List';
@@ -12,7 +12,7 @@ import { makeStyles } from '@material-ui/core';
 import { getRequests } from '../../firebase/db';
 import AppBar from '../AppBar';
 import StatusIcon from './StatusIcon';
-import {UserContext} from "../App";
+import { UserContext } from '../App';
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -34,23 +34,22 @@ const NotificationsScreen = () => {
   const history = useHistory();
   const [requests, setRequests] = useState([]);
 
-  const user = useContext(UserContext)
+  const user = useContext(UserContext);
 
   const handleRequestsGet = async () => {
     const response = await getRequests();
     setRequests(response);
-  }
+  };
 
   useEffect(() => {
-    if (!user)
-      return
+    if (!user) return;
 
-    handleRequestsGet()
+    handleRequestsGet();
   }, [user?.uid]);
 
   return (
     <div className={classes.container}>
-      <AppBar />
+      <AppBar title="Twoje zgłoszenia" />
       <List classes={{ root: classes.list }}>
         {requests?.map(({ id, timestamp, photoUrl, status, isDead }, i) => (
           <ListItem

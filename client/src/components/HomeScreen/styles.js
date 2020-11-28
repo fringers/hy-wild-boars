@@ -30,16 +30,21 @@ export default makeStyles((theme) => ({
   imageWrapper: {
     position: 'relative',
     width: '100vw',
-    height: 300,
+    maxHeight: 300,
     overflow: 'hidden',
+    [theme.breakpoints.up('sm')]: {
+      height: 300,
+    },
   },
   image: {
-    position: 'absolute',
     maxWidth: '100%',
     width: '100%',
     height: 'auto',
-    top: '50%',
-    left: '50%',
-    transform: 'translate( -50%, -50%)',
+    [theme.breakpoints.up('sm')]: {
+      transform: 'translate( -50%, -50%)',
+      position: 'absolute',
+      top: '50%',
+      left: '50%',
+    },
   },
 }));
