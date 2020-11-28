@@ -17,6 +17,7 @@ import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import {faBan} from '@fortawesome/free-solid-svg-icons';
 import {IconButton, makeStyles} from '@material-ui/core';
 import {Chat} from "./components/Chat";
+import {boarsNumberEnumToText} from "../../libs/requestHelper";
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -100,7 +101,15 @@ const NotificationDetails = () => {
           <ListItemText primary={`${statusToText(request.status)}`}/>
         </ListItem>
         <ListItem>
-          <ListItemText primary={request.isDead ? 'Martwy' : 'Żywy'}/>
+          <ListItemText
+            primary={request.isDead ? 'Martwy' : 'Żywy'}
+            secondary={boarsNumberEnumToText(request.howMany)}
+          />
+        </ListItem>
+        <ListItem>
+          <ListItemText
+            primary={request.details}
+          />
         </ListItem>
         <ListItem>
           <ListItemText primary={request.details}/>

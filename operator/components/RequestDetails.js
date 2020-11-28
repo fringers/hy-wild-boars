@@ -9,7 +9,7 @@ import ListGroup from "react-bootstrap/ListGroup";
 import Button from "react-bootstrap/Button";
 import * as html2canvas from "html2canvas";
 import {jsPDF} from "jspdf";
-import {boarsNumberEnumToText} from "../../client/src/libs/requestHelper";
+import {boarsNumberEnumToText} from "../lib/requestHelper";
 
 const MapWithNoSSR = dynamic(() => import('./Map'), {
   ssr: false
