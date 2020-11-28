@@ -4,7 +4,7 @@ import { Paper, Button, Typography } from '@material-ui/core';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faViruses } from '@fortawesome/free-solid-svg-icons';
 
-const DontTouch = ({ onPrev, onNext, classes }) => (
+const DontTouch = ({ onNext, classes }) => (
   <Paper classes={{ root: classes.paper }}>
     <FontAwesomeIcon className={classes.icon} icon={faViruses} />
     <div className={classes.infoContainer}>
@@ -15,9 +15,6 @@ const DontTouch = ({ onPrev, onNext, classes }) => (
       </Typography>
     </div>
     <div className={classes.buttonContainer}>
-      <Button variant="contained" color="primary" onClick={onPrev}>
-        Cofnij
-      </Button>
       <Button variant="contained" color="primary" onClick={onNext}>
         Dalej
       </Button>
