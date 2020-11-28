@@ -18,7 +18,7 @@ export default function Home({user}) {
       setLatestRequests(data)
     }
 
-    return watchLatestRequests(5, statuses, onNewRequests);
+    return watchLatestRequests(10, statuses, onNewRequests);
   }, [user?.uid, key])
 
   const statusesChangeHandler = (statuses) => {

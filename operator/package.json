@@ -17,6 +17,7 @@
     "firebase": "^8.1.1",
     "leaflet": "^1.7.1",
     "next": "10.0.3",
+    "nominatim-search": "^1.0.2",
     "react": "17.0.1",
     "react-bootstrap": "^1.4.0",
     "react-dom": "17.0.1",

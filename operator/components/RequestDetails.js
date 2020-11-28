@@ -53,7 +53,7 @@ const RequestActions = ({request, onStatusUpdate}) => {
   )
 }
 
-export const RequestDetails = ({request, messages, onSendMessage, onStatusUpdate}) => {
+export const RequestDetails = ({request, messages, geoInfo, onSendMessage, onStatusUpdate}) => {
   return (
     <Container fluid className="mt-3">
       <Row>
@@ -62,6 +62,9 @@ export const RequestDetails = ({request, messages, onSendMessage, onStatusUpdate
             <ListGroup variant="flush">
               <ListGroup.Item>
                 <RequestActions request={request} onStatusUpdate={onStatusUpdate}/>
+              </ListGroup.Item>
+              <ListGroup.Item>
+                Miejsce zgłoszenia: {geoInfo ? geoInfo.display_name : ''}
               </ListGroup.Item>
               <ListGroup.Item>
                 Data zgłoszenia: {request.timestamp.toLocaleString("pl")}
