@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
-import { useHistory } from 'react-router-dom';
+import React, {useEffect, useState} from 'react';
+import {useHistory} from 'react-router-dom';
 
-import { sendRequest } from '../../firebase/db';
+import {sendRequest} from '../../firebase/db';
 import IsDead from './pages/IsDead';
 import DontTouch from './pages/DontTouch';
 import KeepCalm from './pages/KeepCalm';
@@ -24,6 +24,10 @@ const Page = {
   additionalInfo: 6,
 };
 
+const isValidIsDeadQuery = (val) => val === "true" || val === "false"
+const isValidHowManyQuery = (val) => val === "ONE" || val === "TWO_TO_SEVEN"
+  || val === "EITGHT_TO_THIRTY" || val === "ABOVE_THIRTY"
+
 const SubmitForm = () => {
   const classes = useStyles();
   const history = useHistory();
@@ -33,6 +37,20 @@ const SubmitForm = () => {
 
   const [position, setPosition] = useState({});
   const [fileUrl, setFileUrl] = useState('');
+
+
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+
+    const queryIsDead = params.get('isDead');
+    const queryHowMany = params.get('howMany');
+    if (isValidIsDeadQuery(queryIsDead) && isValidHowManyQuery(queryHowMany)) {
+      setDead(Boolean(queryIsDead))
+      setHowMany(queryHowMany)
+      setPage(4)
+    }
+  }, [])
+
 
   return (
     <Carousel
