@@ -21,10 +21,10 @@ const SecondForm = ({ onNext, classes }) => {
         multiple
         type="file"
         onChange={async (e) => {
-          const filePath = e?.target?.value;
-          if (filePath) {
+          const file = e?.target?.files[0];
+          if (file) {
             setLoading(true);
-            const fileUrl = await uploadFile(filePath);
+            const fileUrl = await uploadFile(file);
             setLoading(false);
             onNext(fileUrl);
           }
