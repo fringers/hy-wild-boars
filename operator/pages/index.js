@@ -10,6 +10,7 @@ export default function Home({user}) {
   const [latestRequest, setLatestRequests] = useState([])
   const [geoInfo, setGeoInfo] = useState({})
   const [statuses, setStatuses] = useState(['NEW', 'ACCEPTED'])
+  const [geoSearch, setGeoSearch] = useState(null)
 
   const getGeoInfo = async (requests) => {
     const promises = requests.map(async (r) => {
@@ -36,12 +37,17 @@ export default function Home({user}) {
       getGeoInfo(data)
     }
 
-    return watchLatestRequests(10, statuses, onNewRequests);
+    return watchLatestRequests(10, statuses, geoSearch, onNewRequests);
   }, [user?.uid, key])
 
   const statusesChangeHandler = (statuses) => {
-    setKet((new Date()).getTime())
     setStatuses(statuses)
+    setKet((new Date()).getTime())
+  }
+
+  const searchChangeHandler = (search) => {
+    setGeoSearch(search)
+    setKet((new Date()).getTime())
   }
 
   return (
@@ -53,6 +59,7 @@ export default function Home({user}) {
               statuses={statuses}
               geoInfo={geoInfo}
               onStatusesChange={statusesChangeHandler}
+              onSearchChange={searchChangeHandler}
             />
           : ""
       }

@@ -8,6 +8,14 @@ export const reverseSearch = async ({lat, lng}) => {
   })
 }
 
+export const geoSearch = async (query) => {
+  return await NominatimJS.search({
+    q: query,
+    accept_language: 'pl',
+    countrycodes: 'pl',
+  })
+}
+
 const stateShortener = (state) => {
   return state.replace('województwo', 'woj.')
 }

@@ -5,27 +5,36 @@ import Col from "react-bootstrap/Col";
 import dynamic from "next/dynamic";
 import {RequestsPreview} from "./RequestsPreview";
 import {StatusSelector} from "./StatusSelector";
+import {GeoSearchInput} from "./GeoSearchInput";
 
 const MapWithNoSSR = dynamic(() => import('./Map'), {
   ssr: false
 });
 
-export const Dashboard = ({latestRequest, geoInfo, statuses, onStatusesChange}) => {
+export const Dashboard = ({latestRequest, geoInfo, statuses, onStatusesChange, onSearchChange}) => {
   return (
     <Container fluid className="mt-3">
       <Row>
-        <StatusSelector status="NEW" selectedStatuses={statuses} onStatusesChange={onStatusesChange} className="m-1">
-          Nowe
-        </StatusSelector>
-        <StatusSelector status="ACCEPTED" selectedStatuses={statuses} onStatusesChange={onStatusesChange} className="m-1">
-          Zaakceptowane
-        </StatusSelector>
-        <StatusSelector status="RESOLVED" selectedStatuses={statuses} onStatusesChange={onStatusesChange} className="m-1">
-          Rozwiązane
-        </StatusSelector>
-        <StatusSelector status="REJECTED" selectedStatuses={statuses} onStatusesChange={onStatusesChange} className="m-1">
-          Odrzucone
-        </StatusSelector>
+        <Col>
+          <GeoSearchInput onChange={onSearchChange}/>
+        </Col>
+        <Col>
+          <StatusSelector status="NEW" selectedStatuses={statuses} onStatusesChange={onStatusesChange} className="m-1">
+            Nowe
+          </StatusSelector>
+          <StatusSelector status="ACCEPTED" selectedStatuses={statuses} onStatusesChange={onStatusesChange}
+                          className="m-1">
+            Zaakceptowane
+          </StatusSelector>
+          <StatusSelector status="RESOLVED" selectedStatuses={statuses} onStatusesChange={onStatusesChange}
+                          className="m-1">
+            Rozwiązane
+          </StatusSelector>
+          <StatusSelector status="REJECTED" selectedStatuses={statuses} onStatusesChange={onStatusesChange}
+                          className="m-1">
+            Odrzucone
+          </StatusSelector>
+        </Col>
       </Row>
       <Row className="mt-3">
         <Col sm={12} xl={6}>
