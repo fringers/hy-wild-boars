@@ -1,0 +1,14 @@
+{
+  "name": "hy-wild-boars",
+  "version": "1.0.0",
+  "scripts": {
+    "build:client": "cd client && npm ci && npm run build",
+    "build:operator": "cd operator && npm ci && npm run build && npm run export",
+    "build:all": "npm run build:client && npm run build:operator"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/fringers/hy-wild-boars.git"
+  },
+  "author": "fringers"
+}
