@@ -6,7 +6,7 @@ export default makeStyles((theme) => ({
     backgroundColor: '#dcd1bc',
     display: 'flex',
     flexDirection: 'column',
-    height: '80vh',
+    height: '86vh',
     justifyContent: 'space-between',
     margin: theme.spacing(4),
     padding: theme.spacing(4),

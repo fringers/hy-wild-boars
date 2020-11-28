@@ -12,10 +12,10 @@ const ThirdIntro = ({ onNext, onPrev, classes }) => (
       Może mieć wirusa, nie robi się tak,
     </Typography>
     <div className={classes.buttonContainer}>
-      <Button variant="outlined" onClick={onPrev}>
+      <Button variant="contained" color="primary" onClick={onPrev}>
         Wstecz
       </Button>
-      <Button variant="outlined" onClick={onNext}>
+      <Button variant="contained" color="primary" onClick={onNext}>
         Dalej
       </Button>
     </div>

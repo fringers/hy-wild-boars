@@ -4,7 +4,7 @@ import { Button, Typography } from '@material-ui/core';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCommentSlash } from '@fortawesome/free-solid-svg-icons';
 
-const FirstIntro = ({ onSkip, onNext, classes }) => (
+const FirstForm = ({ onSkip, onNext, classes }) => (
   <>
     <FontAwesomeIcon className={classes.icon} icon={faCommentSlash} />
     <Typography variant="h2">Zachowaj ciszę!</Typography>
@@ -12,20 +12,20 @@ const FirstIntro = ({ onSkip, onNext, classes }) => (
       Bądź cicho, Bądź cicho, Bądź cicho
     </Typography>
     <div className={classes.buttonContainer}>
-      <Button variant="outlined" onClick={onSkip}>
+      <Button variant="contained" color="primary" onClick={onSkip}>
         Pomiń
       </Button>
-      <Button variant="outlined" onClick={onNext}>
+      <Button variant="contained" color="primary" onClick={onNext}>
         Dalej
       </Button>
     </div>
   </>
 );
 
-FirstIntro.propTypes = {
+FirstForm.propTypes = {
   onSkip: PropTypes.func.isRequired,
   onNext: PropTypes.func.isRequired,
   classes: PropTypes.object.isRequired,
 };
 
-export default FirstIntro;
+export default FirstForm;

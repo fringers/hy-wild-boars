@@ -15,10 +15,10 @@ const SecondIntro = ({ onNext, onPrev, classes }) => (
       żeby odejść możliwie najdalej
     </Typography>
     <div className={classes.buttonContainer}>
-      <Button variant="outlined" onClick={onPrev}>
+      <Button variant="contained" color="primary" onClick={onPrev}>
         Wstecz
       </Button>
-      <Button variant="outlined" onClick={onNext}>
+      <Button variant="contained" color="primary" onClick={onNext}>
         Dalej
       </Button>
     </div>
