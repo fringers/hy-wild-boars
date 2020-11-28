@@ -12,8 +12,6 @@ Sorted by the priority
 
 ### crutial
 
-- [] offline v2 - zapisywanie i wysyłanie zgłoszeń po przywróceniu połącznia (zapisać itemy w localStorage?) 🚀
-
 ### bugs
 
 ### Improvements, nice to have

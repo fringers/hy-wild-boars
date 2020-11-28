@@ -1,15 +1,14 @@
-import React, {useState} from "react";
-import ListItemIcon from "@material-ui/core/ListItemIcon";
-import {IconButton} from "@material-ui/core";
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faEllipsisH} from "@fortawesome/free-solid-svg-icons";
-import {updateRequestStatus} from "../../../firebase/db";
-import MenuItem from "@material-ui/core/MenuItem";
+import React, { useState } from 'react';
+import ListItemIcon from '@material-ui/core/ListItemIcon';
+import { IconButton } from '@material-ui/core';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faEllipsisH } from '@fortawesome/free-solid-svg-icons';
+import { updateRequestStatus } from '../../../firebase/db';
+import MenuItem from '@material-ui/core/MenuItem';
 import Menu from '@material-ui/core/Menu';
 
-export const RequestMenu = ({request, onCancelled}) => {
-  if (!request || request.status !== 'NEW')
-    return null
+export const RequestMenu = ({ request, onCancelled }) => {
+  if (!request || request.status !== 'NEW') return null;
 
   const [anchorEl, setAnchorEl] = useState(null);
   const [loading, setLoading] = useState(false);
@@ -36,8 +35,13 @@ export const RequestMenu = ({request, onCancelled}) => {
 
   return (
     <ListItemIcon>
-      <IconButton aria-controls="request-menu" aria-haspopup="true" onClick={handleClick} disabled={loading}>
-        <FontAwesomeIcon icon={faEllipsisH}/>
+      <IconButton
+        aria-controls="request-menu"
+        aria-haspopup="true"
+        onClick={handleClick}
+        disabled={loading}
+      >
+        <FontAwesomeIcon icon={faEllipsisH} />
       </IconButton>
       <Menu
         id="request-menu"
@@ -49,5 +53,5 @@ export const RequestMenu = ({request, onCancelled}) => {
         <MenuItem onClick={handleRequestCancel}>Anuluj</MenuItem>
       </Menu>
     </ListItemIcon>
-  )
-}
+  );
+};
