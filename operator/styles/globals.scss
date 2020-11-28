@@ -8,3 +8,7 @@ $theme-colors: (
   width: 100%;
   height: 600px;
 }
+
+.clickable tr {
+  cursor: pointer;
+}
