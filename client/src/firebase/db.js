@@ -27,6 +27,16 @@ const docToRequest = (doc) => {
   };
 };
 
+const docToMessage = (doc) => {
+  const data = doc.data()
+  return {
+    id: doc.id,
+    text: data.text,
+    sender: data.sender,
+    timestamp: data.timestamp.toDate(),
+  }
+}
+
 export const getRequests = async () => {
   const snapshot = await db
     .collection('requests')
@@ -40,3 +50,22 @@ export const getRequestById = async (requestId) => {
   const doc = await db.collection('requests').doc(requestId).get();
   return docToRequest(doc);
 };
+
+export const getRequestMessages = async (requestId) => {
+  const snapshot = await db.collection("requests").doc(requestId)
+    .collection("requestMessages")
+    .orderBy("timestamp", "asc")
+    .get()
+
+  return snapshot.docs.map(docToMessage)
+}
+
+export const addRequestMessage = async (requestId, message) => {
+  await db.collection("requests").doc(requestId)
+    .collection("requestMessages")
+    .add({
+      text: message,
+      sender: 'USER',
+      timestamp: serverTimestamp(),
+    })
+}
