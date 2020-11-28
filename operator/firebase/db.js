@@ -24,6 +24,13 @@ export const getRequest = async (requestId) => {
   return docToRequest(doc)
 }
 
+export const updateRequestStatus = async (requestId, status) => {
+  await db.collection("requests").doc(requestId)
+    .update({
+      status,
+    })
+}
+
 export const getRequestMessages = async (requestId) => {
   const snapshot = await db.collection("requests").doc(requestId)
     .collection("requestMessages")
@@ -48,11 +55,11 @@ const docToRequest = (doc) => {
   return {
     id: doc.id,
     timestamp: data.timestamp.toDate(),
-    // userId: data.userId,
-    // photoUrl: data.photoUrl,
+    userId: data.userId,
+    photoUrl: data.photoUrl,
     location: data.location,
-    // isDead: data.isDead,
-    // details: data.details,
+    isDead: data.isDead,
+    details: data.details,
     status: data.status,
   }
 }

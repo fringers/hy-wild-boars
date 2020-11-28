@@ -30,28 +30,27 @@ export const RequestsPreview = ({requests}) => {
                 </Link>
               </td>
               <td>
-                {/*{*/}
-                {/*  row.photoUrl*/}
-                {/*    ? (*/}
-                {/*      <a href={row.photoUrl} target="_blank">*/}
-                {/*        <img src={row.photoUrl} style={{maxWidth: 60, maxHeight: 60}} alt=""/>*/}
-                {/*      </a>*/}
-                {/*    )*/}
-                {/*    : ""*/}
-                {/*}*/}
+                {
+                  row.photoUrl
+                    ? (
+                      <a href={row.photoUrl} target="_blank">
+                        <img src={row.photoUrl} style={{maxWidth: 60, maxHeight: 60}} alt=""/>
+                      </a>
+                    )
+                    : ""
+                }
               </td>
               <td>
                 <Link href={`/requests/${row.id}`}>
                   <a>Zobacz na mapie</a>
                 </Link>
-                {/*row.location*/}
               </td>
               <td>
-                {/*{*/}
-                {/*  row.isDead*/}
-                {/*    ? "Tak"*/}
-                {/*    : "Nie"*/}
-                {/*}*/}
+                {
+                  row.isDead
+                    ? "Tak"
+                    : "Nie"
+                }
               </td>
               <td>{row.details}</td>
             </tr>

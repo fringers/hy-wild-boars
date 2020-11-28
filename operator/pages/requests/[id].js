@@ -1,7 +1,7 @@
 import {Layout} from "../../components/Layout";
 import React, {useEffect, useState} from "react";
 import {useRouter} from "next/router";
-import {addRequestMessage, getRequest, getRequestMessages} from "../../firebase/db";
+import {addRequestMessage, getRequest, getRequestMessages, updateRequestStatus} from "../../firebase/db";
 import {RequestDetails} from "../../components/RequestDetails";
 
 export default function Request({user}) {
@@ -33,6 +33,13 @@ export default function Request({user}) {
     setRequestMessages(messages)
   }
 
+  const onStatusUpdate = async (status) => {
+    const id = router.query.id
+    await updateRequestStatus(id, status)
+    const data = await getRequest(id)
+    setRequest(data)
+  }
+
   return (
     <Layout user={user} title={title}>
       {
@@ -42,6 +49,7 @@ export default function Request({user}) {
               request={request}
               messages={requestMessages}
               onSendMessage={onSendMessage}
+              onStatusUpdate={onStatusUpdate}
             />
           )
           : ""
