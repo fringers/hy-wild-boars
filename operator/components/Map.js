@@ -225,7 +225,6 @@ const Map = ({requests, center, zoom}) => {
                     opacity: "0.00",
                     fillColor: area.fillColor,
                     fillOpacity: area.fillOpacity,
-                    fillOpacity: area.fillOpacity
                 }} />
             )
         }
