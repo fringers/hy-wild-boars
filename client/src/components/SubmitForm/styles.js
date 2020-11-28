@@ -33,15 +33,9 @@ export default makeStyles((theme) => ({
   formControl: {
     width: 216,
   },
-  photoImg: {
-    borderColor: theme.palette.primary.main,
-    borderRadius: theme.spacing(1),
-    borderStyle: 'solid',
-    borderWidth: theme.spacing(0.5),
-    maxHeight: 148,
-  },
   map: {
     height: '100%',
+    maxHeight: 316,
     width: '100%',
   },
   mapBtn: {

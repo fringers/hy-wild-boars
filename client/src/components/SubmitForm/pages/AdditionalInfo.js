@@ -13,7 +13,8 @@ const AdditionalInfo = ({ onNext, classes }) => {
       <div className={classes.infoContainer}>
         <Typography variant="h2">Uwagi</Typography>
         <Typography variant="subtitle1">
-          Twoje uwagi są dla nas bardzo ważne, dodać coś żeby się pokazywało
+          W tym miejscu możesz wprowadzić inne ważne informacje, które uznasz za
+          istotne.
         </Typography>
       </div>
       <TextField

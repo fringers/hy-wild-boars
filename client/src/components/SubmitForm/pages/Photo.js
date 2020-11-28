@@ -1,34 +1,35 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { Paper, Button, Typography, CircularProgress } from '@material-ui/core';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCamera } from '@fortawesome/free-solid-svg-icons';
 import Skeleton from '@material-ui/lab/Skeleton';
 
 import { uploadFile } from '../../../firebase/storage';
 
+const showSkerton = (photoUrl, loading) => {
+  if (!photoUrl) return true;
+  if (loading && photoUrl) return true;
+  return false;
+};
+
 const Photo = ({ isDead, onNext, classes }) => {
   const [loading, setLoading] = useState(false);
-  const [photoUrl, setPhotoUrl] = useState('');
+  const [photoUrl, setPhotoUrl] = useState(null);
 
   return (
     <Paper classes={{ root: classes.paper }}>
-      <FontAwesomeIcon className={classes.icon} icon={faCamera} />
+      {showSkerton(photoUrl, loading) && (
+        <Skeleton variant="rect" width={324} height={256} />
+      )}
+      {!loading && photoUrl && <img className={classes.icon} src={photoUrl} />}
       <div className={classes.infoContainer}>
         <Typography variant="h2">Zrób zdjęcie</Typography>
         <Typography variant="subtitle1">
-          Jeśli masz możliwośc zrobienia zdjęcia, zrób to.{' '}
-          {isDead &&
-            'Pamiętaj jednak że Twoje bezpieczeństwo jest najważniejsze!'}
+          Jeśli masz taką możliwość, zrób zdjęcie, które pomoże nam lepiej
+          ocenić sytuację.
+          {!isDead &&
+            ' Pamiętaj jednak, że Twoje bezpieczeństwo jest najważniejsze!'}
         </Typography>
       </div>
-      {loading && <CircularProgress />}
-      {!loading && !photoUrl && (
-        <Skeleton variant="rect" width={210} height={118} />
-      )}
-      {!loading && photoUrl && (
-        <img className={classes.photoImg} src={photoUrl} />
-      )}
       <input
         accept="image/*"
         style={{ display: 'none' }}
@@ -53,7 +54,13 @@ const Photo = ({ isDead, onNext, classes }) => {
             color="primary"
             disabled={loading}
           >
-            {photoUrl ? 'Edytuj zdjęcie' : 'Dodaj zdjęcie'}
+            {loading ? (
+              <CircularProgress size={24} />
+            ) : photoUrl ? (
+              'Edytuj zdjęcie'
+            ) : (
+              'Dodaj zdjęcie'
+            )}
           </Button>
         </label>
         <Button
