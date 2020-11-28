@@ -1,19 +1,21 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import { Button, TextField, Typography } from '@material-ui/core';
+import { Paper, Button, TextField, Typography } from '@material-ui/core';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faInfoCircle } from '@fortawesome/free-solid-svg-icons';
 
-const FourthForm = ({ onNext, classes }) => {
+const AdditionalInfo = ({ onNext, classes }) => {
   const [value, setValue] = useState('');
 
   return (
-    <>
+    <Paper classes={{ root: classes.paper }}>
       <FontAwesomeIcon className={classes.icon} icon={faInfoCircle} />
-      <Typography variant="h2">Uwagi</Typography>
-      <Typography variant="subtitle1">
-        Twoje uwagi są dla nas bardzo ważne, dodać coś żeby się pokazywało
-      </Typography>
+      <div className={classes.infoContainer}>
+        <Typography variant="h2">Uwagi</Typography>
+        <Typography variant="subtitle1">
+          Twoje uwagi są dla nas bardzo ważne, dodać coś żeby się pokazywało
+        </Typography>
+      </div>
       <TextField
         placeholder="Twoje uwagi"
         multiline
@@ -24,13 +26,13 @@ const FourthForm = ({ onNext, classes }) => {
       <Button variant="contained" color="primary" onClick={() => onNext(value)}>
         Wyślij
       </Button>
-    </>
+    </Paper>
   );
 };
 
-FourthForm.propTypes = {
+AdditionalInfo.propTypes = {
   onNext: PropTypes.func.isRequired,
   classes: PropTypes.object.isRequired,
 };
 
-export default FourthForm;
+export default AdditionalInfo;

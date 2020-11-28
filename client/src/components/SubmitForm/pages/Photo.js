@@ -1,19 +1,25 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import { Button, Typography } from '@material-ui/core';
+import { Paper, Button, Typography } from '@material-ui/core';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCamera } from '@fortawesome/free-solid-svg-icons';
 
 import { uploadFile } from '../../../firebase/storage';
 
-const SecondForm = ({ onNext, classes }) => {
+const Photo = ({ isDead, onNext, classes }) => {
   const [loading, setLoading] = useState(false);
 
   return (
-    <>
+    <Paper classes={{ root: classes.paper }}>
       <FontAwesomeIcon className={classes.icon} icon={faCamera} />
-      <Typography variant="h2">Zrób zdjęcie</Typography>
-      <Typography variant="subtitle1">Bo się nam przyda</Typography>
+      <div className={classes.infoContainer}>
+        <Typography variant="h2">Zrób zdjęcie</Typography>
+        <Typography variant="subtitle1">
+          Jeśli masz możliwośc zrobienia zdjęcia, zrób to.{' '}
+          {isDead &&
+            'Pamiętaj jednak że Twoje bezpieczeństwo jest najważniejsze!'}
+        </Typography>
+      </div>
       <input
         accept="image/*"
         style={{ display: 'none' }}
@@ -40,13 +46,14 @@ const SecondForm = ({ onNext, classes }) => {
           Dodaj zdjęcie
         </Button>
       </label>
-    </>
+    </Paper>
   );
 };
 
-SecondForm.propTypes = {
+Photo.propTypes = {
+  isDead: PropTypes.bool,
   onNext: PropTypes.func.isRequired,
   classes: PropTypes.object.isRequired,
 };
 
-export default SecondForm;
+export default Photo;

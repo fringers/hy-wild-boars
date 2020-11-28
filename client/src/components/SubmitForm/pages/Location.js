@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import { Button, Typography } from '@material-ui/core';
+import { Paper, Button, Typography } from '@material-ui/core';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMapMarkerAlt } from '@fortawesome/free-solid-svg-icons';
 
 import { getPosition } from '../../../libs/location';
 
-const FirstForm = ({ onNext, classes }) => {
+const Location = ({ onNext, classes }) => {
   const [loading, setLoading] = useState(false);
 
   const handleGetLocation = async () => {
@@ -17,12 +17,14 @@ const FirstForm = ({ onNext, classes }) => {
   };
 
   return (
-    <>
+    <Paper classes={{ root: classes.paper }}>
       <FontAwesomeIcon className={classes.icon} icon={faMapMarkerAlt} />
-      <Typography variant="h2">Daj nam lokalizację</Typography>
-      <Typography variant="subtitle1">
-        Abyśmy mogli sprawnie cię śledzić
-      </Typography>
+      <div className={classes.infoContainer}>
+        <Typography variant="h2">Daj nam lokalizację</Typography>
+        <Typography variant="subtitle1">
+          Abyśmy mogli sprawnie cię śledzić
+        </Typography>
+      </div>
       <Button
         variant="contained"
         color="primary"
@@ -31,13 +33,13 @@ const FirstForm = ({ onNext, classes }) => {
       >
         Pobierz lokalizację
       </Button>
-    </>
+    </Paper>
   );
 };
 
-FirstForm.propTypes = {
+Location.propTypes = {
   onNext: PropTypes.func.isRequired,
   classes: PropTypes.object.isRequired,
 };
 
-export default FirstForm;
+export default Location;
