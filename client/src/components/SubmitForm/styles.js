@@ -7,10 +7,11 @@ export default makeStyles((theme) => ({
   },
   paper: {
     alignItems: 'center',
+    backgroundColor: theme.palette.primary.light,
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'space-between',
-    height: '90vh',
+    height: 'calc(100vh - 64px)',
     padding: theme.spacing(4),
     textAlign: 'center',
   },

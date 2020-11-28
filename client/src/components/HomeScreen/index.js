@@ -26,6 +26,7 @@ const tips = [
 
 const useStyles = makeStyles((theme) => ({
   container: {
+    backgroundColor: theme.palette.primary.light,
     height: `${window.innerHeight}px`,
   },
   wrapper: {
@@ -46,6 +47,10 @@ const useStyles = makeStyles((theme) => ({
   extendedIcon: {
     marginRight: theme.spacing(1),
   },
+  standardInfo: {
+    color: 'inherit',
+    backgroundColor: 'inherit',
+  },
 }));
 
 const HomeScreen = () => {
@@ -57,7 +62,10 @@ const HomeScreen = () => {
     <div className={classes.container}>
       <AppBar showNotifications />
       <div className={classes.wrapper}>
-        <Alert classes={{ root: classes.info }} severity="info">
+        <Alert
+          classes={{ root: classes.info, standardInfo: classes.standardInfo }}
+          severity="info"
+        >
           <AlertTitle>Czy wiesz, że...</AlertTitle>
           {tip}
         </Alert>
