@@ -21,7 +21,7 @@ export const RequestsPreview = ({requests, geoInfo}) => {
       {
         requests.map(row => {
           const geo = geoInfo[row.id];
-          console.log(geo)
+
           return (
             <tr key={row.id}>
               <td className="text-center">
