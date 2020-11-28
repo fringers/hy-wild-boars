@@ -7,6 +7,8 @@ import {RequestMessages} from "./RequestMessages";
 import {StatusIcon} from "./StatusIcon";
 import ListGroup from "react-bootstrap/ListGroup";
 import Button from "react-bootstrap/Button";
+import * as html2canvas from "html2canvas";
+import {jsPDF} from "jsPDF";
 
 const MapWithNoSSR = dynamic(() => import('./Map'), {
   ssr: false
@@ -100,6 +102,18 @@ export const RequestDetails = ({request, messages, geoInfo, onSendMessage, onSta
 
           <div className="mb-2">Rozmowa z użytkownikiem:</div>
           <RequestMessages messages={messages} onSendMessage={onSendMessage}/>
+          <Button variant="danger" onClick={ () => {
+              html2canvas(document.body, {allowTaint: true, useCORS: true}).then(function(canvas) {
+                const doc = jsPDF("l", "mm", [canvas.width, canvas.height]);
+
+                const imgData = canvas.toDataURL('image/png');
+                doc.addImage(imgData, 'PNG', 0, 0,canvas.width, canvas.height);
+                doc.save('Zgłoszenie-'+request.timestamp.toLocaleString("pl")+'.pdf');
+
+                // document.body.appendChild(canvas);
+              });
+          }} className="m-1">Wygeneruj PDF</Button>
+
         </Col>
         <Col sm={12} xl={6}>
           <MapWithNoSSR
