@@ -8,7 +8,7 @@ const { CacheableResponse } = workbox.cacheableResponse;
 const { ExpirationPlugin } = workbox.expiration;
 
 registerRoute(
-  /\.(?:png|gif|jpg|jpeg|svg)$/,
+  /\.(?:png|gif|jpg|jpeg|svg|webp)$/,
   new CacheFirst({
     cacheName: 'images',
     plugins: [
