@@ -28,16 +28,19 @@ export const Layout = ({user, children, title, subTitle}) => {
     <div className="d-flex">
       <div style={{minWidth: '300px'}}>
         <Row>
-          <Col className="m-3 text-primary">
-            <h3>Dzik alarm</h3>
+          <Col className="m-3 text-primary-d">
+            <div className="d-flex align-content-center align-items-center">
+              <img src="/app_logo.png" style={{width: '100px'}}/>
+              <h3 className="p-0 m-0">Dzik alarm</h3>
+            </div>
           </Col>
         </Row>
         <Row>
-          <Col className="m-3 text-primary">
+          <Col className="m-3">
             <ListGroup variant="flush">
               <ListGroup.Item>
                 <Link href="/">
-                  <a>
+                  <a className="text-primary-d">
                     <FontAwesomeIcon icon={faListAlt}/> Ostatnie zgłoszenia
                   </a>
                 </Link>
