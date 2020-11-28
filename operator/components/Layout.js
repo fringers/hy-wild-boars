@@ -26,7 +26,7 @@ export const Layout = ({user, children, title}) => {
 
   return (
     <div className="d-flex">
-      <div style={{width: '300px'}}>
+      <div style={{minWidth: '300px'}}>
         <Row>
           <Col className="m-3 text-primary">
             <h3>Dzik alarm</h3>

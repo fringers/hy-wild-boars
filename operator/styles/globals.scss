@@ -16,3 +16,11 @@ $theme-colors: (
 .rbt-menu.dropdown-menu.show {
   z-index: 1000;
 }
+
+.text-2-lines {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}

@@ -1,6 +1,5 @@
 import React from "react";
 import Table from "react-bootstrap/Table";
-import Link from "next/link"
 import {StatusIcon} from "./StatusIcon";
 import {toShortAddress} from "../nominatim/nominatim";
 import {useRouter} from "next/router";
@@ -50,7 +49,9 @@ export const RequestsPreview = ({requests, geoInfo}) => {
                     : "Nie"
                 }
               </td>
-              <td>{row.details}</td>
+              <td className="text-2-lines">
+                {row.details}
+              </td>
             </tr>
           )
         })
