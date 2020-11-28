@@ -1,7 +1,7 @@
 import {Layout} from "../../components/Layout";
 import React, {useEffect, useState} from "react";
 import {useRouter} from "next/router";
-import {addRequestMessage, getRequest, getRequestMessages, updateRequestStatus} from "../../firebase/db";
+import {addRequestMessage, getGeoInfo, getRequest, getRequestMessages, updateRequestStatus} from "../../firebase/db";
 import {RequestDetails} from "../../components/RequestDetails";
 import {reverseSearch} from "../../nominatim/nominatim";
 
@@ -42,12 +42,12 @@ export default function Request({user}) {
     if (!request)
       return;
 
-    const fetchRequest = async (lat, lng) => {
-      const result = await reverseSearch({lat, lng})
-      setGeoInfo(result)
+    const updateGeoInfo = async (request) => {
+      const result = await getGeoInfo([request])
+      setGeoInfo(result[request.id])
     }
 
-    fetchRequest(request.location.latitude, request.location.longitude)
+    updateGeoInfo(request)
   }, [request])
 
   const onSendMessage = async (message) => {

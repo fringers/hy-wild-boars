@@ -5,3 +5,4 @@
 client/.eslintcache
 ./client/.eslintcache
 /operator/firebase-debug.log
+/.firebase/*.cache

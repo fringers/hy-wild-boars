@@ -1,5 +1,17 @@
 {
   "projects": {
     "default": "hy-wild-boars"
+  },
+  "targets": {
+    "hy-wild-boars": {
+      "hosting": {
+        "client": [
+          "hy-wild-boars"
+        ],
+        "operator": [
+          "hy-wild-boars-operator"
+        ]
+      }
+    }
   }
 }
