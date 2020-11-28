@@ -33,7 +33,6 @@ const NotificationsScreen = () => {
   const history = useHistory();
   const [requests, setRequests] = useState([]);
 
-  console.log({ requests });
   useEffect(async () => {
     const response = await getRequests();
     setRequests(response);

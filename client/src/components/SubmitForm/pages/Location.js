@@ -15,7 +15,6 @@ const Location = ({ onNext, classes }) => {
     setLoading(true);
     try {
       const position = await getPosition();
-      console.log({ position });
       setPosition({
         lat: position.coords.latitude,
         lng: position.coords.longitude,
