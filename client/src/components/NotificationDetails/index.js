@@ -4,21 +4,29 @@ import { useParams } from 'react-router-dom';
 import {
   addRequestMessage,
   getRequestById,
-  getRequestMessages, updateRequestStatus
+  getRequestMessages,
+  updateRequestStatus,
 } from '../../firebase/db';
 import AppBar from '../AppBar';
-import ListItemText from "@material-ui/core/ListItemText";
-import ListItem from "@material-ui/core/ListItem";
-import List from "@material-ui/core/List";
-import Avatar from "@material-ui/core/Avatar";
-import ListItemAvatar from "@material-ui/core/ListItemAvatar";
-import StatusIcon from "../NotificationsScreen/StatusIcon";
-import ListItemIcon from "@material-ui/core/ListItemIcon";
-import ListSubheader from "@material-ui/core/ListSubheader";
-import TextField from "@material-ui/core/TextField";
+import ListItemText from '@material-ui/core/ListItemText';
+import ListItem from '@material-ui/core/ListItem';
+import List from '@material-ui/core/List';
+import Avatar from '@material-ui/core/Avatar';
+import ListItemAvatar from '@material-ui/core/ListItemAvatar';
+import StatusIcon from '../NotificationsScreen/StatusIcon';
+import ListItemIcon from '@material-ui/core/ListItemIcon';
+import ListSubheader from '@material-ui/core/ListSubheader';
+import TextField from '@material-ui/core/TextField';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import {faBan} from '@fortawesome/free-solid-svg-icons';
-import {IconButton } from "@material-ui/core";
+import { faBan } from '@fortawesome/free-solid-svg-icons';
+import { IconButton, makeStyles } from '@material-ui/core';
+
+const useStyles = makeStyles((theme) => ({
+  container: {
+    height: `${window.innerHeight}px`,
+    backgroundColor: theme.palette.primary.light,
+  },
+}));
 
 const getDate = (timestamp) => {
   const tmp = Date.parse(timestamp);
@@ -28,30 +36,31 @@ const getDate = (timestamp) => {
 const statusToText = (status) => {
   switch (status) {
     case 'NEW':
-      return "Zgłoszenie wysłane"
+      return 'Zgłoszenie wysłane';
     case 'ACCEPTED':
-      return "Zgłoszenie zaakceptowane"
+      return 'Zgłoszenie zaakceptowane';
     case 'REJECTED':
-      return "Odrzucone"
+      return 'Odrzucone';
     case 'RESOLVED':
-      return "Zgłoszenie rozwiązane"
+      return 'Zgłoszenie rozwiązane';
     default:
-      return "Nieznany status"
+      return 'Nieznany status';
   }
-}
+};
 
 const msgSenderToText = (sender) => {
   switch (sender) {
     case 'OPERATOR':
-      return "Operator"
+      return 'Operator';
     case 'USER':
-      return "Ty"
+      return 'Ty';
     default:
-      return ""
+      return '';
   }
-}
+};
 
 const NotificationDetails = () => {
+  const classes = useStyles();
   const { id } = useParams();
   const [request, setRequest] = useState({});
   const [requestMessages, setRequestMessages] = useState([]);
@@ -62,12 +71,12 @@ const NotificationDetails = () => {
   const fetchRequest = async (id) => {
     const response = await getRequestById(id);
     setRequest(response);
-  }
+  };
 
   const fetchMessages = async (id) => {
     const messagesResponse = await getRequestMessages(id);
-    setRequestMessages(messagesResponse)
-  }
+    setRequestMessages(messagesResponse);
+  };
 
   useEffect(() => {
     fetchRequest(id);
@@ -78,79 +87,68 @@ const NotificationDetails = () => {
     event.preventDefault();
     event.stopPropagation();
 
-    setLoading(true)
+    setLoading(true);
 
     if (message && message.length > 0) {
       try {
-        await addRequestMessage(id, message)
+        await addRequestMessage(id, message);
         await fetchMessages(id);
 
-        setMessage('')
+        setMessage('');
       } catch (e) {
-        console.error(e)
+        console.error(e);
       }
     }
 
-    setLoading(false)
+    setLoading(false);
   };
 
   const handleRequestCancel = async () => {
-    setLoading(true)
+    setLoading(true);
     try {
-      await updateRequestStatus(id, 'REJECTED')
+      await updateRequestStatus(id, 'REJECTED');
       await fetchRequest(id);
     } catch (e) {
-      console.error(e)
+      console.error(e);
     }
-    setLoading(false)
-  }
+    setLoading(false);
+  };
 
   return (
-    <>
+    <div className={classes.container}>
       <AppBar />
       <List>
         <ListItem>
           <ListItemAvatar>
-            <Avatar src={request.photoUrl}/>
+            <Avatar src={request.photoUrl} />
           </ListItemAvatar>
-          <ListItemText
-            primary={`${getDate(request.timestamp)}`}
-          />
-          {
-            (request.status === "NEW") ? (
-              <ListItemIcon>
-                <IconButton onClick={handleRequestCancel} disabled={loading}>
-                  <FontAwesomeIcon icon={faBan} />
-                </IconButton >
-              </ListItemIcon>
-            ) : ''
-          }
-
+          <ListItemText primary={`${getDate(request.timestamp)}`} />
+          {request.status === 'NEW' ? (
+            <ListItemIcon>
+              <IconButton onClick={handleRequestCancel} disabled={loading}>
+                <FontAwesomeIcon icon={faBan} />
+              </IconButton>
+            </ListItemIcon>
+          ) : (
+            ''
+          )}
         </ListItem>
         <ListItem>
           <ListItemIcon>
             <StatusIcon status={request.status} />
           </ListItemIcon>
-          <ListItemText
-            primary={`${statusToText(request.status)}`}
-          />
+          <ListItemText primary={`${statusToText(request.status)}`} />
         </ListItem>
         <ListItem>
-          <ListItemText
-            primary={request.isDead ? "Martwy" : "Żywy"}
-          />
+          <ListItemText primary={request.isDead ? 'Martwy' : 'Żywy'} />
         </ListItem>
         <ListItem>
-          <ListItemText
-            primary={request.details}
-          />
+          <ListItemText primary={request.details} />
         </ListItem>
       </List>
 
       <List>
-        <ListSubheader>
-          Wiadomości:
-        </ListSubheader>
+        <ListSubheader>Wiadomości:</ListSubheader>
         {requestMessages?.map(({ id, text, sender, timestamp }, i) => (
           <ListItem key={i}>
             <ListItemText
@@ -164,16 +162,14 @@ const NotificationDetails = () => {
             <TextField
               label="Wyślij wiadomość..."
               value={message}
-              onChange={e => setMessage(e.target.value)}
+              onChange={(e) => setMessage(e.target.value)}
               required
               disabled={loading}
             />
           </form>
         </ListItem>
       </List>
-
-
-    </>
+    </div>
   );
 };
 
