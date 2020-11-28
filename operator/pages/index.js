@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from "react";
 import {Layout} from "../components/Layout";
 import {Dashboard} from "../components/Dashboard";
-import {updateRequestGeoInfo, watchLatestRequests} from "../firebase/db";
+import {getGeoInfo, updateRequestGeoInfo, watchLatestRequests} from "../firebase/db";
 import {reverseSearch} from "../nominatim/nominatim";
 
 export default function Home({user}) {
@@ -12,39 +12,14 @@ export default function Home({user}) {
   const [statuses, setStatuses] = useState(['NEW', 'ACCEPTED'])
   const [geoSearch, setGeoSearch] = useState(null)
 
-  const getGeoInfo = async (requests) => {
-    const promises = requests.map(async (r) => {
-      if (r.geoInfo) {
-        return [
-          r.id,
-          r.geoInfo,
-        ]
-      }
-
-      const data = await reverseSearch({
-        lat: r.location.latitude,
-        lng: r.location.longitude,
-      });
-
-      updateRequestGeoInfo(r.id, data)
-
-      return [
-        r.id,
-        data,
-      ]
-    });
-
-    const resolved = await Promise.all(promises);
-    setGeoInfo(Object.fromEntries(resolved));
-  }
-
   useEffect(() => {
     if (!user)
       return;
 
-    const onNewRequests = (data) => {
+    const onNewRequests = async (data) => {
       setLatestRequests(data)
-      getGeoInfo(data)
+      const geoData = await getGeoInfo(data)
+      setGeoInfo(geoData);
     }
 
     return watchLatestRequests(10, statuses, geoSearch, onNewRequests);

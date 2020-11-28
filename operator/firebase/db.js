@@ -1,4 +1,5 @@
 import {db, GeoPoint, serverTimestamp} from "./firebase";
+import {reverseSearch} from "../nominatim/nominatim";
 
 const getLatestRequestsRef = (limit, statuses, geoSearch) => {
   let request = db.collection("requests")
@@ -44,6 +45,32 @@ export const updateRequestGeoInfo = async (requestId, geoInfo) => {
     .update({
       geoInfo,
     })
+}
+
+export const getGeoInfo = async (requests) => {
+  const promises = requests.map(async (r) => {
+    if (r.geoInfo) {
+      return [
+        r.id,
+        r.geoInfo,
+      ]
+    }
+
+    const data = await reverseSearch({
+      lat: r.location.latitude,
+      lng: r.location.longitude,
+    });
+
+    updateRequestGeoInfo(r.id, data)
+
+    return [
+      r.id,
+      data,
+    ]
+  });
+
+  const resolved = await Promise.all(promises);
+  return Object.fromEntries(resolved)
 }
 
 export const getRequestMessages = async (requestId) => {
