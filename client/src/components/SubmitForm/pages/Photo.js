@@ -47,15 +47,6 @@ const Photo = ({ isDead, onNext, classes }) => {
         }}
       />
       <div className={classes.buttonContainer}>
-        <Button
-          onClick={() => onNext(photoUrl)}
-          variant="contained"
-          component="span"
-          color="primary"
-          disabled={loading}
-        >
-          {photoUrl ? 'Dalej' : 'Pomiń'}
-        </Button>
         <label htmlFor="button-file">
           <Button
             variant="contained"
@@ -72,6 +63,15 @@ const Photo = ({ isDead, onNext, classes }) => {
             )}
           </Button>
         </label>
+        <Button
+          onClick={() => onNext(photoUrl)}
+          variant="contained"
+          component="span"
+          color="primary"
+          disabled={loading}
+        >
+          {photoUrl ? 'Dalej' : 'Pomiń'}
+        </Button>
       </div>
     </Paper>
   );
