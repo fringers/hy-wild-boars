@@ -83,24 +83,24 @@ export const RequestDetails = ({request, messages, geoInfo, onSendMessage, onSta
                 </div>
               </ListGroup.Item>
               <ListGroup.Item>
-                Miejsce zgłoszenia: {geoInfo ? geoInfo.display_name : ''}
+                <strong>Miejsce zgłoszenia:</strong> {geoInfo ? geoInfo.display_name : ''}
               </ListGroup.Item>
               <ListGroup.Item>
-                Data zgłoszenia: {request.timestamp.toLocaleString("pl")}
+                <strong>Data zgłoszenia:</strong> {request.timestamp.toLocaleString("pl")}
               </ListGroup.Item>
               <ListGroup.Item>
-                Status: <StatusIcon status={request.status}/> {statusToText(request.status)}
+                <strong>Status:</strong> <StatusIcon status={request.status}/> {statusToText(request.status)}
 
               </ListGroup.Item>
               <ListGroup.Item>
-                Martwy dzik: {
+                <strong>Martwy dzik:</strong> {
                 request.isDead
                   ? "Tak"
                   : "Nie"
               }
               </ListGroup.Item>
               <ListGroup.Item>
-                Szczegóły: {request.details}
+                <strong>Szczegóły:</strong> {request.details}
               </ListGroup.Item>
               <ListGroup.Item>
                 {
