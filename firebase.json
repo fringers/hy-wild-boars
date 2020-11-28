@@ -30,6 +30,12 @@
         "firebase.json",
         "**/.*",
         "**/node_modules/**"
+      ],
+      "rewrites": [
+        {
+          "source": "/requests/**",
+          "destination": "/requests/[id].html"
+        }
       ]
     }
   ]
