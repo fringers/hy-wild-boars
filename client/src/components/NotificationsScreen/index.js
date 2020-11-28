@@ -26,7 +26,7 @@ const useStyles = makeStyles((theme) => ({
 
 const getDate = (timestamp) => {
   const tmp = Date.parse(timestamp);
-  return new Date(tmp).toLocaleString();
+  return new Date(tmp).toLocaleString('PL');
 };
 
 const NotificationsScreen = () => {
