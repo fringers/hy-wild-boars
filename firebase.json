@@ -25,6 +25,7 @@
     {
       "target": "operator",
       "public": "operator/out",
+      "cleanUrls": true,
       "ignore": [
         "firebase.json",
         "**/.*",
