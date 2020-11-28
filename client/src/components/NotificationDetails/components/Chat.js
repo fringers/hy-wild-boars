@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import React, {useContext, useEffect, useState} from "react";
 import ListSubheader from "@material-ui/core/ListSubheader";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemText from "@material-ui/core/ListItemText";
@@ -8,6 +8,7 @@ import {
   addRequestMessage,
   watchRequestMessages
 } from "../../../firebase/db";
+import {UserContext} from "../../App";
 
 const msgSenderToText = (sender) => {
   switch (sender) {
@@ -26,12 +27,19 @@ const getDate = (timestamp) => {
 };
 
 export const Chat = ({id}) => {
+  const user = useContext(UserContext)
+
   const [requestMessages, setRequestMessages] = useState([]);
 
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState('');
 
-  useEffect(() => watchRequestMessages(id, setRequestMessages), []);
+  useEffect(() => {
+    if (!user)
+      return
+
+    return watchRequestMessages(id, setRequestMessages)
+  }, [user?.uid]);
 
   const handleSubmit = async (event) => {
     event.preventDefault();

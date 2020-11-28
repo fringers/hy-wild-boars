@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, {useState, useEffect, useContext} from 'react';
 import { useHistory } from 'react-router-dom';
 
 import List from '@material-ui/core/List';
@@ -12,6 +12,7 @@ import { makeStyles } from '@material-ui/core';
 import { getRequests } from '../../firebase/db';
 import AppBar from '../AppBar';
 import StatusIcon from './StatusIcon';
+import {UserContext} from "../App";
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -33,10 +34,19 @@ const NotificationsScreen = () => {
   const history = useHistory();
   const [requests, setRequests] = useState([]);
 
-  useEffect(async () => {
+  const user = useContext(UserContext)
+
+  const handleRequestsGet = async () => {
     const response = await getRequests();
     setRequests(response);
-  }, []);
+  }
+
+  useEffect(() => {
+    if (!user)
+      return
+
+    handleRequestsGet()
+  }, [user?.uid]);
 
   return (
     <div className={classes.container}>

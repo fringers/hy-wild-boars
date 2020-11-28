@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, useContext} from 'react';
 import {useParams} from 'react-router-dom';
 
 import {
@@ -18,6 +18,7 @@ import {faBan} from '@fortawesome/free-solid-svg-icons';
 import {IconButton, makeStyles} from '@material-ui/core';
 import {Chat} from "./components/Chat";
 import {boarsNumberEnumToText} from "../../libs/requestHelper";
+import {UserContext} from "../App";
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -49,6 +50,7 @@ const statusToText = (status) => {
 const NotificationDetails = () => {
   const classes = useStyles();
   const {id} = useParams();
+  const user = useContext(UserContext)
   const [request, setRequest] = useState({});
 
   const [loading, setLoading] = useState(false);
@@ -58,10 +60,11 @@ const NotificationDetails = () => {
     setRequest(response);
   };
 
-
   useEffect(() => {
+    if (!user)
+      return
     fetchRequest(id);
-  }, []);
+  }, [user?.uid]);
 
 
   const handleRequestCancel = async () => {
