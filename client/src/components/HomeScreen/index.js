@@ -1,21 +1,29 @@
 import React from 'react';
 import { useHistory } from 'react-router-dom';
-import { makeStyles } from '@material-ui/core';
+import { Typography, makeStyles } from '@material-ui/core';
 
 import AppBar from '../AppBar';
 
-const useStyles = makeStyles({
-  grow: {},
-});
+const useStyles = makeStyles((theme) => ({
+  container: {
+    alignItems: 'center',
+    display: 'flex',
+    flexDirection: 'column',
+    marginTop: theme.spacing(4),
+  },
+}));
 
 const HomeScreen = () => {
   const classes = useStyles();
   const history = useHistory();
 
   return (
-    <div className={classes.container}>
+    <>
       <AppBar showNotifications />
-    </div>
+      <div className={classes.container}>
+        <Typography variant="subtitle1">Czy wiesz że..</Typography>
+      </div>
+    </>
   );
 };
 

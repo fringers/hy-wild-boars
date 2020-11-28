@@ -39,7 +39,7 @@ const AppBar = ({ showNotifications }) => {
 };
 
 AppBar.propTypes = {
-  showNotifications: PropTypes.bool.isRequired,
+  showNotifications: PropTypes.bool,
 };
 
 export default AppBar;
