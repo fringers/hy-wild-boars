@@ -1,10 +1,8 @@
-import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import React, {useState, useEffect} from 'react';
+import {useParams} from 'react-router-dom';
 
 import {
-  addRequestMessage,
   getRequestById,
-  getRequestMessages,
   updateRequestStatus,
 } from '../../firebase/db';
 import AppBar from '../AppBar';
@@ -15,11 +13,10 @@ import Avatar from '@material-ui/core/Avatar';
 import ListItemAvatar from '@material-ui/core/ListItemAvatar';
 import StatusIcon from '../NotificationsScreen/StatusIcon';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
-import ListSubheader from '@material-ui/core/ListSubheader';
-import TextField from '@material-ui/core/TextField';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faBan } from '@fortawesome/free-solid-svg-icons';
-import { IconButton, makeStyles } from '@material-ui/core';
+import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
+import {faBan} from '@fortawesome/free-solid-svg-icons';
+import {IconButton, makeStyles} from '@material-ui/core';
+import {Chat} from "./components/Chat";
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -30,7 +27,7 @@ const useStyles = makeStyles((theme) => ({
 
 const getDate = (timestamp) => {
   const tmp = Date.parse(timestamp);
-  return new Date(tmp).toLocaleString();
+  return new Date(tmp).toLocaleString('PL');
 };
 
 const statusToText = (status) => {
@@ -48,60 +45,23 @@ const statusToText = (status) => {
   }
 };
 
-const msgSenderToText = (sender) => {
-  switch (sender) {
-    case 'OPERATOR':
-      return 'Operator';
-    case 'USER':
-      return 'Ty';
-    default:
-      return '';
-  }
-};
-
 const NotificationDetails = () => {
   const classes = useStyles();
-  const { id } = useParams();
+  const {id} = useParams();
   const [request, setRequest] = useState({});
-  const [requestMessages, setRequestMessages] = useState([]);
 
   const [loading, setLoading] = useState(false);
-  const [message, setMessage] = useState('');
 
   const fetchRequest = async (id) => {
     const response = await getRequestById(id);
     setRequest(response);
   };
 
-  const fetchMessages = async (id) => {
-    const messagesResponse = await getRequestMessages(id);
-    setRequestMessages(messagesResponse);
-  };
 
   useEffect(() => {
     fetchRequest(id);
-    fetchMessages(id);
   }, []);
 
-  const handleSubmit = async (event) => {
-    event.preventDefault();
-    event.stopPropagation();
-
-    setLoading(true);
-
-    if (message && message.length > 0) {
-      try {
-        await addRequestMessage(id, message);
-        await fetchMessages(id);
-
-        setMessage('');
-      } catch (e) {
-        console.error(e);
-      }
-    }
-
-    setLoading(false);
-  };
 
   const handleRequestCancel = async () => {
     setLoading(true);
@@ -116,17 +76,17 @@ const NotificationDetails = () => {
 
   return (
     <div className={classes.container}>
-      <AppBar />
+      <AppBar/>
       <List>
         <ListItem>
           <ListItemAvatar>
-            <Avatar src={request.photoUrl} />
+            <Avatar src={request.photoUrl}/>
           </ListItemAvatar>
-          <ListItemText primary={`${getDate(request.timestamp)}`} />
+          <ListItemText primary={`${getDate(request.timestamp)}`}/>
           {request.status === 'NEW' ? (
             <ListItemIcon>
               <IconButton onClick={handleRequestCancel} disabled={loading}>
-                <FontAwesomeIcon icon={faBan} />
+                <FontAwesomeIcon icon={faBan}/>
               </IconButton>
             </ListItemIcon>
           ) : (
@@ -135,40 +95,19 @@ const NotificationDetails = () => {
         </ListItem>
         <ListItem>
           <ListItemIcon>
-            <StatusIcon status={request.status} />
+            <StatusIcon status={request.status}/>
           </ListItemIcon>
-          <ListItemText primary={`${statusToText(request.status)}`} />
+          <ListItemText primary={`${statusToText(request.status)}`}/>
         </ListItem>
         <ListItem>
-          <ListItemText primary={request.isDead ? 'Martwy' : 'Żywy'} />
+          <ListItemText primary={request.isDead ? 'Martwy' : 'Żywy'}/>
         </ListItem>
         <ListItem>
-          <ListItemText primary={request.details} />
+          <ListItemText primary={request.details}/>
         </ListItem>
       </List>
 
-      <List>
-        <ListSubheader>Wiadomości:</ListSubheader>
-        {requestMessages?.map(({ id, text, sender, timestamp }, i) => (
-          <ListItem key={i}>
-            <ListItemText
-              primary={text}
-              secondary={`${msgSenderToText(sender)}, ${getDate(timestamp)}`}
-            />
-          </ListItem>
-        ))}
-        <ListItem>
-          <form noValidate autoComplete="off" onSubmit={handleSubmit}>
-            <TextField
-              label="Wyślij wiadomość..."
-              value={message}
-              onChange={(e) => setMessage(e.target.value)}
-              required
-              disabled={loading}
-            />
-          </form>
-        </ListItem>
-      </List>
+      <Chat id={id}/>
     </div>
   );
 };

@@ -31,11 +31,12 @@ const docToRequest = (doc) => {
 
 const docToMessage = (doc) => {
   const data = doc.data()
+  console.log(data)
   return {
     id: doc.id,
     text: data.text,
     sender: data.sender,
-    timestamp: data.timestamp.toDate(),
+    timestamp: data.timestamp?.toDate(),
   }
 }
 
@@ -60,13 +61,11 @@ export const updateRequestStatus = async (requestId, status) => {
     })
 }
 
-export const getRequestMessages = async (requestId) => {
-  const snapshot = await db.collection("requests").doc(requestId)
+export const watchRequestMessages = (requestId, callback) => {
+  return db.collection("requests").doc(requestId)
     .collection("requestMessages")
     .orderBy("timestamp", "asc")
-    .get()
-
-  return snapshot.docs.map(docToMessage)
+    .onSnapshot(snapshot => callback(snapshot.docs.map(docToMessage)))
 }
 
 export const addRequestMessage = async (requestId, message) => {
