@@ -1,17 +1,26 @@
 import React from "react";
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faSatelliteDish, faTree, faBan, faCheck } from '@fortawesome/free-solid-svg-icons'
+
+const Icon = ({bgColor, shadowColor}) => {
+  return <div style={{
+    display: 'inline-block',
+    width: '12px',
+    height: '12px',
+    backgroundColor: bgColor,
+    boxShadow: `1px 1px 8px 0 ${shadowColor}`,
+    borderRadius: '100%',
+  }}/>
+}
 
 export const StatusIcon = ({status}) => {
   switch (status) {
     case 'NEW':
-      return <FontAwesomeIcon icon={faSatelliteDish} title="Nowe zgłoszenie"/>
+      return <Icon bgColor="red" shadowColor="rgb(255,0,0,0.75)"/>
     case 'ACCEPTED':
-      return <FontAwesomeIcon icon={faTree} title="Zaakceptowano - przetwarzanie"/>
-    case 'REJECTED':
-      return <FontAwesomeIcon icon={faBan} title="Odrzucone"/>
+      return <Icon bgColor="orange" shadowColor="rgb(255,69,0,0.75)"/>
     case 'RESOLVED':
-      return <FontAwesomeIcon icon={faCheck} title="Zgłoszenie rozwiązane"/>
+      return <Icon bgColor="green" shadowColor="rgb(0,0,0,0.75)"/>
+    case 'REJECTED':
+      return <Icon bgColor="black" shadowColor="rgb(0,0,0,0.75)"/>
     default:
       return null
   }
