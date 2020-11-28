@@ -11,7 +11,7 @@ const DontTouch = ({ onPrev, onNext, classes }) => (
       <Typography variant="h2">Zachowaj dystans</Typography>
       <Typography variant="subtitle1">
         Nie dotykaj zwłok i nie zbliżaj się do nich. Pamiętaj, że zwierzę mogło
-        być chore
+        być chore.
       </Typography>
     </div>
     <div className={classes.buttonContainer}>

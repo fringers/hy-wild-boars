@@ -36,6 +36,7 @@
     "@material-ui/icons": "^4.9.1",
     "@material-ui/lab": "^4.0.0-alpha.56",
     "babel-eslint": "^10.1.0",
+    "clsx": "^1.1.1",
     "firebase": "^8.1.1",
     "leaflet": "^1.7.1",
     "prop-types": "^15.7.2",

@@ -36,7 +36,7 @@ const Location = ({ onNext, classes }) => {
         classes={classes}
       />
       <div className={classes.infoContainer}>
-        <Typography variant="h2">Wskaż localizajcę</Typography>
+        <Typography variant="h2">Wskaż lokalizajcę</Typography>
         <Typography variant="subtitle1">
           Dokładna lokalizacja pozwoli nam szybciej dotrzeć na miejsce i podjąć
           odpowiednią interwencję wtedy, gdy jest to konieczne.

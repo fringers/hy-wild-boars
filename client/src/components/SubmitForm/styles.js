@@ -2,7 +2,6 @@ import { makeStyles } from '@material-ui/core';
 
 export default makeStyles((theme) => ({
   carousel: {
-    backgroundColor: theme.palette.primary.light,
     display: 'flex',
     flexDirection: 'column',
   },
@@ -16,7 +15,7 @@ export default makeStyles((theme) => ({
     textAlign: 'center',
   },
   icon: {
-    color: theme.palette.secondary.main,
+    color: theme.palette.secondary.dark,
     height: 256,
     fontSize: 156,
   },
