@@ -1,6 +1,6 @@
 {
-  "short_name": "Client",
-  "name": "Client App",
+  "short_name": "Dzik Alert",
+  "name": "Dzik Alert",
   "icons": [
     {
       "src": "favicon.ico",
@@ -16,5 +16,6 @@
   "start_url": ".",
   "display": "standalone",
   "theme_color": "#000000",
-  "background_color": "#ffffff"
+  "background_color": "#ffffff",
+  "orientation": "portrait"
 }

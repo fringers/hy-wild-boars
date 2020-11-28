@@ -26,5 +26,11 @@ export const toShortAddress = (geo) => {
   if (address.village)
     return address.village + ", " + address.county + ", " + stateShortener(address.state)
 
-  return address.city + ", " + stateShortener(address.state)
+  if (address.city)
+    return address.city + ", " + stateShortener(address.state)
+
+  if (address.administrative)
+    return address.administrative + ", " + stateShortener(address.state)
+
+  return stateShortener(address.state)
 }

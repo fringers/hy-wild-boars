@@ -96,7 +96,7 @@ const SubmitForm = () => {
         onNext={async (details) => {
           // TODO: add error handling, check if offline
           // TODO: add howMany
-          await sendRequest(fileUrl, position, isDead, details);
+          await sendRequest(fileUrl, position, isDead, howMany, details);
           history.push('/thankyou');
         }}
       />

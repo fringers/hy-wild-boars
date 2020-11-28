@@ -4,7 +4,7 @@ import { useParams } from 'react-router-dom';
 import {
   addRequestMessage,
   getRequestById,
-  getRequestMessages
+  getRequestMessages, updateRequestStatus
 } from '../../firebase/db';
 import AppBar from '../AppBar';
 import ListItemText from "@material-ui/core/ListItemText";
@@ -16,7 +16,9 @@ import StatusIcon from "../NotificationsScreen/StatusIcon";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListSubheader from "@material-ui/core/ListSubheader";
 import TextField from "@material-ui/core/TextField";
-import Button from "@material-ui/core/Button";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import {faBan} from '@fortawesome/free-solid-svg-icons';
+import {IconButton } from "@material-ui/core";
 
 const getDate = (timestamp) => {
   const tmp = Date.parse(timestamp);
@@ -57,12 +59,19 @@ const NotificationDetails = () => {
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState('');
 
-  useEffect(async () => {
+  const fetchRequest = async (id) => {
     const response = await getRequestById(id);
     setRequest(response);
+  }
 
+  const fetchMessages = async (id) => {
     const messagesResponse = await getRequestMessages(id);
     setRequestMessages(messagesResponse)
+  }
+
+  useEffect(() => {
+    fetchRequest(id);
+    fetchMessages(id);
   }, []);
 
   const handleSubmit = async (event) => {
@@ -74,8 +83,7 @@ const NotificationDetails = () => {
     if (message && message.length > 0) {
       try {
         await addRequestMessage(id, message)
-        const messagesResponse = await getRequestMessages(id);
-        setRequestMessages(messagesResponse)
+        await fetchMessages(id);
 
         setMessage('')
       } catch (e) {
@@ -85,6 +93,17 @@ const NotificationDetails = () => {
 
     setLoading(false)
   };
+
+  const handleRequestCancel = async () => {
+    setLoading(true)
+    try {
+      await updateRequestStatus(id, 'REJECTED')
+      await fetchRequest(id);
+    } catch (e) {
+      console.error(e)
+    }
+    setLoading(false)
+  }
 
   return (
     <>
@@ -97,6 +116,16 @@ const NotificationDetails = () => {
           <ListItemText
             primary={`${getDate(request.timestamp)}`}
           />
+          {
+            (request.status === "NEW") ? (
+              <ListItemIcon>
+                <IconButton onClick={handleRequestCancel} disabled={loading}>
+                  <FontAwesomeIcon icon={faBan} />
+                </IconButton >
+              </ListItemIcon>
+            ) : ''
+          }
+
         </ListItem>
         <ListItem>
           <ListItemIcon>

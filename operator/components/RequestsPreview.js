@@ -1,9 +1,9 @@
 import React from "react";
 import Table from "react-bootstrap/Table";
-import Link from "next/link"
 import {StatusIcon} from "./StatusIcon";
 import {toShortAddress} from "../nominatim/nominatim";
 import {useRouter} from "next/router";
+import {boarsNumberEnumToText} from "../../client/src/libs/requestHelper";
 
 export const RequestsPreview = ({requests, geoInfo}) => {
   const router = useRouter()
@@ -20,7 +20,7 @@ export const RequestsPreview = ({requests, geoInfo}) => {
         <th>Data</th>
         <th>Lokalizacja</th>
         <th>Martwy</th>
-        <th>Szczegóły</th>
+        <th>Liczba</th>
       </tr>
       </thead>
       <tbody>
@@ -50,7 +50,9 @@ export const RequestsPreview = ({requests, geoInfo}) => {
                     : "Nie"
                 }
               </td>
-              <td>{row.details}</td>
+              <td>
+                {boarsNumberEnumToText(row.howMany)}
+              </td>
             </tr>
           )
         })

@@ -1,10 +1,11 @@
 import { db, GeoPoint, serverTimestamp } from './firebase';
 import { currentUser } from './auth';
 
-export const sendRequest = async (photoUrl, position, isDead, details) => {
+export const sendRequest = async (photoUrl, position, isDead, howMany, details) => {
   await db.collection('requests').add({
     photoUrl,
     isDead,
+    howMany,
     details,
     location: new GeoPoint(position.coords.latitude, position.coords.longitude),
     userId: currentUser().uid,
@@ -22,6 +23,7 @@ const docToRequest = (doc) => {
     photoUrl: data.photoUrl,
     location: data.location,
     isDead: data.isDead,
+    howMany: data.howMany,
     details: data.details,
     status: data.status,
   };
@@ -41,7 +43,7 @@ export const getRequests = async () => {
   const snapshot = await db
     .collection('requests')
     .where('userId', '==', currentUser().uid)
-    .orderBy('timestamp', 'asc')
+    .orderBy('timestamp', 'desc')
     .get();
   return snapshot.docs.map(docToRequest);
 };
@@ -50,6 +52,13 @@ export const getRequestById = async (requestId) => {
   const doc = await db.collection('requests').doc(requestId).get();
   return docToRequest(doc);
 };
+
+export const updateRequestStatus = async (requestId, status) => {
+  await db.collection("requests").doc(requestId)
+    .update({
+      status,
+    })
+}
 
 export const getRequestMessages = async (requestId) => {
   const snapshot = await db.collection("requests").doc(requestId)
