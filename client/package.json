@@ -44,7 +44,6 @@
     "react-confetti": "^6.0.0",
     "react-dom": "^17.0.1",
     "react-leaflet": "^3.0.2",
-    "react-material-ui-carousel": "^2.1.1",
     "react-router-dom": "^5.2.0",
     "react-router-transition": "^2.0.0",
     "react-scripts": "^4.0.1"
