@@ -41,7 +41,7 @@ export const getRequests = async () => {
   const snapshot = await db
     .collection('requests')
     .where('userId', '==', currentUser().uid)
-    .orderBy('timestamp', 'asc')
+    .orderBy('timestamp', 'desc')
     .get();
   return snapshot.docs.map(docToRequest);
 };
@@ -50,6 +50,13 @@ export const getRequestById = async (requestId) => {
   const doc = await db.collection('requests').doc(requestId).get();
   return docToRequest(doc);
 };
+
+export const updateRequestStatus = async (requestId, status) => {
+  await db.collection("requests").doc(requestId)
+    .update({
+      status,
+    })
+}
 
 export const getRequestMessages = async (requestId) => {
   const snapshot = await db.collection("requests").doc(requestId)
