@@ -2,21 +2,21 @@ import { makeStyles } from '@material-ui/core';
 
 export default makeStyles((theme) => ({
   carousel: {
-    backgroundColor: theme.palette.primary.light,
     display: 'flex',
     flexDirection: 'column',
   },
   paper: {
     alignItems: 'center',
+    backgroundColor: theme.palette.primary.light,
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'space-between',
-    height: '90vh',
+    height: 'calc(100vh - 64px)',
     padding: theme.spacing(4),
     textAlign: 'center',
   },
   icon: {
-    color: theme.palette.secondary.main,
+    color: theme.palette.secondary.dark,
     height: 256,
     fontSize: 156,
   },

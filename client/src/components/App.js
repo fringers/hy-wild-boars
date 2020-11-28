@@ -9,7 +9,6 @@ import HomeScreen from './HomeScreen';
 import NotificationsScreen from './NotificationsScreen';
 import NotificationDetails from './NotificationDetails';
 
-// import Intro from './Intro';
 import SubmitForm from './SubmitForm';
 import ThankYou from './ThankYou';
 
