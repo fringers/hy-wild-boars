@@ -10,13 +10,29 @@ import {
 const StatusIcon = ({ status }) => {
   switch (status) {
     case 'NEW':
-      return <FontAwesomeIcon icon={faClock} size="lg" title="Nowe zgłoszenie" />;
+      return (
+        <FontAwesomeIcon icon={faClock} size="lg" title="Nowe zgłoszenie" />
+      );
     case 'ACCEPTED':
-      return <FontAwesomeIcon icon={faCheckCircle} size="lg" title="Zaakceptowano - przetwarzanie" />
+      return (
+        <FontAwesomeIcon
+          icon={faCheckCircle}
+          size="lg"
+          title="Zaakceptowano - przetwarzanie"
+        />
+      );
     case 'RESOLVED':
-      return <FontAwesomeIcon icon={faCheckCircle} size="lg" title="Zgłoszenie rozwiązane" />;
+      return (
+        <FontAwesomeIcon
+          icon={faCheckCircle}
+          size="lg"
+          title="Zgłoszenie rozwiązane"
+        />
+      );
     case 'REJECTED':
-      return <FontAwesomeIcon icon={faTimesCircle} size="lg" title="Odrzucone" />;
+      return (
+        <FontAwesomeIcon icon={faTimesCircle} size="lg" title="Odrzucone" />
+      );
     default:
       return null;
   }

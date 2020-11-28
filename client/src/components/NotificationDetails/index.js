@@ -6,8 +6,6 @@ import AppBar from '../AppBar';
 import ListItemText from '@material-ui/core/ListItemText';
 import ListItem from '@material-ui/core/ListItem';
 import List from '@material-ui/core/List';
-import Avatar from '@material-ui/core/Avatar';
-import ListItemAvatar from '@material-ui/core/ListItemAvatar';
 import StatusIcon from '../NotificationsScreen/StatusIcon';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import { makeStyles } from '@material-ui/core';
@@ -85,9 +83,6 @@ const NotificationDetails = () => {
             primary={request.isDead ? 'Martwy' : 'Żywy'}
             secondary={boarsNumberEnumToText(request.howMany)}
           />
-        </ListItem>
-        <ListItem>
-          <ListItemText primary={request.details} />
         </ListItem>
         <ListItem>
           <ListItemText primary={request.details} />

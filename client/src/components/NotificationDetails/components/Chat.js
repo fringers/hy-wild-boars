@@ -1,14 +1,11 @@
-import React, {useContext, useEffect, useState} from "react";
-import ListSubheader from "@material-ui/core/ListSubheader";
-import ListItem from "@material-ui/core/ListItem";
-import ListItemText from "@material-ui/core/ListItemText";
-import TextField from "@material-ui/core/TextField";
-import List from "@material-ui/core/List";
-import {
-  addRequestMessage,
-  watchRequestMessages
-} from "../../../firebase/db";
-import {UserContext} from "../../App";
+import React, { useContext, useEffect, useState } from 'react';
+import ListSubheader from '@material-ui/core/ListSubheader';
+import ListItem from '@material-ui/core/ListItem';
+import ListItemText from '@material-ui/core/ListItemText';
+import TextField from '@material-ui/core/TextField';
+import List from '@material-ui/core/List';
+import { addRequestMessage, watchRequestMessages } from '../../../firebase/db';
+import { UserContext } from '../../App';
 
 const msgSenderToText = (sender) => {
   switch (sender) {
@@ -26,8 +23,8 @@ const getDate = (timestamp) => {
   return new Date(tmp).toLocaleString('PL');
 };
 
-export const Chat = ({id}) => {
-  const user = useContext(UserContext)
+export const Chat = ({ id }) => {
+  const user = useContext(UserContext);
 
   const [requestMessages, setRequestMessages] = useState([]);
 
@@ -35,10 +32,9 @@ export const Chat = ({id}) => {
   const [message, setMessage] = useState('');
 
   useEffect(() => {
-    if (!user)
-      return
+    if (!user) return;
 
-    return watchRequestMessages(id, setRequestMessages)
+    return watchRequestMessages(id, setRequestMessages);
   }, [user?.uid]);
 
   const handleSubmit = async (event) => {
@@ -62,8 +58,11 @@ export const Chat = ({id}) => {
   return (
     <List>
       <ListSubheader>Wiadomości:</ListSubheader>
-      {requestMessages?.map(({id, text, sender, timestamp}, i) => (
-        <ListItem key={i} style={{textAlign: (sender === "USER") ? 'right' : 'left'}}>
+      {requestMessages?.map(({ id, text, sender, timestamp }, i) => (
+        <ListItem
+          key={i}
+          style={{ textAlign: sender === 'USER' ? 'right' : 'left' }}
+        >
           <ListItemText
             primary={text}
             secondary={`${msgSenderToText(sender)}, ${getDate(timestamp)}`}
@@ -71,10 +70,15 @@ export const Chat = ({id}) => {
         </ListItem>
       ))}
       <ListItem>
-        <form noValidate autoComplete="off" onSubmit={handleSubmit} style={{width: '100%'}}>
+        <form
+          noValidate
+          autoComplete="off"
+          onSubmit={handleSubmit}
+          style={{ width: '100%' }}
+        >
           <TextField
-            style={{width: '100%'}}
-            inputStyle ={{width: '100%'}}
+            style={{ width: '100%' }}
+            inputStyle={{ width: '100%' }}
             label="Wyślij wiadomość..."
             variant="filled"
             value={message}
@@ -85,5 +89,5 @@ export const Chat = ({id}) => {
         </form>
       </ListItem>
     </List>
-  )
-}
+  );
+};
