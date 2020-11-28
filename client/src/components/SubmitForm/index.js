@@ -64,6 +64,7 @@ const SubmitForm = () => {
       />
       <HowMany classes={classes} onNext={() => setPage(Page.photo)} />
       <Photo
+        isDead={isDead}
         classes={classes}
         onNext={(fileUrl) => {
           setFileUrl(fileUrl);
