@@ -9,5 +9,6 @@ export const sendRequest = async (photoUrl, position, isDead, details) => {
     location: new GeoPoint(position.coords.latitude, position.coords.longitude),
     userId: currentUser().uid,
     timestamp: serverTimestamp(),
+    status: 'NEW',
   });
 };

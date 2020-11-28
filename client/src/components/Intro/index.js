@@ -21,21 +21,21 @@ const Intro = () => {
       onChange={(index) => setPage(index)}
       navButtonsAlwaysInvisible
     >
-      <Paper classes={{ root: classes.container }}>
+      <Paper classes={{ root: classes.paper }}>
         <FirstIntro
           classes={classes}
           onSkip={() => history.push('/submit')}
           onNext={() => setPage(page + 1)}
         />
       </Paper>
-      <Paper classes={{ root: classes.container }}>
+      <Paper classes={{ root: classes.paper }}>
         <SecondIntro
           classes={classes}
           onPrev={() => setPage(page - 1)}
           onNext={() => setPage(page + 1)}
         />
       </Paper>
-      <Paper classes={{ root: classes.container }}>
+      <Paper classes={{ root: classes.paper }}>
         <ThirdIntro
           classes={classes}
           onPrev={() => setPage(page - 1)}
