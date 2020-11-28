@@ -18,7 +18,7 @@ Sorted by the priority
 
 ### bugs
 
-- [] zablokuj carousel na /submit formie (żeby nie dało się przesunąć i wrócić na mobile)
+- [x] zablokuj carousel na /submit formie (żeby nie dało się przesunąć i wrócić na mobile)
 - [X] lista zgłoszeń, backgroundColor na LIST issue
 
 ### Improvements, nice to have

@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
-import Carousel from 'react-material-ui-carousel';
 
 import { sendRequest } from '../../firebase/db';
 import IsDead from './pages/IsDead';
@@ -13,6 +12,7 @@ import Photo from './pages/Photo';
 
 import AdditionalInfo from './pages/AdditionalInfo';
 import useStyles from './styles';
+import Carousel from "./pages/components/Carousel";
 
 const Page = {
   isDead: 0,
@@ -41,6 +41,7 @@ const SubmitForm = () => {
       autoPlay={false}
       indicators={false}
       onChange={(index) => setPage(index)}
+      strictIndexing={false}
       navButtonsAlwaysInvisible
     >
       <IsDead
