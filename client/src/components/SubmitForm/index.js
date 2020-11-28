@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 
 import { sendRequest } from '../../firebase/db';
+import { uploadFile } from '../../firebase/storage';
 import IsDead from './pages/IsDead';
 import DontTouch from './pages/DontTouch';
 import KeepCalm from './pages/KeepCalm';
@@ -12,7 +13,7 @@ import Photo from './pages/Photo';
 
 import AdditionalInfo from './pages/AdditionalInfo';
 import useStyles from './styles';
-import Carousel from "./pages/components/Carousel";
+import Carousel from './pages/components/Carousel';
 
 const Page = {
   isDead: 0,
@@ -30,9 +31,24 @@ const SubmitForm = () => {
   const [page, setPage] = useState(0);
   const [isDead, setDead] = useState(null);
   const [howMany, setHowMany] = useState('');
-
   const [position, setPosition] = useState({});
   const [fileUrl, setFileUrl] = useState('');
+  const [fileForLater, setFileForLater] = useState('');
+
+  // online/offline support
+  const [online, setOnline] = useState(window.navigator.onLine);
+  const handleNetworkChange = () => {
+    setOnline(window.navigator.onLine);
+  };
+
+  useEffect(() => {
+    window.addEventListener('online', handleNetworkChange);
+    window.addEventListener('offline', handleNetworkChange);
+    return () => {
+      window.removeEventListener('online', handleNetworkChange);
+      window.removeEventListener('offline', handleNetworkChange);
+    };
+  }, []);
 
   return (
     <Carousel
@@ -70,10 +86,12 @@ const SubmitForm = () => {
         }}
       />
       <Photo
+        online={online}
         isDead={isDead}
         classes={classes}
-        onNext={(fileUrl) => {
-          setFileUrl(fileUrl);
+        onNext={(fileUrl, fileForLater) => {
+          if (fileForLater) setFileForLater(fileForLater);
+          else setFileUrl(fileUrl);
           setPage(Page.location);
         }}
       />
@@ -90,10 +108,25 @@ const SubmitForm = () => {
         }}
       />
       <AdditionalInfo
+        online={online}
         classes={classes}
         onNext={async (details) => {
-          // TODO: add error handling, check if offline
-          await sendRequest(fileUrl, position, isDead, howMany, details);
+          let fUrl = fileUrl;
+          if (online) {
+            if (fileForLater) {
+              fUrl = await uploadFile(fileForLater);
+            }
+            await sendRequest(fUrl, position, isDead, howMany, details);
+          } else {
+            window.myCache.push({
+              fileUrl,
+              fileForLater,
+              position,
+              isDead,
+              howMany,
+              details,
+            });
+          }
           history.push('/thankyou');
         }}
       />

@@ -4,14 +4,16 @@ import { AnimatedSwitch, AnimatedRoute } from 'react-router-transition';
 import { Snackbar, makeStyles } from '@material-ui/core';
 import { ThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 
+import { onAuthStateChanged } from '../firebase/auth';
+import { sendRequest } from '../firebase/db';
+import { uploadFile } from '../firebase/storage';
+
 import WelcomeScreen from './WelcomeScreen';
 import HomeScreen from './HomeScreen';
-import NotificationsScreen from './NotificationsScreen';
-import NotificationDetails from './NotificationDetails';
-
 import SubmitForm from './SubmitForm';
 import ThankYou from './ThankYou';
-import { onAuthStateChanged } from '../firebase/auth';
+import NotificationsScreen from './NotificationsScreen';
+import NotificationDetails from './NotificationDetails';
 
 const useStyles = makeStyles(() => ({
   switchWrapper: {
@@ -63,25 +65,48 @@ export const UserContext = React.createContext(undefined);
 const App = () => {
   const classes = useStyles();
   const [user, setUser] = useState(undefined);
-  const [online, setOnline] = useState(true);
+  const [online, setOnline] = useState(window.navigator.onLine);
   const [openSnackbar, setOpenSnackbar] = useState(false);
+  const [uploading, setUploading] = useState(false);
 
-  const handleOnline = () => {
-    setOnline(true);
+  const handleNetworkChange = () => {
+    setOnline(window.navigator.onLine);
     setOpenSnackbar(true);
-  };
-  const handleOffline = () => {
-    setOnline(false);
-    setOpenSnackbar(true);
+
+    let myCache = window.myCache;
+    if (myCache.length) {
+      setUploading(true);
+      myCache.forEach(
+        async ({
+          fileUrl,
+          fileForLater,
+          position,
+          isDead,
+          howMany,
+          details,
+        }) => {
+          let fUrl = fileUrl;
+          if (fileForLater) {
+            fUrl = await uploadFile(fileForLater);
+          }
+          await sendRequest(fUrl, position, isDead, howMany, details);
+        }
+      );
+      setUploading(false);
+    }
   };
 
   useEffect(() => {
-    window.addEventListener('online', handleOnline);
-    window.addEventListener('offline', handleOffline);
+    if (typeof window.myCache !== Array) {
+      window.myCache = [];
+    }
+
+    window.addEventListener('online', handleNetworkChange);
+    window.addEventListener('offline', handleNetworkChange);
     onAuthStateChanged(setUser);
     return () => {
-      window.removeEventListener('online', handleOnline);
-      window.removeEventListener('offline', handleOffline);
+      window.removeEventListener('online', handleNetworkChange);
+      window.removeEventListener('offline', handleNetworkChange);
     };
   }, []);
 
@@ -94,6 +119,12 @@ const App = () => {
           open={openSnackbar}
           onClose={() => setOpenSnackbar(false)}
           message={online ? 'Odzyskano połączenie!' : 'Jesteś offline'}
+        />
+        <Snackbar
+          classes={{ root: classes.snackbar }}
+          anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
+          open={uploading}
+          message="Wysyłanie zaległył zgłoszeń..."
         />
         <BrowserRouter>
           <AnimatedSwitch

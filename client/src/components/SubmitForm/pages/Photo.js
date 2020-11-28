@@ -11,9 +11,10 @@ const showSkerton = (photoUrl, loading) => {
   return false;
 };
 
-const Photo = ({ isDead, onNext, classes }) => {
+const Photo = ({ online, isDead, onNext, classes }) => {
   const [loading, setLoading] = useState(false);
   const [photoUrl, setPhotoUrl] = useState(null);
+  const [fileForLater, setFileForLater] = useState('');
 
   return (
     <Paper classes={{ root: classes.paper }}>
@@ -39,9 +40,12 @@ const Photo = ({ isDead, onNext, classes }) => {
         onChange={async (e) => {
           const file = e?.target?.files[0];
           if (file) {
+            setFileForLater('');
             setLoading(true);
-            const photoUrl = await uploadFile(file);
-            setPhotoUrl(photoUrl);
+            if (online) {
+              const photoUrl = await uploadFile(file);
+              setPhotoUrl(photoUrl);
+            } else setFileForLater(file);
             setLoading(false);
           }
         }}
@@ -56,7 +60,7 @@ const Photo = ({ isDead, onNext, classes }) => {
           >
             {loading ? (
               <CircularProgress size={24} />
-            ) : photoUrl ? (
+            ) : photoUrl || fileForLater ? (
               'Edytuj zdjęcie'
             ) : (
               'Dodaj zdjęcie'
@@ -64,13 +68,13 @@ const Photo = ({ isDead, onNext, classes }) => {
           </Button>
         </label>
         <Button
-          onClick={() => onNext(photoUrl)}
+          onClick={() => onNext(photoUrl, fileForLater)}
           variant="contained"
           component="span"
           color="primary"
           disabled={loading}
         >
-          {photoUrl ? 'Dalej' : 'Pomiń'}
+          {photoUrl || fileForLater ? 'Dalej' : 'Pomiń'}
         </Button>
       </div>
     </Paper>
@@ -78,6 +82,7 @@ const Photo = ({ isDead, onNext, classes }) => {
 };
 
 Photo.propTypes = {
+  online: PropTypes.bool,
   isDead: PropTypes.bool,
   onNext: PropTypes.func.isRequired,
   classes: PropTypes.object.isRequired,

@@ -4,7 +4,7 @@ import { Paper, Button, TextField, Typography } from '@material-ui/core';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faInfoCircle } from '@fortawesome/free-solid-svg-icons';
 
-const AdditionalInfo = ({ onNext, classes }) => {
+const AdditionalInfo = ({ online, onNext, classes }) => {
   const [value, setValue] = useState('');
 
   return (
@@ -18,8 +18,8 @@ const AdditionalInfo = ({ onNext, classes }) => {
         </Typography>
       </div>
       <TextField
-        style={{width: '100%'}}
-        inputStyle ={{width: '100%'}}
+        style={{ width: '100%' }}
+        inputStyle={{ width: '100%' }}
         placeholder="Twoje uwagi"
         multiline
         onChange={(e) => setValue(e?.target?.value)}
@@ -27,6 +27,12 @@ const AdditionalInfo = ({ onNext, classes }) => {
         rows={4}
         variant="filled"
       />
+      {!online && (
+        <Typography variant="caption">
+          Zgłoszenie zostanie wysłane automatycznie gdy odzyskasz połącznie
+          Internetowe
+        </Typography>
+      )}
       <Button variant="contained" color="primary" onClick={() => onNext(value)}>
         Wyślij
       </Button>
@@ -35,6 +41,7 @@ const AdditionalInfo = ({ onNext, classes }) => {
 };
 
 AdditionalInfo.propTypes = {
+  online: PropTypes.bool,
   onNext: PropTypes.func.isRequired,
   classes: PropTypes.object.isRequired,
 };
