@@ -20,7 +20,7 @@ import {Chat} from "./components/Chat";
 
 const useStyles = makeStyles((theme) => ({
   container: {
-    minheight: `${window.innerHeight}px`,
+    minHeight: `${window.innerHeight}px`,
     backgroundColor: theme.palette.primary.light,
   },
 }));
