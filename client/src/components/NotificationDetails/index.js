@@ -1,10 +1,7 @@
 import React, {useState, useEffect, useContext} from 'react';
 import {useParams} from 'react-router-dom';
 
-import {
-  getRequestById,
-  updateRequestStatus,
-} from '../../firebase/db';
+import {getRequestById,} from '../../firebase/db';
 import AppBar from '../AppBar';
 import ListItemText from '@material-ui/core/ListItemText';
 import ListItem from '@material-ui/core/ListItem';
@@ -13,12 +10,11 @@ import Avatar from '@material-ui/core/Avatar';
 import ListItemAvatar from '@material-ui/core/ListItemAvatar';
 import StatusIcon from '../NotificationsScreen/StatusIcon';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
-import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
-import {faBan} from '@fortawesome/free-solid-svg-icons';
-import {IconButton, makeStyles} from '@material-ui/core';
+import {makeStyles} from '@material-ui/core';
 import {Chat} from "./components/Chat";
 import {boarsNumberEnumToText} from "../../libs/requestHelper";
 import {UserContext} from "../App";
+import {RequestMenu} from "./components/RequestMenu";
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -53,8 +49,6 @@ const NotificationDetails = () => {
   const user = useContext(UserContext)
   const [request, setRequest] = useState({});
 
-  const [loading, setLoading] = useState(false);
-
   const fetchRequest = async (id) => {
     const response = await getRequestById(id);
     setRequest(response);
@@ -66,18 +60,6 @@ const NotificationDetails = () => {
     fetchRequest(id);
   }, [user?.uid]);
 
-
-  const handleRequestCancel = async () => {
-    setLoading(true);
-    try {
-      await updateRequestStatus(id, 'REJECTED');
-      await fetchRequest(id);
-    } catch (e) {
-      console.error(e);
-    }
-    setLoading(false);
-  };
-
   return (
     <div className={classes.container}>
       <AppBar/>
@@ -87,15 +69,7 @@ const NotificationDetails = () => {
             <Avatar src={request.photoUrl}/>
           </ListItemAvatar>
           <ListItemText primary={`${getDate(request.timestamp)}`}/>
-          {request.status === 'NEW' ? (
-            <ListItemIcon>
-              <IconButton onClick={handleRequestCancel} disabled={loading}>
-                <FontAwesomeIcon icon={faBan}/>
-              </IconButton>
-            </ListItemIcon>
-          ) : (
-            ''
-          )}
+          <RequestMenu request={request} onCancelled={fetchRequest}/>
         </ListItem>
         <ListItem>
           <ListItemIcon>
