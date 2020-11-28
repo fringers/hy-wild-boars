@@ -6,7 +6,7 @@ import {signOut} from "../firebase/auth";
 import Col from "react-bootstrap/Col";
 import ListGroup from "react-bootstrap/ListGroup";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faListAlt } from '@fortawesome/free-solid-svg-icons'
+import { faListAlt, faChartArea } from '@fortawesome/free-solid-svg-icons'
 
 export const Layout = ({user, children, title, subTitle}) => {
 
@@ -45,6 +45,13 @@ export const Layout = ({user, children, title, subTitle}) => {
                   </a>
                 </Link>
               </ListGroup.Item>
+              <ListGroup.Item>
+                <Link href="/charts">
+                  <a className="text-primary-d">
+                    <FontAwesomeIcon icon={faChartArea}/> Statystyki
+                  </a>
+                </Link>
+              </ListGroup.Item>
             </ListGroup>
           </Col>
         </Row>
@@ -62,7 +69,7 @@ export const Layout = ({user, children, title, subTitle}) => {
           </Col>
         </Row>
 
-        {children}
+        {user ? children : ''}
       </div>
     </div>
   )

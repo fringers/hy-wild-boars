@@ -1,8 +1,7 @@
 import React, {useState, useEffect} from "react";
 import {Layout} from "../components/Layout";
 import {Dashboard} from "../components/Dashboard";
-import {getGeoInfo, updateRequestGeoInfo, watchLatestRequests} from "../firebase/db";
-import {reverseSearch} from "../nominatim/nominatim";
+import {getGeoInfo, watchLatestRequests} from "../firebase/db";
 
 export default function Home({user}) {
   const [key, setKet] = useState((new Date()).getTime())
@@ -37,17 +36,13 @@ export default function Home({user}) {
 
   return (
     <Layout user={user} title="Ostatnie zgłoszenia">
-      {
-        user
-          ? <Dashboard
-              latestRequest={latestRequest}
-              statuses={statuses}
-              geoInfo={geoInfo}
-              onStatusesChange={statusesChangeHandler}
-              onSearchChange={searchChangeHandler}
-            />
-          : ""
-      }
+      <Dashboard
+        latestRequest={latestRequest}
+        statuses={statuses}
+        geoInfo={geoInfo}
+        onStatusesChange={statusesChangeHandler}
+        onSearchChange={searchChangeHandler}
+      />
     </Layout>
   )
 }

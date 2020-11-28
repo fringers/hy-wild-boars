@@ -7,13 +7,12 @@ import IsDead from './pages/IsDead';
 import DontTouch from './pages/DontTouch';
 import KeepCalm from './pages/KeepCalm';
 import HowMany from './pages/HowMany';
-
 import Location from './pages/Location';
 import Photo from './pages/Photo';
-
 import AdditionalInfo from './pages/AdditionalInfo';
-import useStyles from './styles';
 import Carousel from './pages/components/Carousel';
+
+import useStyles from './styles';
 
 const Page = {
   isDead: 0,
@@ -24,6 +23,10 @@ const Page = {
   location: 5,
   additionalInfo: 6,
 };
+
+const isValidIsDeadQuery = (val) => val === "true" || val === "false"
+const isValidHowManyQuery = (val) => val === "ONE" || val === "TWO_TO_SEVEN"
+  || val === "EITGHT_TO_THIRTY" || val === "ABOVE_THIRTY"
 
 const SubmitForm = () => {
   const classes = useStyles();
@@ -49,6 +52,20 @@ const SubmitForm = () => {
       window.removeEventListener('offline', handleNetworkChange);
     };
   }, []);
+
+
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+
+    const queryIsDead = params.get('isDead');
+    const queryHowMany = params.get('howMany');
+    if (isValidIsDeadQuery(queryIsDead) && isValidHowManyQuery(queryHowMany)) {
+      setDead(Boolean(queryIsDead))
+      setHowMany(queryHowMany)
+      setPage(4)
+    }
+  }, [])
+
 
   return (
     <Carousel
