@@ -8,7 +8,6 @@ const getLatestRequestsRef = (limit, statuses, geoSearch) => {
 
   const geoPoints = geoSearchToSearchPoints(geoSearch, 10)
   if (geoPoints) {
-    console.log(geoPoints)
     request = request
       .where('location', '>', geoPoints[0])
       .where('location', '<', geoPoints[1])
@@ -37,6 +36,13 @@ export const updateRequestStatus = async (requestId, status) => {
   await db.collection("requests").doc(requestId)
     .update({
       status,
+    })
+}
+
+export const updateRequestGeoInfo = async (requestId, geoInfo) => {
+  await db.collection("requests").doc(requestId)
+    .update({
+      geoInfo,
     })
 }
 
@@ -70,6 +76,7 @@ const docToRequest = (doc) => {
     isDead: data.isDead,
     details: data.details,
     status: data.status,
+    geoInfo: data.geoInfo,
   }
 }
 
