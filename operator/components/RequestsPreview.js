@@ -41,9 +41,7 @@ export const RequestsPreview = ({requests, geoInfo}) => {
                 {
                   row.photoUrl
                     ? (
-                      <a href={row.photoUrl} target="_blank">
-                        <img src={row.photoUrl} style={{maxWidth: 60, maxHeight: 60}} alt=""/>
-                      </a>
+                      <img src={row.photoUrl} style={{maxWidth: 60, maxHeight: 60}} alt=""/>
                     )
                     : ""
                 }
