@@ -14,7 +14,7 @@ const getLatestRequestsRef = (limit, statuses, geoSearch) => {
       .orderBy("location", "desc")
   }
 
-  request.orderBy("timestamp", "desc")
+  request = request.orderBy("timestamp", "desc")
     .limit(limit)
 
   return request
