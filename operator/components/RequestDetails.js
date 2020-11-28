@@ -8,7 +8,7 @@ import {StatusIcon} from "./StatusIcon";
 import ListGroup from "react-bootstrap/ListGroup";
 import Button from "react-bootstrap/Button";
 import * as html2canvas from "html2canvas";
-import {jsPDF} from "jsPDF";
+import {jsPDF} from "jspdf";
 
 const MapWithNoSSR = dynamic(() => import('./Map'), {
   ssr: false
