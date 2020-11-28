@@ -18,7 +18,6 @@ export const RequestsPreview = ({requests, geoInfo}) => {
       <tr>
         <th>Status</th>
         <th>Data</th>
-        <th>Zdjęcie</th>
         <th>Lokalizacja</th>
         <th>Martwy</th>
         <th>Szczegóły</th>
@@ -36,15 +35,6 @@ export const RequestsPreview = ({requests, geoInfo}) => {
               </td>
               <td>
                 {row.timestamp.toLocaleString("pl")}
-              </td>
-              <td>
-                {
-                  row.photoUrl
-                    ? (
-                      <img src={row.photoUrl} style={{maxWidth: 60, maxHeight: 60}} alt=""/>
-                    )
-                    : ""
-                }
               </td>
               <td>
                 {
