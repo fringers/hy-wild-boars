@@ -28,6 +28,19 @@ export const watchLatestRequests = (limit, statuses, geoSearch, callback) => {
     })
 }
 
+export const getLastRequestsByDate = async (lastDays) => {
+  const date = new Date();
+  date.setDate(date.getDate()-lastDays);
+
+  const snapshot = await db.collection("requests")
+    .where("timestamp", ">=", date)
+    .orderBy("timestamp", "desc")
+    .get()
+
+  return snapshot.docs.map(docToRequest)
+}
+
+
 export const getRequest = async (requestId) => {
   const doc = await db.collection("requests").doc(requestId).get()
   return docToRequest(doc)
