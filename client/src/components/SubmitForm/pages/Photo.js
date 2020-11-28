@@ -68,9 +68,9 @@ const Photo = ({ isDead, onNext, classes }) => {
           variant="contained"
           component="span"
           color="primary"
-          disabled={loading || !photoUrl}
+          disabled={loading}
         >
-          Dalej
+          {photoUrl ? 'Dalej' : 'Pomiń'}
         </Button>
       </div>
     </Paper>
