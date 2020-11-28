@@ -103,14 +103,14 @@ export const RequestDetails = ({request, messages, geoInfo, onSendMessage, onSta
                 Szczegóły: {request.details}
               </ListGroup.Item>
               <ListGroup.Item>
-                Zdjęcie: {
+                {
                 request.photoUrl
                   ? (
                     <a href={request.photoUrl} target="_blank">
-                      <img src={request.photoUrl} style={{maxWidth: 128, maxHeight: 128}} alt=""/>
+                      <img src={request.photoUrl} style={{maxWidth: 480, maxHeight: 480}} alt=""/>
                     </a>
                   )
-                  : "Brak"
+                  : ""
               }
               </ListGroup.Item>
             </ListGroup>
