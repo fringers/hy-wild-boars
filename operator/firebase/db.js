@@ -101,6 +101,7 @@ const docToRequest = (doc) => {
     photoUrl: data.photoUrl,
     location: data.location,
     isDead: data.isDead,
+    howMany: data.howMany,
     details: data.details,
     status: data.status,
     geoInfo: data.geoInfo,

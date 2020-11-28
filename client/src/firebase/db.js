@@ -1,10 +1,11 @@
 import { db, GeoPoint, serverTimestamp } from './firebase';
 import { currentUser } from './auth';
 
-export const sendRequest = async (photoUrl, position, isDead, details) => {
+export const sendRequest = async (photoUrl, position, isDead, howMany, details) => {
   await db.collection('requests').add({
     photoUrl,
     isDead,
+    howMany,
     details,
     location: new GeoPoint(position.coords.latitude, position.coords.longitude),
     userId: currentUser().uid,
@@ -22,6 +23,7 @@ const docToRequest = (doc) => {
     photoUrl: data.photoUrl,
     location: data.location,
     isDead: data.isDead,
+    howMany: data.howMany,
     details: data.details,
     status: data.status,
   };

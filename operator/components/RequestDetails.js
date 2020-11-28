@@ -89,7 +89,7 @@ export const RequestDetails = ({request, messages, geoInfo, onSendMessage, onSta
                 <strong>Data zgłoszenia:</strong> {request.timestamp.toLocaleString("pl")}
               </ListGroup.Item>
               <ListGroup.Item>
-                <strong>Status:</strong> <StatusIcon status={request.status}/> {statusToText(request.status)}
+                <strong>Status:</strong> <span className="mx-2"><StatusIcon status={request.status}/></span> {statusToText(request.status)}
 
               </ListGroup.Item>
               <ListGroup.Item>
