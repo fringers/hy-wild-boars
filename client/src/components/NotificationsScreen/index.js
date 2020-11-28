@@ -18,6 +18,9 @@ const useStyles = makeStyles((theme) => ({
     height: `${window.innerHeight}px`,
     backgroundColor: theme.palette.primary.light,
   },
+  list: {
+    backgroundColor: theme.palette.primary.light,
+  },
 }));
 
 const getDate = (timestamp) => {
@@ -39,7 +42,7 @@ const NotificationsScreen = () => {
   return (
     <div className={classes.container}>
       <AppBar />
-      <List>
+      <List classes={{ root: classes.list }}>
         {requests?.map(({ id, timestamp, photoUrl, status, isDead }, i) => (
           <ListItem
             button
