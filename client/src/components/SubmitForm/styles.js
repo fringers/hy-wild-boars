@@ -40,4 +40,11 @@ export default makeStyles((theme) => ({
     borderWidth: theme.spacing(0.5),
     maxHeight: 148,
   },
+  map: {
+    height: '100%',
+    width: '100%',
+  },
+  mapBtn: {
+    marginTop: theme.spacing(2),
+  },
 }));
