@@ -1,18 +1,24 @@
-import React, { useEffect } from 'react';
-import { useHistory } from 'react-router-dom';
-import { Typography, Zoom, makeStyles } from '@material-ui/core';
+import React, { useState, useEffect } from 'react';
+import { useParams } from 'react-router-dom';
 
-const useStyles = makeStyles(({ palette, spacing }) => ({
-  grow: {},
-}));
+import { getRequestById } from '../../firebase/db';
+import AppBar from '../AppBar';
 
 const NotificationDetails = () => {
-  const classes = useStyles();
-  const history = useHistory();
+  const { id } = useParams();
+  const [request, setRequest] = useState({});
 
-  const newNotifications = 2;
+  useEffect(async () => {
+    const response = await getRequestById(id);
+    setRequest(response);
+  }, []);
 
-  return <p>NotificationDetails</p>;
+  return (
+    <>
+      <AppBar />
+      <p>{JSON.stringify(request)}</p>
+    </>
+  );
 };
 
 export default NotificationDetails;

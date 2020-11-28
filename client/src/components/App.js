@@ -91,7 +91,7 @@ const App = () => {
               transform: `translateX(${styles.offset}%)`,
             })}
             exact
-            path="/notifications:id"
+            path="/notifications/:id"
             component={NotificationDetails}
           />
           <AnimatedRoute

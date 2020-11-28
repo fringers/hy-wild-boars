@@ -35,3 +35,8 @@ export const getRequests = async () => {
     .get();
   return snapshot.docs.map(docToRequest);
 };
+
+export const getRequestById = async (requestId) => {
+  const doc = await db.collection('requests').doc(requestId).get();
+  return docToRequest(doc);
+};
