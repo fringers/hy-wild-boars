@@ -18,11 +18,14 @@ const AdditionalInfo = ({ onNext, classes }) => {
         </Typography>
       </div>
       <TextField
+        style={{width: '100%'}}
+        inputStyle ={{width: '100%'}}
         placeholder="Twoje uwagi"
         multiline
         onChange={(e) => setValue(e?.target?.value)}
         value={value}
         rows={4}
+        variant="filled"
       />
       <Button variant="contained" color="primary" onClick={() => onNext(value)}>
         Wyślij

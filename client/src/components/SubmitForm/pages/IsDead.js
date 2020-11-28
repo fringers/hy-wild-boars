@@ -9,10 +9,10 @@ const IsDead = ({ onNext, classes }) => (
     <FontAwesomeIcon className={classes.icon} icon={faSkullCrossbones} />
     <Typography variant="h2">Czy dzik jest martwy?</Typography>
     <div className={classes.buttonContainer}>
-      <Button variant="contained" color="primary" onClick={() => onNext(true)}>
+      <Button variant="contained" size="large" color="primary" onClick={() => onNext(true)}>
         Tak
       </Button>
-      <Button variant="contained" color="primary" onClick={() => onNext(false)}>
+      <Button variant="contained" size="large" color="primary" onClick={() => onNext(false)}>
         Nie
       </Button>
     </div>
