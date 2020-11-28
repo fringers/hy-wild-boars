@@ -50,7 +50,7 @@ export const RequestsPreview = ({requests, geoInfo}) => {
                     : "Nie"
                 }
               </td>
-              <td className="text-2-lines">
+              <td>
                 {boarsNumberEnumToText(row.howMany)}
               </td>
             </tr>
