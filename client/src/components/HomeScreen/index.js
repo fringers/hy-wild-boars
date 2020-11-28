@@ -26,7 +26,7 @@ const tips = [
 
 const useStyles = makeStyles((theme) => ({
   container: {
-    height: '100vh',
+    height: `${window.innerHeight}px`,
   },
   wrapper: {
     alignItems: 'center',
