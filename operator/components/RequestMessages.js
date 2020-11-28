@@ -46,8 +46,13 @@ export const RequestMessages = ({messages, onSendMessage}) => {
       {
         messages.map(m => {
           return (
-            <div>
-              {messageSenderToText(m.sender)} {m.timestamp.toLocaleString("pl")}: {m.text}
+            <div className={`my-2 ${(m.sender === 'OPERATOR' ? 'text-right' : 'text-left')}`}>
+              <div>
+                {messageSenderToText(m.sender)} ({m.timestamp.toLocaleString("pl")}):
+              </div>
+              <div>
+                <strong>{m.text}</strong>
+              </div>
             </div>
           )
         })
