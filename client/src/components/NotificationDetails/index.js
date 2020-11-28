@@ -65,18 +65,22 @@ const NotificationDetails = () => {
       <AppBar/>
       <List>
         <ListItem>
-          <ListItemAvatar>
-            <Avatar src={request.photoUrl}/>
-          </ListItemAvatar>
-          <ListItemText primary={`${getDate(request.timestamp)}`}/>
-          <RequestMenu request={request} onCancelled={fetchRequest}/>
-        </ListItem>
-        <ListItem>
           <ListItemIcon>
             <StatusIcon status={request.status}/>
           </ListItemIcon>
-          <ListItemText primary={`${statusToText(request.status)}`}/>
+          <ListItemText
+            primary={`${statusToText(request.status)}`}
+            secondary={`${getDate(request.timestamp)}`}
+          />
+          <RequestMenu request={request} onCancelled={fetchRequest}/>
         </ListItem>
+      </List>
+
+      <div>
+        <img src={request.photoUrl} style={{width: '100%'}}/>
+      </div>
+
+      <List>
         <ListItem>
           <ListItemText
             primary={request.isDead ? 'Martwy' : 'Żywy'}
