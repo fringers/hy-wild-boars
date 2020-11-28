@@ -99,9 +99,7 @@ const geoSearchToSearchPoints = (geoSearch, distance) => {
   const lon = 0.0181818181818182
 
   const latitude = parseFloat(geoSearch[0].lat)
-  console.log(latitude)
   const longitude = parseFloat(geoSearch[0].lon)
-  console.log(longitude)
 
   const lowerLat = latitude - (lat * distance)
   const lowerLon = longitude - (lon * distance)
