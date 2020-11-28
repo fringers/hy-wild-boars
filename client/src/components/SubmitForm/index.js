@@ -9,7 +9,6 @@ import KeepCalm from './pages/KeepCalm';
 import HowMany from './pages/HowMany';
 
 import Location from './pages/Location';
-import ManualLocation from './pages/ManualLocation';
 import Photo from './pages/Photo';
 
 import AdditionalInfo from './pages/AdditionalInfo';
@@ -22,8 +21,7 @@ const Page = {
   howMany: 3,
   photo: 4,
   location: 5,
-  manualLocation: 6,
-  additionalInfo: 7,
+  additionalInfo: 6,
 };
 
 const SubmitForm = () => {
@@ -81,16 +79,6 @@ const SubmitForm = () => {
         }}
       />
       <Location
-        isDead={isDead}
-        classes={classes}
-        onNext={(position) => {
-          console.log({ position });
-          setPosition(position);
-          setPage(Page.additionalInfo);
-        }}
-        onSkip={() => setPage(Page.manualLocation)}
-      />
-      <ManualLocation
         classes={classes}
         onNext={(position) => {
           console.log({ position });

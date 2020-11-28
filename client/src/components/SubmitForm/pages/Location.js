@@ -1,57 +1,60 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { Paper, Button, Typography } from '@material-ui/core';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faMapMarkerAlt } from '@fortawesome/free-solid-svg-icons';
 
 import { getPosition } from '../../../libs/location';
+import Map from './components/Map';
 
-const Location = ({ isDead, onNext, onSkip, classes }) => {
+const POSITION = { lat: '52.241', lng: '21.005' };
+
+const Location = ({ onNext, classes }) => {
   const [loading, setLoading] = useState(false);
+  const [position, setPosition] = useState(POSITION);
 
-  const handleGetLocation = async () => {
+  useEffect(async () => {
     setLoading(true);
-    const position = await getPosition();
+    try {
+      const position = await getPosition();
+      console.log({ position });
+      setPosition({
+        lat: position.coords.latitude,
+        lng: position.coords.longitude,
+      });
+    } catch (_) {
+      setPosition(POSITION);
+      setLoading(false);
+    }
     setLoading(false);
-    onNext(position);
-  };
+  }, []);
 
   return (
     <Paper classes={{ root: classes.paper }}>
-      <FontAwesomeIcon className={classes.icon} icon={faMapMarkerAlt} />
+      <Map
+        waiting={loading}
+        position={position}
+        setPosition={setPosition}
+        classes={classes}
+      />
       <div className={classes.infoContainer}>
         <Typography variant="h2">Wskaż localizajcę</Typography>
         <Typography variant="subtitle1">
-          {isDead
-            ? 'Wyślemy odpowiednią osobę która wszystkim się zajmie.'
-            : 'Jest nam potrzebna aby sprawnie śledzić dziki.'}
+          Dokładna lokalizacja pozwoli nam szybciej dotrzeć na miejsce i podjąć
+          odpowiednią interwencję wtedy, gdy jest to konieczne.
         </Typography>
       </div>
-      <div className={classes.buttonContainer}>
-        <Button
-          variant="contained"
-          color="primary"
-          onClick={handleGetLocation}
-          disabled={loading}
-        >
-          Pobierz automatycznie
-        </Button>
-        <Button
-          variant="contained"
-          color="primary"
-          onClick={onSkip}
-          disabled={loading}
-        >
-          Wskaż ręcznie
-        </Button>
-      </div>
+      <Button
+        variant="contained"
+        color="primary"
+        onClick={() => onNext(position)}
+        disabled={loading}
+      >
+        Dalej
+      </Button>
     </Paper>
   );
 };
 
 Location.propTypes = {
-  isDead: PropTypes.bool,
-  onSkip: PropTypes.func.isRequired,
   onNext: PropTypes.func.isRequired,
   classes: PropTypes.object.isRequired,
 };
