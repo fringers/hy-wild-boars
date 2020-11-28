@@ -10,12 +10,17 @@
     {
       "src": "app_logo.png",
       "type": "image/png",
+      "sizes": "192x192"
+    },
+    {
+      "src": "app_logo.png",
+      "type": "image/png",
       "sizes": "512x512"
     }
   ],
   "start_url": ".",
   "display": "standalone",
-  "theme_color": "#000000",
-  "background_color": "#ffffff",
+  "theme_color": "#bc9c6d",
+  "background_color": "#E5DECD",
   "orientation": "portrait"
 }

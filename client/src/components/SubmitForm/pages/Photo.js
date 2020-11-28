@@ -24,8 +24,8 @@ const Photo = ({ isDead, onNext, classes }) => {
       <div className={classes.infoContainer}>
         <Typography variant="h2">Zrób zdjęcie</Typography>
         <Typography variant="subtitle1">
-          Jeśli masz taką możliwość, zrób zdjęcie, które pomoże nam lepiej
-          ocenić sytuację.
+          Jeśli masz taką możliwość, zrób zdjęcie. Pomoże nam ono lepiej ocenić
+          sytuację.
           {!isDead &&
             ' Pamiętaj jednak, że Twoje bezpieczeństwo jest najważniejsze!'}
         </Typography>
