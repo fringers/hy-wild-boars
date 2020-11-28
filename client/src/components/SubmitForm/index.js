@@ -34,8 +34,6 @@ const SubmitForm = () => {
   const [position, setPosition] = useState({});
   const [fileUrl, setFileUrl] = useState('');
 
-  console.log({ position, fileUrl, isDead });
-
   return (
     <Carousel
       className={classes.carousel}
@@ -82,7 +80,6 @@ const SubmitForm = () => {
       <Location
         classes={classes}
         onNext={(position) => {
-          console.log({ position });
           setPosition({
             coords: {
               latitude: position.lat,
@@ -96,7 +93,6 @@ const SubmitForm = () => {
         classes={classes}
         onNext={async (details) => {
           // TODO: add error handling, check if offline
-          // TODO: add howMany
           await sendRequest(fileUrl, position, isDead, howMany, details);
           history.push('/thankyou');
         }}

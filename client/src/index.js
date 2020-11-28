@@ -1,10 +1,12 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import 'leaflet/dist/leaflet.css'
+import 'leaflet/dist/leaflet.css';
 
 import { signIn } from './firebase/auth';
+import { initSW } from './serviceWorkers/index';
 
 signIn();
+initSW();
 
 import App from './components/App';
 
