@@ -41,9 +41,7 @@ const NotificationsScreen = () => {
               <StatusIcon status={status} />
             </ListItemIcon>
             <ListItemAvatar>
-              <Avatar>
-                <img src={photoUrl} />
-              </Avatar>
+              <Avatar src={photoUrl}/>
             </ListItemAvatar>
             <ListItemText
               primary={`${getDate(timestamp)}`}
