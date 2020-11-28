@@ -32,11 +32,7 @@ const useStyles = makeStyles((theme) => ({
     alignItems: 'center',
     display: 'flex',
     flexDirection: 'column',
-    height: '100%',
     padding: theme.spacing(2),
-  },
-  tips: {
-    height: '100%',
   },
   info: {
     width: '95%',
