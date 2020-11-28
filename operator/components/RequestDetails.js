@@ -31,7 +31,7 @@ const RequestActions = ({request, onStatusUpdate}) => {
   if (request.status === "NEW") {
     return (
       <>
-        <Button onClick={e => onStatusUpdate("ACCEPTED")} className="m-1">Potwierdź</Button>
+        <Button onClick={e => onStatusUpdate("ACCEPTED")} className="m-1 text-white">Potwierdź</Button>
         <Button variant="danger" onClick={e => onStatusUpdate("REJECTED")} className="m-1">Odrzuć</Button>
       </>
     )
@@ -48,7 +48,7 @@ const RequestActions = ({request, onStatusUpdate}) => {
 
   return (
     <>
-      <Button variant="warning" onClick={e => onStatusUpdate("NEW")} className="m-1">Otwórz ponownie</Button>
+      <Button variant="warning" onClick={e => onStatusUpdate("NEW")} className="m-1 text-white">Otwórz ponownie</Button>
     </>
   )
 }

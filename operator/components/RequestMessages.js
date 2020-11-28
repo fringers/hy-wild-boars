@@ -64,7 +64,7 @@ export const RequestMessages = ({messages, onSendMessage}) => {
           />
         </Form.Group>
 
-        <Button variant="primary" type="submit" disabled={loading}>
+        <Button variant="primary" type="submit" disabled={loading} className="text-white">
           Wyślij wiadomość
         </Button>
       </Form>
