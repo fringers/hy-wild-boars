@@ -2,6 +2,7 @@ import React, {useEffect, useState} from "react";
 import Head from "next/head";
 import 'leaflet/dist/leaflet.css'
 import '../styles/globals.scss'
+import 'react-bootstrap-typeahead/css/Typeahead.css';
 import {onAuthStateChanged} from "../firebase/auth";
 
 function MyApp({ Component, pageProps }) {

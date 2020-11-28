@@ -12,3 +12,7 @@ $theme-colors: (
 .clickable tr {
   cursor: pointer;
 }
+
+.rbt-menu.dropdown-menu.show {
+  z-index: 1000;
+}
