@@ -1,7 +1,14 @@
 import {Layout} from "../../components/Layout";
 import React, {useEffect, useState} from "react";
 import {useRouter} from "next/router";
-import {addRequestMessage, getGeoInfo, getRequest, getRequestMessages, updateRequestStatus} from "../../firebase/db";
+import {
+  addRequestMessage,
+  getGeoInfo,
+  getRequest,
+  getRequestMessages,
+  updateRequestStatus,
+  watchRequestMessages
+} from "../../firebase/db";
 import {RequestDetails} from "../../components/RequestDetails";
 
 export default function Request({user}) {
@@ -31,12 +38,7 @@ export default function Request({user}) {
     if (!user || !router.query.id)
       return;
 
-    const fetchRequest = async (id) => {
-      const messages = await getRequestMessages(id)
-      setRequestMessages(messages)
-    }
-
-    fetchRequest(router.query.id)
+    return watchRequestMessages(router.query.id, setRequestMessages)
   }, [user?.uid, router.query.id])
 
   useEffect(() => {
@@ -54,8 +56,6 @@ export default function Request({user}) {
   const onSendMessage = async (message) => {
     const id = router.query.id
     await addRequestMessage(id, message)
-    const messages = await getRequestMessages(id)
-    setRequestMessages(messages)
   }
 
   const onStatusUpdate = async (status) => {

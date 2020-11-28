@@ -48,7 +48,7 @@ export const RequestMessages = ({messages, onSendMessage}) => {
           return (
             <div className={`my-2 ${(m.sender === 'OPERATOR' ? 'text-right' : 'text-left')}`}>
               <div>
-                {messageSenderToText(m.sender)} ({m.timestamp.toLocaleString("pl")}):
+                {messageSenderToText(m.sender)} ({m.timestamp?.toLocaleString("pl")}):
               </div>
               <div>
                 <strong>{m.text}</strong>

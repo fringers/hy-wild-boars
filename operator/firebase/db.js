@@ -73,13 +73,11 @@ export const getGeoInfo = async (requests) => {
   return Object.fromEntries(resolved)
 }
 
-export const getRequestMessages = async (requestId) => {
-  const snapshot = await db.collection("requests").doc(requestId)
+export const watchRequestMessages = (requestId, callback) => {
+  return db.collection("requests").doc(requestId)
     .collection("requestMessages")
     .orderBy("timestamp", "asc")
-    .get()
-
-  return snapshot.docs.map(docToMessage)
+    .onSnapshot(snapshot => callback(snapshot.docs.map(docToMessage)))
 }
 
 export const addRequestMessage = async (requestId, message) => {
@@ -114,7 +112,7 @@ const docToMessage = (doc) => {
     id: doc.id,
     text: data.text,
     sender: data.sender,
-    timestamp: data.timestamp.toDate(),
+    timestamp: data.timestamp?.toDate(),
   }
 }
 
