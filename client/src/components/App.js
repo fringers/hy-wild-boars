@@ -2,18 +2,18 @@ import React from 'react';
 import { BrowserRouter } from 'react-router-dom';
 import { AnimatedSwitch, AnimatedRoute } from 'react-router-transition';
 import { makeStyles } from '@material-ui/core';
+import { ThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 
-import Intro from './Intro';
+import WelcomeScreen from './WelcomeScreen';
+import HomeScreen from './HomeScreen';
+import NotificationsScreen from './NotificationsScreen';
+import NotificationDetails from './NotificationDetails';
+
+// import Intro from './Intro';
 import SubmitForm from './SubmitForm';
 import ThankYou from './ThankYou';
 
 const useStyles = makeStyles(() => ({
-  container: {
-    backgroundColor: '#f6f3ee',
-    height: '100vh',
-    width: '100%',
-    margin: 0,
-  },
   switchWrapper: {
     position: 'relative',
     '& > div': {
@@ -23,11 +23,26 @@ const useStyles = makeStyles(() => ({
   },
 }));
 
+const theme = createMuiTheme({
+  palette: {
+    primary: {
+      main: '#bc9c6d',
+      light: '#f0cd9c',
+      dark: '#8a6e41',
+    },
+    secondary: {
+      main: '#503f2b',
+      light: '#7d6a54',
+      dark: '#271900',
+    },
+  },
+});
+
 const App = () => {
   const classes = useStyles();
 
   return (
-    <div className={classes.container}>
+    <ThemeProvider theme={theme}>
       <BrowserRouter>
         <AnimatedSwitch
           atEnter={{ opacity: 0 }}
@@ -44,7 +59,40 @@ const App = () => {
             })}
             exact
             path="/"
-            component={Intro}
+            component={WelcomeScreen}
+          />
+          <AnimatedRoute
+            atEnter={{ offset: -100 }}
+            atLeave={{ offset: -100 }}
+            atActive={{ offset: 0 }}
+            mapStyles={(styles) => ({
+              transform: `translateX(${styles.offset}%)`,
+            })}
+            exact
+            path="/home"
+            component={HomeScreen}
+          />
+          <AnimatedRoute
+            atEnter={{ offset: -100 }}
+            atLeave={{ offset: -100 }}
+            atActive={{ offset: 0 }}
+            mapStyles={(styles) => ({
+              transform: `translateX(${styles.offset}%)`,
+            })}
+            exact
+            path="/notifications"
+            component={NotificationsScreen}
+          />
+          <AnimatedRoute
+            atEnter={{ offset: -100 }}
+            atLeave={{ offset: -100 }}
+            atActive={{ offset: 0 }}
+            mapStyles={(styles) => ({
+              transform: `translateX(${styles.offset}%)`,
+            })}
+            exact
+            path="/notifications/:id"
+            component={NotificationDetails}
           />
           <AnimatedRoute
             atEnter={{ offset: -100 }}
@@ -70,7 +118,7 @@ const App = () => {
           />
         </AnimatedSwitch>
       </BrowserRouter>
-    </div>
+    </ThemeProvider>
   );
 };
 

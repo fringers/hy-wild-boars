@@ -3,7 +3,7 @@ import React, {useEffect, useState} from "react";
 import {useRouter} from "next/router";
 import {addRequestMessage, getRequest, getRequestMessages, updateRequestStatus} from "../../firebase/db";
 import {RequestDetails} from "../../components/RequestDetails";
-import {NominatimJS} from 'nominatim-search'
+import {reverseSearch} from "../../nominatim/nominatim";
 
 export default function Request({user}) {
   const router = useRouter()
@@ -43,12 +43,7 @@ export default function Request({user}) {
       return;
 
     const fetchRequest = async (lat, lng) => {
-      const result = await NominatimJS.reverse({
-        lat: lat,
-        lon: lng,
-        accept_language: 'pl',
-      })
-      console.log(result)
+      const result = await reverseSearch({lat, lng})
       setGeoInfo(result)
     }
 

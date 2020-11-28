@@ -1,5 +1,5 @@
 $theme-colors: (
-  "primary": #728d57,
+  "primary": #BC9C6D,
 );
 
 @import "~bootstrap/scss/bootstrap";
@@ -7,4 +7,8 @@ $theme-colors: (
 .map {
   width: 100%;
   height: 600px;
+}
+
+.clickable tr {
+  cursor: pointer;
 }

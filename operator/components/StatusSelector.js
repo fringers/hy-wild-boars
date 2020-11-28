@@ -16,8 +16,10 @@ export const StatusSelector = ({status, children, selectedStatuses, onStatusesCh
     onStatusesChange(newStatuses)
   }
 
+  const customClass = className + (selected ? ' text-white' : '')
+
   return (
-    <Button variant={selected ? 'primary' : 'link'} onClick={onClick} className={className}>
+    <Button variant={selected ? 'primary' : 'link'} onClick={onClick} className={customClass}>
       {children}
     </Button>
   )
