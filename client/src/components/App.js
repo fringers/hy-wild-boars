@@ -26,6 +26,9 @@ const useStyles = makeStyles(() => ({
   snackbar: {
     bottom: 80,
   },
+  snackbar2: {
+    bottom: 140,
+  },
 }));
 
 const theme = () =>
@@ -121,10 +124,10 @@ const App = () => {
           message={online ? 'Odzyskano połączenie!' : 'Jesteś offline'}
         />
         <Snackbar
-          classes={{ root: classes.snackbar }}
+          classes={{ root: classes.snackbar2 }}
           anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
           open={uploading}
-          message="Wysyłanie zaległył zgłoszeń..."
+          message="Wysyłanie zaległych zgłoszeń..."
         />
         <BrowserRouter>
           <AnimatedSwitch
