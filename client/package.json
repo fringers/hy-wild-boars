@@ -6,7 +6,7 @@
   "author": "",
   "main": "index.js",
   "scripts": {
-    "build": "react-scripts build",
+    "build": "CI= react-scripts build",
     "start": "BROWSER=none react-scripts start",
     "start:win": "react-scripts start"
   },

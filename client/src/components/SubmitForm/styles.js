@@ -30,4 +30,14 @@ export default makeStyles((theme) => ({
     width: '100%',
     justifyContent: 'space-around',
   },
+  formControl: {
+    width: 216,
+  },
+  photoImg: {
+    borderColor: theme.palette.primary.main,
+    borderRadius: theme.spacing(1),
+    borderStyle: 'solid',
+    borderWidth: theme.spacing(0.5),
+    maxHeight: 148,
+  },
 }));

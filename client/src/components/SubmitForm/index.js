@@ -29,6 +29,7 @@ const SubmitForm = () => {
   const history = useHistory();
   const [page, setPage] = useState(0);
   const [isDead, setDead] = useState(null);
+  const [howMany, setHowMany] = useState('');
 
   const [position, setPosition] = useState({});
   const [fileUrl, setFileUrl] = useState('');
@@ -62,7 +63,13 @@ const SubmitForm = () => {
         onPrev={() => setPage(Page.isDead)}
         onNext={() => setPage(Page.howMany)}
       />
-      <HowMany classes={classes} onNext={() => setPage(Page.photo)} />
+      <HowMany
+        classes={classes}
+        onNext={(value) => {
+          setHowMany(value);
+          setPage(Page.photo);
+        }}
+      />
       <Photo
         isDead={isDead}
         classes={classes}
@@ -82,6 +89,7 @@ const SubmitForm = () => {
         classes={classes}
         onNext={async (details) => {
           // TODO: add error handling, check if offline
+          // TODO: add howMany
           await sendRequest(fileUrl, position, isDead, details);
           history.push('/thankyou');
         }}
