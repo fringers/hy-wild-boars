@@ -24,7 +24,11 @@ export const RequestsPreview = ({requests}) => {
               <td className="text-center">
                 <StatusIcon status={row.status}/>
               </td>
-              <td>{row.timestamp.toLocaleString("pl")}</td>
+              <td>
+                <Link href={`/requests/${row.id}`}>
+                  <a>{row.timestamp.toLocaleString("pl")}</a>
+                </Link>
+              </td>
               <td>
                 {/*{*/}
                 {/*  row.photoUrl*/}
