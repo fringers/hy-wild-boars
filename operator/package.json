@@ -8,6 +8,7 @@
     "start": "next start"
   },
   "dependencies": {
+    "@ansur/leaflet-pulse-icon": "^0.1.1",
     "@fortawesome/fontawesome-svg-core": "^1.2.32",
     "@fortawesome/free-brands-svg-icons": "^5.15.1",
     "@fortawesome/free-regular-svg-icons": "^5.15.1",
