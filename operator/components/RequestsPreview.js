@@ -2,8 +2,9 @@ import React from "react";
 import Table from "react-bootstrap/Table";
 import Link from "next/link"
 import {StatusIcon} from "./StatusIcon";
+import {toShortAddress} from "../nominatim/nominatim";
 
-export const RequestsPreview = ({requests}) => {
+export const RequestsPreview = ({requests, geoInfo}) => {
   return (
     <Table striped hover responsive>
       <thead>
@@ -19,6 +20,8 @@ export const RequestsPreview = ({requests}) => {
       <tbody>
       {
         requests.map(row => {
+          const geo = geoInfo[row.id];
+          console.log(geo)
           return (
             <tr key={row.id}>
               <td className="text-center">
@@ -42,7 +45,13 @@ export const RequestsPreview = ({requests}) => {
               </td>
               <td>
                 <Link href={`/requests/${row.id}`}>
-                  <a>Zobacz na mapie</a>
+                  <a>
+                    {
+                      geo
+                        ? toShortAddress(geo)
+                        : 'Zobacz na mapie'
+                    }
+                  </a>
                 </Link>
               </td>
               <td>
