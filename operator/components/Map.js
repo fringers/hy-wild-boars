@@ -71,7 +71,7 @@ const Map = ({requests, center, zoom}) => {
       }
 
     return (
-        <MapContainer center={mapCenter} zoom={mapZoom} className="map">
+        <MapContainer center={mapCenter} zoom={mapZoom} minZoom={6} className="map">
             <TileLayer
                 attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
                 url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
@@ -88,11 +88,13 @@ const Map = ({requests, center, zoom}) => {
                                     icon={statusToIcon(r.status)}
                                     eventHandlers={{
                                         click: (event) => {
-                                            event.target._map.flyTo(event.target._latlng, 15, {
-                                                animate: true,
-                                                duration: 1
-                                            })
-
+                                            if(requests.length != 1)
+                                                location.href = "/requests/"+r.id
+                                            else
+                                                event.target._map.flyTo(event.target._latlng, 15, {
+                                                    animate: true,
+                                                    duration: 1
+                                                })
                                         },
                                     }}
                                 />
