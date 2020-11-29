@@ -18,7 +18,8 @@ const AdditionalInfo = ({ online, onNext, classes }) => {
         </Typography>
       </div>
       <TextField
-        style={{ width: '100%' }}
+        fullWidth
+        InputProps={{ classes: { multiline: classes.customTextField } }}
         placeholder="Twoje uwagi"
         multiline
         onChange={(e) => setValue(e?.target?.value)}
