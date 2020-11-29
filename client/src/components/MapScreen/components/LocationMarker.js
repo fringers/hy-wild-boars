@@ -4,9 +4,9 @@ import L from 'leaflet';
 import { Marker, useMapEvents } from 'react-leaflet';
 
 const MarkerIcon = L.icon({
-  iconUrl: '/map-marker.svg',
-  iconSize: [32, 32],
-  iconAnchor: [16, 32],
+  iconUrl: '/circle-solid.svg',
+  iconSize: [16, 16],
+  iconAnchor: [8, 8],
 });
 
 const LocationMarker = ({ waiting, position, setPosition }) => {

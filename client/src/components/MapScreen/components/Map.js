@@ -6,9 +6,9 @@ import LocationMarker from "./LocationMarker";
 import L from "leaflet";
 
 const BoarIcon = L.icon({
-  iconUrl: '/wild-boar.svg',
-  iconSize: [16, 16],
-  iconAnchor: [8, 8],
+  iconUrl: '/map-marker.svg',
+  iconSize: [32, 32],
+  iconAnchor: [16, 32],
 });
 
 const Map = ({ requests, position, waiting, setPosition }) => (
