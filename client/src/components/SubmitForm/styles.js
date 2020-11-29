@@ -35,6 +35,8 @@ export default makeStyles((theme) => ({
     flexDirection: 'row-reverse',
   },
   formControl: {
+    display: 'flex',
+    flexDirection: 'column',
     width: 216,
   },
   map: {

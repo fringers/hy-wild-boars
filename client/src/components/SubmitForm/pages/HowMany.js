@@ -26,14 +26,14 @@ const HowMany = ({ onNext, classes }) => {
         <Typography variant="h4">Ile dzików widzisz?</Typography>
       </div>
       <div className={classes.switchContainer}>
-        <FormControl className={classes.formControl}>
+        <FormControl classes={{ root: classes.formControl }}>
           <InputLabel id="how-many">Liczba dzików</InputLabel>
           <Select
             labelId="how-many"
             value={value}
             onChange={(e) => setValue(e?.target?.value)}
           >
-            <MenuItem value="ONE">Jednego</MenuItem>
+            <MenuItem value="ONE">Jeden</MenuItem>
             <MenuItem value="TWO_TO_SEVEN">Od 2 do 7</MenuItem>
             <MenuItem value="EITGHT_TO_THIRTY">Od 8 do 30</MenuItem>
             <MenuItem value="ABOVE_THIRTY">Powyżej 30</MenuItem>

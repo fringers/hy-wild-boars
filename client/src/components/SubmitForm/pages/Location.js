@@ -45,7 +45,7 @@ const Location = ({ onNext, classes }) => {
         variant="contained"
         color="primary"
         onClick={() => onNext(position)}
-        disabled={loading}
+        disabled={!position}
       >
         Dalej
       </Button>
