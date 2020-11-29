@@ -78,7 +78,6 @@ export const Chat = ({ id }) => {
         >
           <TextField
             style={{ width: '100%' }}
-            inputStyle={{ width: '100%' }}
             label="Wyślij wiadomość..."
             variant="filled"
             value={message}
