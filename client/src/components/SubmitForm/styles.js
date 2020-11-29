@@ -11,6 +11,7 @@ export default makeStyles((theme) => ({
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'space-between',
+    height: `calc(${window.innerHeight}px - 64px)`,
     minHeight: `calc(${window.innerHeight}px - 64px)`,
     padding: theme.spacing(4),
     textAlign: 'center',
