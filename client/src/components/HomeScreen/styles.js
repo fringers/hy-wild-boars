@@ -31,6 +31,7 @@ export default makeStyles((theme) => ({
     position: 'relative',
     width: '100vw',
     maxHeight: 300,
+    minHeight: 128,
     overflow: 'hidden',
     [theme.breakpoints.up('sm')]: {
       height: 300,

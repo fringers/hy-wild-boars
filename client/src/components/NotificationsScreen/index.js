@@ -33,7 +33,7 @@ const NotificationsScreen = () => {
   const classes = useStyles();
   const history = useHistory();
   const [requests, setRequests] = useState([]);
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
 
   const user = useContext(UserContext);
 
@@ -45,8 +45,8 @@ const NotificationsScreen = () => {
   };
 
   useEffect(() => {
+    setLoading(false);
     if (!user) return;
-
     handleRequestsGet();
   }, [user?.uid]);
 

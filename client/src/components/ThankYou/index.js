@@ -67,11 +67,15 @@ const ThankYou = () => {
           icon={faMedal}
         />
         <div className={classes.infoContainer}>
-          <Typography variant="h4">
-            Dziękujemy, że dbasz z nami o wspólne bezpieczeństwo!
-          </Typography>
+          <Typography variant="h4">Dziękujemy za Twoją pomoc!</Typography>
         </div>
-        <Button variant="contained" color="primary" onClick={() => history.push('/home')}>Wróć</Button>
+        <Button
+          variant="contained"
+          color="primary"
+          onClick={() => history.push('/home')}
+        >
+          Wróć
+        </Button>
       </div>
     </>
   );

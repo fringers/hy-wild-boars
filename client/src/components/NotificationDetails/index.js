@@ -64,6 +64,7 @@ const NotificationDetails = () => {
   };
 
   useEffect(() => {
+    setLoading(false);
     if (!user) return;
     fetchRequest(id);
   }, [user?.uid]);
