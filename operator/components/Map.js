@@ -30,8 +30,8 @@ const doneIcon = L.icon.pulse({
 })
 
 const rejectedIcon = L.icon.pulse({
-  fillColor: 'black',
-  color: 'black',
+  fillColor: 'gray',
+  color: 'gray',
   animate: false
 })
 

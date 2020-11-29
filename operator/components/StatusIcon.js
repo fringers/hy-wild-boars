@@ -20,7 +20,7 @@ export const StatusIcon = ({status}) => {
     case 'RESOLVED':
       return <Icon bgColor="green" shadowColor="rgb(0,0,0,0.75)"/>
     case 'REJECTED':
-      return <Icon bgColor="black" shadowColor="rgb(0,0,0,0.75)"/>
+      return <Icon bgColor="gray" shadowColor="rgb(0,0,0,0.75)"/>
     default:
       return null
   }
