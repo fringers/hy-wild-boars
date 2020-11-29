@@ -24,9 +24,12 @@ const Page = {
   additionalInfo: 6,
 };
 
-const isValidIsDeadQuery = (val) => val === "true" || val === "false"
-const isValidHowManyQuery = (val) => val === "ONE" || val === "TWO_TO_SEVEN"
-  || val === "EITGHT_TO_THIRTY" || val === "ABOVE_THIRTY"
+const isValidIsDeadQuery = (val) => val === 'true' || val === 'false';
+const isValidHowManyQuery = (val) =>
+  val === 'ONE' ||
+  val === 'TWO_TO_SEVEN' ||
+  val === 'EITGHT_TO_THIRTY' ||
+  val === 'ABOVE_THIRTY';
 
 const SubmitForm = () => {
   const classes = useStyles();
@@ -34,6 +37,7 @@ const SubmitForm = () => {
   const [page, setPage] = useState(0);
   const [isDead, setDead] = useState(null);
   const [howMany, setHowMany] = useState('');
+  const [young, setYoung] = useState('');
   const [position, setPosition] = useState({});
   const [fileUrl, setFileUrl] = useState('');
   const [fileForLater, setFileForLater] = useState('');
@@ -53,19 +57,17 @@ const SubmitForm = () => {
     };
   }, []);
 
-
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
 
     const queryIsDead = params.get('isDead');
     const queryHowMany = params.get('howMany');
     if (isValidIsDeadQuery(queryIsDead) && isValidHowManyQuery(queryHowMany)) {
-      setDead(Boolean(queryIsDead))
-      setHowMany(queryHowMany)
-      setPage(4)
+      setDead(Boolean(queryIsDead));
+      setHowMany(queryHowMany);
+      setPage(4);
     }
-  }, [])
-
+  }, []);
 
   return (
     <Carousel
@@ -97,8 +99,9 @@ const SubmitForm = () => {
       />
       <HowMany
         classes={classes}
-        onNext={(value) => {
+        onNext={(value, young) => {
           setHowMany(value);
+          setYoung(young);
           setPage(Page.photo);
         }}
       />
@@ -133,7 +136,7 @@ const SubmitForm = () => {
             if (fileForLater) {
               fUrl = await uploadFile(fileForLater);
             }
-            await sendRequest(fUrl, position, isDead, howMany, details);
+            await sendRequest(fUrl, position, isDead, howMany, details, young);
           } else {
             window.myCache.push({
               fileUrl,
@@ -142,6 +145,7 @@ const SubmitForm = () => {
               isDead,
               howMany,
               details,
+              young,
             });
           }
           history.push('/thankyou');

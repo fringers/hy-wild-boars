@@ -41,4 +41,12 @@ export default makeStyles((theme) => ({
   mapBtn: {
     marginTop: theme.spacing(2),
   },
+  switchContainer: {
+    '& > :last-child': {
+      marginTop: theme.spacing(1),
+    },
+  },
+  thumb: {
+    color: theme.palette.primary.main,
+  },
 }));
