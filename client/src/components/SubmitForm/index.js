@@ -37,7 +37,7 @@ const SubmitForm = () => {
   const [page, setPage] = useState(0);
   const [isDead, setDead] = useState(null);
   const [howMany, setHowMany] = useState('');
-  const [young, setYoung] = useState('');
+  const [young, setYoung] = useState(false);
   const [position, setPosition] = useState({});
   const [fileUrl, setFileUrl] = useState('');
   const [fileForLater, setFileForLater] = useState('');

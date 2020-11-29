@@ -15,7 +15,7 @@ import ThankYou from './ThankYou';
 import NotificationsScreen from './NotificationsScreen';
 import NotificationDetails from './NotificationDetails';
 import { theme, offlineTheme } from './themes';
-import MapScreen from "./MapScreen";
+import MapScreen from './MapScreen';
 
 const useStyles = makeStyles(() => ({
   switchWrapper: {
@@ -64,12 +64,13 @@ const App = () => {
           isDead,
           howMany,
           details,
+          young,
         }) => {
           let fUrl = fileUrl;
           if (fileForLater) {
             fUrl = await uploadFile(fileForLater);
           }
-          await sendRequest(fUrl, position, isDead, howMany, details);
+          await sendRequest(fUrl, position, isDead, howMany, details, young);
         }
       );
       window.myCache = [];
