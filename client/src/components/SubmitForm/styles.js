@@ -53,4 +53,7 @@ export default makeStyles((theme) => ({
   thumb: {
     color: theme.palette.primary.main,
   },
+  customTextField: {
+    paddingTop: theme.spacing(2),
+  },
 }));
