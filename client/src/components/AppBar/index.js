@@ -10,16 +10,16 @@ import {
   useMediaQuery,
 } from '@material-ui/core';
 import MailIcon from '@material-ui/icons/Mail';
-import MapIcon from '@material-ui/icons/Map';
+import ExploreIcon from '@material-ui/icons/Explore';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronLeft } from '@fortawesome/free-solid-svg-icons';
 
-const useStyles = makeStyles({
+const useStyles = makeStyles((theme) => ({
   grow: {
     flexGrow: 1,
   },
-});
+}));
 
 const AppBar = ({ title = 'Dzik Alert', showNotifications }) => {
   const classes = useStyles();
@@ -47,7 +47,7 @@ const AppBar = ({ title = 'Dzik Alert', showNotifications }) => {
         {showNotifications && (
           <>
             <IconButton onClick={() => history.push('/map')} color="inherit">
-              <MapIcon />
+              <ExploreIcon />
             </IconButton>
             <IconButton
               onClick={() => history.push('/notifications')}
