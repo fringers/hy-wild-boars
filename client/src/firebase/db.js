@@ -57,6 +57,20 @@ export const getRequests = async () => {
   return snapshot.docs.map(docToRequest);
 };
 
+export const getAllRecentRequests = async (lastDays) => {
+  const date = new Date();
+  date.setDate(date.getDate()-lastDays);
+
+  const snapshot = await db
+    .collection('requests')
+    .where("timestamp", ">=", date)
+    .where("status", "in", ['NEW', 'ACCEPTED', 'RESOLVED'])
+    .get();
+
+  return snapshot.docs.map(docToRequest);
+};
+
+
 export const getRequestById = async (requestId) => {
   const doc = await db.collection('requests').doc(requestId).get();
   return docToRequest(doc);
