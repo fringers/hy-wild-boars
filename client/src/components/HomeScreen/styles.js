@@ -18,7 +18,7 @@ export default makeStyles((theme) => ({
     backgroundColor: theme.palette.secondary.main,
     color: 'white',
     position: 'absolute',
-    bottom: theme.spacing(2),
+    bottom: theme.spacing(3),
   },
   extendedIcon: {
     marginRight: theme.spacing(1),
