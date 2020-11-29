@@ -30,7 +30,7 @@ const AdditionalInfo = ({ online, onNext, classes }) => {
       {!online && (
         <Typography variant="caption">
           Zgłoszenie zostanie wysłane automatycznie gdy odzyskasz połącznie
-          Internetowe
+          Internetowe.
         </Typography>
       )}
       <Button variant="contained" color="primary" onClick={() => onNext(value)}>

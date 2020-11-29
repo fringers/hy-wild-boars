@@ -31,7 +31,6 @@ const docToRequest = (doc) => {
 
 const docToMessage = (doc) => {
   const data = doc.data()
-  console.log(data)
   return {
     id: doc.id,
     text: data.text,

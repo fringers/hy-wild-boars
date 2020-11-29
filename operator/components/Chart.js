@@ -41,14 +41,11 @@ export const Chart = ({requests}) => {
 
   const hours = Object.keys(groupedByHour).sort()
 
-  // console.log(hours)
-
   const datasetData = [];
   const labels = [];
   hours.forEach(h => {
     datasetData.push(groupedByHour[h])
     const date = new Date(h)
-    console.log(h)
     labels.push(formatDate(date))
   })
 
