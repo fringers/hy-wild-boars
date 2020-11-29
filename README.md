@@ -10,3 +10,7 @@ https://hy-wild-boars.web.app/
 `/operator` - operator dashboard
 
 https://hy-wild-boars-operator.web.app/
+
+login: `a@a.com`
+
+password: `zaq12wsx`
