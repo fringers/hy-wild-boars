@@ -38,7 +38,7 @@ const Location = ({ onNext, classes }) => {
         <Typography variant="h4">Wskaż lokalizację</Typography>
         <Typography variant="subtitle1">
           Dokładna lokalizacja pozwoli nam szybciej dotrzeć na miejsce i podjąć
-          odpowiednią interwencję wtedy gdy jest to konieczne.
+          odpowiednią interwencję.
         </Typography>
       </div>
       <Button
