@@ -31,7 +31,7 @@ export const Layout = ({user, children, title, subTitle}) => {
           <Col className="mx-3 text-primary-d">
             <div className="d-flex align-content-center align-items-center">
               <img src="/app_logo.png" style={{width: '100px'}}/>
-              <h3 className="p-0 m-0">Dzik alarm</h3>
+              <h3 className="p-0 m-0">Dzik alert</h3>
             </div>
           </Col>
         </Row>
