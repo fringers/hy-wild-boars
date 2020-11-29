@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { BrowserRouter } from 'react-router-dom';
 import { AnimatedSwitch, AnimatedRoute } from 'react-router-transition';
 import { Snackbar, makeStyles } from '@material-ui/core';
-import { ThemeProvider, createMuiTheme } from '@material-ui/core/styles';
+import { ThemeProvider } from '@material-ui/core/styles';
 
 import { onAuthStateChanged } from '../firebase/auth';
 import { sendRequest } from '../firebase/db';
@@ -14,6 +14,7 @@ import SubmitForm from './SubmitForm';
 import ThankYou from './ThankYou';
 import NotificationsScreen from './NotificationsScreen';
 import NotificationDetails from './NotificationDetails';
+import { theme, offlineTheme } from './themes';
 
 const useStyles = makeStyles(() => ({
   switchWrapper: {
@@ -30,38 +31,6 @@ const useStyles = makeStyles(() => ({
     bottom: 140,
   },
 }));
-
-const theme = () =>
-  createMuiTheme({
-    palette: {
-      primary: {
-        main: '#bc9c6d',
-        light: '#E5DECD',
-        dark: '#8a6e41',
-      },
-      secondary: {
-        main: '#503f2b',
-        light: '#7d6a54',
-        dark: '#271900',
-      },
-    },
-  });
-
-const offlineTheme = () =>
-  createMuiTheme({
-    palette: {
-      primary: {
-        main: '#808080',
-        light: '#F5F5F5',
-        dark: '#303030',
-      },
-      secondary: {
-        main: '#503f2b',
-        light: '#7d6a54',
-        dark: '#271900',
-      },
-    },
-  });
 
 const getSnackbarMessgae = (online, uploading) => {
   const message = online ? 'Odzyskano połączenie!' : 'Jesteś offline';
