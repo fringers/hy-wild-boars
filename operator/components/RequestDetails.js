@@ -111,7 +111,7 @@ export const RequestDetails = ({request, messages, geoInfo, onSendMessage, onSta
                 request.photoUrl
                   ? (
                     <a href={request.photoUrl} target="_blank">
-                      <img src={request.photoUrl} style={{maxWidth: 480, maxHeight: 480}} alt=""/>
+                      <img src={request.photoUrl} crossOrigin="anonymous" style={{maxWidth: 480, maxHeight: 480}} alt=""/>
                     </a>
                   )
                   : ""
