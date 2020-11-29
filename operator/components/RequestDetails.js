@@ -104,6 +104,12 @@ export const RequestDetails = ({request, messages, geoInfo, onSendMessage, onSta
               <strong>Liczba dzików:</strong> {boarsNumberEnumToText(request.howMany)}
             </ListGroup.Item>
             <ListGroup.Item>
+              <strong>Młode dziki:</strong> {request.young
+              ? "Tak"
+              : "Nie"
+            }
+            </ListGroup.Item>
+            <ListGroup.Item>
               <strong>Szczegóły:</strong> {request.details}
             </ListGroup.Item>
             <ListGroup.Item>

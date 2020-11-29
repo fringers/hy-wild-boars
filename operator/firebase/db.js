@@ -116,6 +116,7 @@ const docToRequest = (doc) => {
     details: data.details,
     status: data.status,
     geoInfo: data.geoInfo,
+    young: data.young,
   }
 }
 
