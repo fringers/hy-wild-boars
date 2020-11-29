@@ -16,3 +16,7 @@ https://hy-wild-boars-operator.web.app/
 login: `a@a.com`
 
 password: `zaq12wsx`
+
+### Presentation
+
+`Fringers -Dzik alert (prezentacja aplikacji).pdf`
