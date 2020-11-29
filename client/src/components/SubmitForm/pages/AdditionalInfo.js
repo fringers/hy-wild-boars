@@ -19,7 +19,6 @@ const AdditionalInfo = ({ online, onNext, classes }) => {
       </div>
       <TextField
         style={{ width: '100%' }}
-        inputStyle={{ width: '100%' }}
         placeholder="Twoje uwagi"
         multiline
         onChange={(e) => setValue(e?.target?.value)}

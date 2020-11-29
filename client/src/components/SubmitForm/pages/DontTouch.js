@@ -10,8 +10,7 @@ const DontTouch = ({ onNext, classes }) => (
     <div className={classes.infoContainer}>
       <Typography variant="h4">Zachowaj dystans</Typography>
       <Typography variant="subtitle1">
-        Nie dotykaj zwłok i nie zbliżaj się do nich. Pamiętaj, że zwierzę mogło
-        być chore.
+        Nie zbliżaj się do zwłok. Pamiętaj, że zwierzę mogło być chore.
       </Typography>
     </div>
     <div className={classes.buttonContainer}>

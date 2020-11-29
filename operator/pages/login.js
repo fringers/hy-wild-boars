@@ -11,7 +11,7 @@ const login = () => {
 
   return (
     <Container>
-      <Row>
+      <Row className="p-5 align-content-center justify-content-md-center">
         <LoginForm onLogin={onLogin}/>
       </Row>
     </Container>
