@@ -15,6 +15,7 @@ import ThankYou from './ThankYou';
 import NotificationsScreen from './NotificationsScreen';
 import NotificationDetails from './NotificationDetails';
 import { theme, offlineTheme } from './themes';
+import MapScreen from "./MapScreen";
 
 const useStyles = makeStyles(() => ({
   switchWrapper: {
@@ -172,6 +173,17 @@ const App = () => {
               exact
               path="/thankyou"
               component={ThankYou}
+            />
+            <AnimatedRoute
+              atEnter={{ offset: -100 }}
+              atLeave={{ offset: -100 }}
+              atActive={{ offset: 0 }}
+              mapStyles={(styles) => ({
+                transform: `translateX(${styles.offset}%)`,
+              })}
+              exact
+              path="/map"
+              component={MapScreen}
             />
           </AnimatedSwitch>
         </BrowserRouter>
