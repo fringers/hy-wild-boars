@@ -1,23 +1,31 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { useParams } from 'react-router-dom';
+import {
+  List,
+  ListItem,
+  ListItemText,
+  ListItemIcon,
+  CircularProgress,
+  makeStyles,
+} from '@material-ui/core';
 
-import { getRequestById } from '../../firebase/db';
-import AppBar from '../AppBar';
-import ListItemText from '@material-ui/core/ListItemText';
-import ListItem from '@material-ui/core/ListItem';
-import List from '@material-ui/core/List';
-import StatusIcon from '../NotificationsScreen/StatusIcon';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
-import { makeStyles } from '@material-ui/core';
-import { Chat } from './components/Chat';
 import { boarsNumberEnumToText } from '../../libs/requestHelper';
+import { getRequestById } from '../../firebase/db';
 import { UserContext } from '../App';
+import StatusIcon from '../NotificationsScreen/StatusIcon';
+import AppBar from '../AppBar';
+import { Chat } from './components/Chat';
 import { RequestMenu } from './components/RequestMenu';
 
 const useStyles = makeStyles((theme) => ({
   container: {
     minHeight: `${window.innerHeight}px`,
     backgroundColor: theme.palette.primary.light,
+  },
+  loadingWrapper: {
+    display: 'flex',
+    justifyContent: 'center',
+    marginTop: theme.spacing(2),
   },
 }));
 
@@ -46,10 +54,13 @@ const NotificationDetails = () => {
   const { id } = useParams();
   const user = useContext(UserContext);
   const [request, setRequest] = useState({});
+  const [loading, setLoading] = useState(true);
 
   const fetchRequest = async (id) => {
+    setLoading(true);
     const response = await getRequestById(id);
     setRequest(response);
+    setLoading(false);
   };
 
   useEffect(() => {
@@ -60,36 +71,42 @@ const NotificationDetails = () => {
   return (
     <div className={classes.container}>
       <AppBar title="Szczegóły zgłoszenia" />
-      <List>
-        <ListItem>
-          <ListItemIcon>
-            <StatusIcon status={request.status} />
-          </ListItemIcon>
-          <ListItemText
-            primary={`${statusToText(request.status)}`}
-            secondary={`${getDate(request.timestamp)}`}
-          />
-          <RequestMenu request={request} onCancelled={fetchRequest} />
-        </ListItem>
-      </List>
-
-      <div>
-        <img src={request.photoUrl} style={{ width: '100%' }} />
-      </div>
-
-      <List>
-        <ListItem>
-          <ListItemText
-            primary={request.isDead ? 'Martwy' : 'Żywy'}
-            secondary={boarsNumberEnumToText(request.howMany)}
-          />
-        </ListItem>
-        <ListItem>
-          <ListItemText primary={request.details} />
-        </ListItem>
-      </List>
-
-      <Chat id={id} />
+      {loading && (
+        <div className={classes.loadingWrapper}>
+          <CircularProgress />
+        </div>
+      )}
+      {!loading && (
+        <>
+          <List>
+            <ListItem>
+              <ListItemIcon>
+                <StatusIcon status={request.status} />
+              </ListItemIcon>
+              <ListItemText
+                primary={`${statusToText(request.status)}`}
+                secondary={`${getDate(request.timestamp)}`}
+              />
+              <RequestMenu request={request} onCancelled={fetchRequest} />
+            </ListItem>
+          </List>
+          <div>
+            <img src={request.photoUrl} style={{ width: '100%' }} />
+          </div>
+          <List>
+            <ListItem>
+              <ListItemText
+                primary={request.isDead ? 'Martwy' : 'Żywy'}
+                secondary={boarsNumberEnumToText(request.howMany)}
+              />
+            </ListItem>
+            <ListItem>
+              <ListItemText primary={request.details} />
+            </ListItem>
+          </List>
+          <Chat id={id} />
+        </>
+      )}
     </div>
   );
 };
