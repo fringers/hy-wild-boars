@@ -1,9 +1,17 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { MapContainer, TileLayer } from 'react-leaflet';
+import {LayerGroup, MapContainer, Marker, TileLayer} from 'react-leaflet';
 import LocationMarker from "./LocationMarker";
 
-const Map = ({ position, waiting, setPosition }) => (
+import L from "leaflet";
+
+const BoarIcon = L.icon({
+  iconUrl: '/wild-boar.svg',
+  iconSize: [16, 16],
+  iconAnchor: [8, 8],
+});
+
+const Map = ({ requests, position, waiting, setPosition }) => (
   <MapContainer
     center={position}
     zoom={13}
@@ -21,6 +29,19 @@ const Map = ({ position, waiting, setPosition }) => (
       position={position}
       setPosition={setPosition}
     />
+
+    <LayerGroup>
+      {
+        requests?.map(r => {
+          return (
+            <Marker
+              key={r.id}
+              position={[r.location.latitude, r.location.longitude]}
+              icon={BoarIcon}
+            />
+          )
+        })}
+    </LayerGroup>
   </MapContainer>
 );
 

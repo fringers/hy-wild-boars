@@ -1,8 +1,10 @@
-import React, {useEffect, useState} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 
 import AppBar from '../AppBar';
 import Map from "./components/Map";
 import {getPosition} from "../../libs/location";
+import {UserContext} from "../App";
+import {getAllRecentRequests, getRequests} from "../../firebase/db";
 
 const POSITION = {lat: '52.241', lng: '21.005'};
 
@@ -25,6 +27,20 @@ const MapScreen = () => {
     setLoading(false);
   }, []);
 
+  const user = useContext(UserContext);
+
+  const [requests, setRequests] = useState([])
+  const handleRequestsGet = async () => {
+    const response = await getAllRecentRequests(7);
+    setRequests(response);
+  };
+
+  useEffect(() => {
+    if (!user) return;
+
+    handleRequestsGet();
+  }, [user?.uid]);
+
   return (
     <div style={{
       height: `${window.innerHeight}px`,
@@ -34,6 +50,7 @@ const MapScreen = () => {
         height: `calc(${window.innerHeight}px - 56px)`,
       }}>
         <Map
+          requests={requests}
           waiting={loading}
           position={position}
           setPosition={setPosition}
