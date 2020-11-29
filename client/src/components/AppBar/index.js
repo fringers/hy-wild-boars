@@ -11,7 +11,6 @@ import {
 } from '@material-ui/core';
 import MailIcon from '@material-ui/icons/Mail';
 import ExploreIcon from '@material-ui/icons/Explore';
-import MapIcon from '@material-ui/icons/Map';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronLeft } from '@fortawesome/free-solid-svg-icons';
@@ -48,23 +47,8 @@ const AppBar = ({ title = 'Dzik Alert', showNotifications }) => {
         {showNotifications && (
           <>
             <IconButton onClick={() => history.push('/map')} color="inherit">
-              <MapIcon />
-            </IconButton>
-            <IconButton
-              onClick={() => history.push('/notifications')}
-              color="inherit"
-            >
-              <MailIcon />
-            </IconButton>
-          </>
-          <>
-            <IconButton
-              onClick={() => history.push('/map')}
-              color="inherit"
-            >
               <ExploreIcon />
             </IconButton>
-
             <IconButton
               onClick={() => history.push('/notifications')}
               color="inherit"
