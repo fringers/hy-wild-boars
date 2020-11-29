@@ -63,9 +63,11 @@ export const Chart = ({requests}) => {
       <Row className="m-3">
         <h5>Liczba zgłoszeń w ostatnich dniach</h5>
       </Row>
-      <Row className="pm-4">
+      <Row>
         <Col>
-          <Line data={data}/>
+          <div className="p-5">
+            <Line data={data}/>
+          </div>
         </Col>
       </Row>
     </Container>

@@ -57,19 +57,21 @@ export const Layout = ({user, children, title, subTitle}) => {
         </Row>
       </div>
       <div className="flex-grow-1">
-        <Row className={`bg-primary text-white ${subTitle ? 'py-3 px-4' : 'p-4'}`}>
-          <Col>
-            <h5 className="m-0">
-              {title}
-            </h5>
-            <span>{subTitle}</span>
-          </Col>
-          <Col className="text-right">
-            {user.email} | <a href="#" className="text-white" onClick={signOut}>Wyloguj</a>
-          </Col>
-        </Row>
+        <Col>
+          <Row className={`bg-primary text-white ${subTitle ? 'py-3 px-4' : 'p-4'}`}>
+            <Col>
+              <h5 className="m-0">
+                {title}
+              </h5>
+              <span>{subTitle}</span>
+            </Col>
+            <Col className="text-right">
+              {user.email} | <a href="#" className="text-white" onClick={signOut}>Wyloguj</a>
+            </Col>
+          </Row>
 
-        {user ? children : ''}
+          {user ? children : ''}
+        </Col>
       </div>
     </div>
   )
