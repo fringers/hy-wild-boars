@@ -31,8 +31,7 @@ const MapScreen = () => {
     }}>
       <AppBar title="Mapa zgłoszeń"/>
       <div style={{
-        height: `calc(${window.innerHeight}px - 56px - 2*24px)`,
-        margin: "24px"
+        height: `calc(${window.innerHeight}px - 56px)`,
       }}>
         <Map
           waiting={loading}
