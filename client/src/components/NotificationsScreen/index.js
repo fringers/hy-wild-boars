@@ -8,7 +8,6 @@ import {
   ListItemAvatar,
   ListItemText,
   ListItemIcon,
-  makeStyles,
 } from '@material-ui/core';
 import ImageIcon from '@material-ui/icons/Image';
 
@@ -16,32 +15,14 @@ import { getRequests } from '../../firebase/db';
 import { UserContext } from '../App';
 import AppBar from '../AppBar';
 import StatusIcon from './StatusIcon';
+import useStyles from './styles';
 
-const useStyles = makeStyles((theme) => ({
-  container: {
-    height: `${window.innerHeight}px`,
-    backgroundColor: theme.palette.primary.light,
-  },
-  list: {
-    backgroundColor: theme.palette.primary.light,
-  },
-  loadingWrapper: {
-    display: 'flex',
-    justifyContent: 'center',
-    marginTop: theme.spacing(2),
-  },
-  genericIcon: {
-    color: theme.palette.primary.dark,
-    fontSize: 52,
-    marginLeft: -6,
-  },
-  listItemIcon: {
-    minWidth: 'auto',
-  },
-  avatar: {
-    borderRadius: 4,
-  },
-}));
+const HOW_MANY = {
+  ONE: 'jeden',
+  TWO_TO_SEVEN: 'od 2 do 7',
+  EITGHT_TO_THIRTY: 'od 8 do 30',
+  ABOVE_THIRTY: 'powyżej 30',
+};
 
 const getDate = (timestamp) => {
   const tmp = Date.parse(timestamp);
@@ -79,7 +60,7 @@ const NotificationsScreen = () => {
       )}
       {!loading && (
         <List classes={{ root: classes.list }}>
-          {requests?.map(({ id, timestamp, photoUrl, status, isDead }, i) => (
+          {requests?.map(({ id, timestamp, photoUrl, status, howMany }, i) => (
             <ListItem
               button
               key={i}
@@ -98,7 +79,7 @@ const NotificationsScreen = () => {
               </ListItemAvatar>
               <ListItemText
                 primary={`${getDate(timestamp)}`}
-                secondary={`${isDead ? 'martwy' : 'żywy'}`}
+                secondary={`Dzików: ${HOW_MANY[howMany]}`}
               />
               <ListItemIcon classes={{ root: classes.listItemIcon }}>
                 <StatusIcon status={status} />
