@@ -31,6 +31,9 @@ export default makeStyles((theme) => ({
     width: '100%',
     justifyContent: 'space-around',
   },
+  reverseButtonContainer: {
+    flexDirection: 'row-reverse',
+  },
   formControl: {
     width: 216,
   },

@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
+import clsx from 'clsx';
 import { Paper, Button, Typography, CircularProgress } from '@material-ui/core';
 import Skeleton from '@material-ui/lab/Skeleton';
 
@@ -50,7 +51,12 @@ const Photo = ({ online, isDead, onNext, classes }) => {
           }
         }}
       />
-      <div className={classes.buttonContainer}>
+      <div
+        className={clsx(
+          classes.buttonContainer,
+          !photoUrl && !fileForLater && classes.reverseButtonContainer
+        )}
+      >
         <label htmlFor="button-file">
           <Button
             variant="contained"
