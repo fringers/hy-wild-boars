@@ -29,8 +29,6 @@ const LocationMarker = ({ waiting, position, setPosition }) => {
     <Marker
       position={position}
       icon={MarkerIcon}
-      draggable
-      eventHandlers={eventHandlers}
       ref={markerRef}
     />
   );

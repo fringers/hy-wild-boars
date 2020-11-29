@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { MapContainer, TileLayer } from 'react-leaflet';
-import LocationMarker from "../../SubmitForm/pages/components/LocationMarker";
+import LocationMarker from "./LocationMarker";
 
 const Map = ({ position, waiting, setPosition }) => (
   <MapContainer
