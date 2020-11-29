@@ -1,41 +1,43 @@
-import React, {useState} from 'react';
-
-import {makeStyles} from '@material-ui/core';
+import React, {useEffect, useState} from 'react';
 
 import AppBar from '../AppBar';
 import Map from "./components/Map";
+import {getPosition} from "../../libs/location";
 
 const POSITION = {lat: '52.241', lng: '21.005'};
 
-const useStyles = makeStyles((theme) => ({
-  container: {
-    backgroundColor: theme.palette.primary.light,
-    height: `${window.innerHeight}px`,
-    overflow: "hidden"
-  },
-  wrapper: {
-    height: `calc(${window.innerHeight}px - 56px - 2*24px)`,
-    backgroundColor: "red",
-    margin: "24px"
-  },
-  map: {
-    height: `100%`,
-  },
-}));
-
 const MapScreen = () => {
-  const classes = useStyles();
+  const [loading, setLoading] = useState(false);
+  const [position,  setPosition] = useState(POSITION);
 
-  const [position] = useState(POSITION);
-
+  useEffect(async () => {
+    setLoading(true);
+    try {
+      const position = await getPosition();
+      setPosition({
+        lat: position.coords.latitude,
+        lng: position.coords.longitude,
+      });
+    } catch (_) {
+      setPosition(POSITION);
+      setLoading(false);
+    }
+    setLoading(false);
+  }, []);
 
   return (
-    <div className={classes.container}>
+    <div style={{
+      height: `${window.innerHeight}px`,
+    }}>
       <AppBar title="Mapa zgłoszeń"/>
-      <div className={classes.wrapper}>
+      <div style={{
+        height: `calc(${window.innerHeight}px - 56px - 2*24px)`,
+        margin: "24px"
+      }}>
         <Map
+          waiting={loading}
           position={position}
-          classes={classes}
+          setPosition={setPosition}
         />
       </div>
     </div>
