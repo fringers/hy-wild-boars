@@ -63,6 +63,12 @@ const offlineTheme = () =>
     },
   });
 
+const getSnackbarMessgae = (online, uploading) => {
+  const message = online ? 'Odzyskano połączenie!' : 'Jesteś offline';
+  if (uploading) return `${message} Trwa wysyłanie zaległych zgłoszeń...`;
+  return message;
+};
+
 export const UserContext = React.createContext(undefined);
 
 const App = () => {
@@ -74,11 +80,12 @@ const App = () => {
 
   const handleNetworkChange = () => {
     setOnline(window.navigator.onLine);
+    let myCache = window.myCache;
+
+    if (myCache.length) setUploading(true);
     setOpenSnackbar(true);
 
-    let myCache = window.myCache;
     if (myCache.length) {
-      setUploading(true);
       myCache.forEach(
         async ({
           fileUrl,
@@ -95,6 +102,7 @@ const App = () => {
           await sendRequest(fUrl, position, isDead, howMany, details);
         }
       );
+      window.myCache = [];
       setUploading(false);
     }
   };
@@ -121,13 +129,7 @@ const App = () => {
           anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
           open={openSnackbar}
           onClose={() => setOpenSnackbar(false)}
-          message={online ? 'Odzyskano połączenie!' : 'Jesteś offline'}
-        />
-        <Snackbar
-          classes={{ root: classes.snackbar2 }}
-          anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
-          open={uploading}
-          message="Wysyłanie zaległych zgłoszeń..."
+          message={getSnackbarMessgae(online, uploading)}
         />
         <BrowserRouter>
           <AnimatedSwitch
