@@ -13,7 +13,7 @@ export const Layout = ({user, children, title, subTitle}) => {
   if (!user) {
     return (
       <Container>
-        <Row className="text-center m-5 p-5">
+        <Row className="text-center p-5 align-content-center justify-content-md-center">
           <Link href="/login">
             <a className="block text-center">
               Logowanie

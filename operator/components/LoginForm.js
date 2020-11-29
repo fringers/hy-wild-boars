@@ -1,5 +1,6 @@
 import React, {useState} from "react";
 import Form from "react-bootstrap/Form"
+import Row from "react-bootstrap/Row";
 import Button from "react-bootstrap/Button";
 import {useRouter} from "next/router";
 
@@ -58,9 +59,11 @@ export const LoginForm = ({onLogin}) => {
         />
       </Form.Group>
 
+      <Row className="align-content-center justify-content-md-center">
       <Button variant="primary" type="submit" disabled={loading}>
         Login
       </Button>
+      </Row>
     </Form>
   )
 }
