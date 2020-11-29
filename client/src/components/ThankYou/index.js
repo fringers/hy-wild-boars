@@ -13,7 +13,7 @@ const useStyles = makeStyles((theme) => ({
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'space-between',
-    height: 'calc(100vh - 64px)',
+    minHeight: `calc(${window.innerHeight}px - 64px)`,
     padding: theme.spacing(4),
     textAlign: 'center',
   },
