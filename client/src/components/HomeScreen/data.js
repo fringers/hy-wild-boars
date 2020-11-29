@@ -2,7 +2,7 @@ export const tips = [
   'Dziki z natury prowadzą nocny tryb życia, jednak przez dokarmianie zmieniają tryb na dzienny.',
   'Młode najczęściej rodzą się w kwietniu.',
   'Waga dzika może wynosić nawet 300 kg.',
-  'Zazwyczaj jednak waga waha się w granicach 170 kg (odyńce) oraz 70 kg u lochy.',
+  'Waga dzika zazwyczaj waha się w granicach 170 kg (odyńce) oraz 70 kg u lochy.',
   'Warchlaki (czyli młode) do około 4 miesiąca posiadają charakterystyczne paski po bokach. ',
   'Dzik uwielbia tarzać się w błocie i ocierać o drzewa – na skutek czego po jego bokach tworzy się twardy pancerz nazywany usmołem – są to włosy posklejane żywicą i błotem',
   'Dziki żyją w watahach, czyli grupach składających się ze starej lochy, która jest przewodniczą stada, oraz innych samic wraz z warchlakami. Mogą liczyć one nawet 100 osobników.',
