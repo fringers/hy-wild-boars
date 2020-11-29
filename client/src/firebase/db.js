@@ -34,6 +34,7 @@ const docToRequest = (doc) => {
     howMany: data.howMany,
     details: data.details,
     status: data.status,
+    young: data.young,
   };
 };
 
