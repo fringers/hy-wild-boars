@@ -10,6 +10,7 @@ import {
   ListItemIcon,
   makeStyles,
 } from '@material-ui/core';
+import ImageIcon from '@material-ui/icons/Image';
 
 import { getRequests } from '../../firebase/db';
 import { UserContext } from '../App';
@@ -28,6 +29,17 @@ const useStyles = makeStyles((theme) => ({
     display: 'flex',
     justifyContent: 'center',
     marginTop: theme.spacing(2),
+  },
+  genericIcon: {
+    color: theme.palette.primary.dark,
+    fontSize: 52,
+    marginLeft: -6,
+  },
+  listItemIcon: {
+    minWidth: 'auto',
+  },
+  avatar: {
+    borderRadius: 4,
   },
 }));
 
@@ -73,16 +85,24 @@ const NotificationsScreen = () => {
               key={i}
               onClick={() => history.push(`/notifications/${id}`)}
             >
-              <ListItemIcon>
-                <StatusIcon status={status} />
-              </ListItemIcon>
               <ListItemAvatar>
-                <Avatar src={photoUrl} />
+                {photoUrl ? (
+                  <Avatar
+                    classes={{ root: classes.avatar }}
+                    variant="square"
+                    src={photoUrl}
+                  />
+                ) : (
+                  <ImageIcon className={classes.genericIcon} />
+                )}
               </ListItemAvatar>
               <ListItemText
                 primary={`${getDate(timestamp)}`}
                 secondary={`${isDead ? 'martwy' : 'żywy'}`}
               />
+              <ListItemIcon classes={{ root: classes.listItemIcon }}>
+                <StatusIcon status={status} />
+              </ListItemIcon>
             </ListItem>
           ))}
         </List>
