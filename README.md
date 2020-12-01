@@ -1,6 +1,8 @@
 ### About project
 
-More details in presentation: [Fringers -Dzik alert (prezentacja aplikacji).pdf](./Fringers%20-Dzik%20alert%20(prezentacja%20aplikacji).pdf)
+More details in presentation: 
+- [Fringers -Dzik alert (prezentacja aplikacji).pdf](./Fringers%20-Dzik%20alert%20(prezentacja%20aplikacji).pdf)
+- [HackYeah — dziki i Alexa](https://fringers.pl/blog/20201130_hack-yeah-2020-dziki-amazon-alexa)
 
 ### Client
 
